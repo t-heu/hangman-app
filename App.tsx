@@ -11,7 +11,7 @@ interface ThemeParams {
   code: string;
   wordArray?: any
   currentPlayerUID?: string;
-  indexTheme: number;
+  indexTheme?: number;
 }
 
 export type ScreenNames = ["Home", "Game"] // type these manually

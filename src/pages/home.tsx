@@ -7,8 +7,10 @@ import { v4 } from 'uuid';
 import { useNavigation } from '@react-navigation/native';
 import { type StackNavigation } from "../../App";
 
-import { database, set, ref, update, get, child } from '../firebase'
+import { database, set, ref, update, get, child } from '../api/firebase'
 import DataTheme from '../data/themes.json';
+
+import generateTheme from '../utils/generateTheme';
 
 import Header from '../components/header'
 import Button from '../components/button'
@@ -36,13 +38,6 @@ export default function Home() {
 
   async function play(stauts: boolean) {
     try {
-      const scheme = DataTheme.themes[checked].words;
-      const num = scheme.length - 1;
-      const randomIndex = Math.round(Math.random() * num);
-    
-      const selectedWord = scheme[randomIndex];
-      const wordArray = Array(selectedWord.name.length).fill('');
-
       if (stauts) {
         const uuid = v4();
         const uid = v4();
@@ -65,14 +60,16 @@ export default function Home() {
             restartGame: false
           },
           turn: 'p1',
-          newGame: false,
+          indexTheme: checked,
+          newGame: true,
           selectedLetters: Array('-'),
-          wordArray: wordArray,
-          selectedWord
+          wordArray: Array('-'),
+          selectedWord: {name: '', dica: ''}
         });
   
-        navigate("Game",  { selectedWord, wordArray, code: uuid, currentPlayerUID: uid, indexTheme: checked })
+        navigate("Game",  { code: uuid, currentPlayerUID: uid })
       } else {
+        const {selectedWord, wordArray} = generateTheme(checked);
         navigate("Game",  { selectedWord, wordArray, code, indexTheme: checked })
       }
     } catch (e) {
@@ -93,7 +90,7 @@ export default function Home() {
           updates['hangman/' + code + '/p2' + '/restartGame'] = true;
           update(ref(database), updates);
       
-          navigate("Game",  { code, currentPlayerUID: uid, indexTheme: checked })
+          navigate("Game",  { code, currentPlayerUID: uid})
         } else {
           Alert.alert('Error', 'Código inválido')
         }

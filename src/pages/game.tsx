@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, FlatList, Alert, ScrollView } from 'react-native';
+import { TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 
-import { database, ref, update, get, child, onValue } from '../firebase'
-import DataTheme from '../data/themes.json';
+import { database, ref, update, onValue } from '../api/firebase'
 
 import {
   Main,
@@ -16,10 +15,12 @@ import {
   CharacterDisplay,
   LetterBoxWrapper,
   LetterText
-} from './style'
+} from './style';
 
-import Header from '../components/header'
-import Button from '../components/button'
+import Header from '../components/header';
+import Button from '../components/button';
+
+import generateTheme from '../utils/generateTheme';
 
 interface Theme {
   name: string;
@@ -32,7 +33,7 @@ type ParamList = {
     wordArray?: any;
     code: string;
     currentPlayerUID?: string;
-    indexTheme: number;
+    indexTheme?: number;
   };
 };
 
@@ -48,7 +49,7 @@ export default function Game() {
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
   const [countErrors, setCountErrors] = useState(0);
   const [existLetter, setExistLetter] = useState('');
-  const [existElement, setExistElement] = useState(true);
+  const [existElement, setExistElement] = useState(false);
   const [status, setStatus] = useState('');
   const [players, setPlayers] = useState<any>({});
   const [playerTurn, setPlayerTurn] = useState('');
@@ -63,7 +64,7 @@ export default function Game() {
       onValue(ref(database, 'hangman/' + code), (snapshot) => {
         const data = snapshot.val();
 
-        if (data.p1.restartGame && data.p2.restartGame) {
+        if (data.newGame && (data.p1.active && data.p2.active) && !(data.p1.gameover || data.p2.gameover || data.p1.victory || data.p2.victory)) {
           setWordName(data.wordArray);
           setSelectedLetters(data.selectedLetters);
           setExistElement(true)
@@ -75,13 +76,27 @@ export default function Game() {
           });
         }
 
+        if (data.p1.restartGame && data.p2.restartGame) {
+          const {selectedWord, wordArray} = generateTheme(data.indexTheme);
+
+          const updates: any = {};
+          updates['hangman/' + code + '/p1/restartGame'] = false;
+          updates['hangman/' + code + '/p2/restartGame'] = false;
+          updates['hangman/' + code + '/selectedLetters'] = Array('-');
+          updates['hangman/' + code + '/selectedWord'] = selectedWord;
+          updates['hangman/' + code + '/wordArray'] = wordArray;
+          updates['hangman/' + code + '/newGame'] = true;
+          
+          update(ref(database), updates);
+        }
+
         // Verificar se é a vez do jogador atual
         if ((data.turn === 'p1' && data.p1.uid === currentPlayerUID) || (data.turn === 'p2' && data.p2.uid === currentPlayerUID)) {
           setExistElement(false);
         }
 
         // Verificar se o jogo acabou por gameover ou vitória
-        if (data.p1.gameover || data.p2.gameover || data.p1.victory || data.p2.victory) {
+        if (data.newGame && (data.p1.gameover || data.p2.gameover || data.p1.victory || data.p2.victory)) {
           handleGameEnd(data)
         }
       });
@@ -126,15 +141,15 @@ export default function Game() {
   const handleGameEnd = (data: any) => {
     setExistElement(false);
     setStatus('gameover');
+    setWinnerMessage('VOÇES PERDERAM!');
   
     if (data.p1.victory || data.p2.victory) {
       const winner = data.p1.victory ? data.p1 : data.p2;
       setWinnerMessage(`${winner.name} ganhou!`);
     }
-  
+
     const updates: any = {};
-    updates['hangman/' + code + '/p1/restartGame'] = false;
-    updates['hangman/' + code + '/p2/restartGame'] = false;
+    updates['hangman/' + code + '/newGame'] = false;
     update(ref(database), updates);
   };
 
@@ -163,30 +178,21 @@ export default function Game() {
       const updates: any = {};
       if (code && players.p1.uid === currentPlayerUID) {
         updates['hangman/' + code + '/p1/gameover'] = true;
+        update(ref(database), updates);
       } else if (code && players.p2.uid === currentPlayerUID) {
         updates['hangman/' + code + '/p2/gameover'] = true;
+        update(ref(database), updates);
       }
     }
   };
 
   async function restartGameInDatabase() {
-    const scheme = DataTheme.themes[indexTheme].words;
-    const num = scheme.length - 1;
-    const randomIndex = Math.round(Math.random() * num);
-    
-    const selectedWord = scheme[randomIndex];
-    const wordArray = Array(selectedWord.name.length).fill('');
-
     if (code && players.p1.uid === currentPlayerUID) {
       const updates: any = {};
       updates['hangman/' + code + '/p1'+ '/gameover'] = false;
       updates['hangman/' + code + '/p1'+ '/victory'] = false;
       updates['hangman/' + code + '/p1' + '/restartGame'] = true;
 
-      updates['hangman/' + code + '/selectedLetters'] = Array('-');
-      updates['hangman/' + code + '/selectedWord'] = selectedWord;
-      updates['hangman/' + code + '/wordArray'] = wordArray;
-      
       await update(ref(database), updates);
     } else if (code && players.p2.uid === currentPlayerUID) {
       const updates: any = {};
@@ -194,12 +200,10 @@ export default function Game() {
       updates['hangman/' + code + '/p2'+ '/victory'] = false;
       updates['hangman/' + code + '/p2' + '/restartGame'] = true;
 
-      updates['hangman/' + code + '/selectedLetters'] = Array('-');
-      updates['hangman/' + code + '/selectedWord'] = selectedWord;
-      updates['hangman/' + code + '/wordArray'] = wordArray;
-
       await update(ref(database), updates);
     } else {
+      const {selectedWord, wordArray} = generateTheme(indexTheme || 3);
+
       setExistElement(true);
       setWord(selectedWord);
       setWordName(wordArray);
@@ -216,11 +220,9 @@ export default function Game() {
     setStatus('');
     setWinnerMessage('VOÇE PERDEU!');
     setSelectedLetters([]);
+    setWord({name: '', dica: ''});
+    setWordName([]);
     restartGameInDatabase();
-  };
-
-  const logout = () => {
-
   };
 
   const RenderItemLetters = ({ item, index }: any) => (

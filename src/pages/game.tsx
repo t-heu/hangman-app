@@ -53,7 +53,7 @@ export default function Game() {
   const [status, setStatus] = useState('');
   const [players, setPlayers] = useState<any>({});
   const [playerTurn, setPlayerTurn] = useState('');
-  const [winnerMessage, setWinnerMessage] = useState('VOÇE PERDEU!');
+  const [winnerMessage, setWinnerMessage] = useState('');
 
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(code);
@@ -68,12 +68,8 @@ export default function Game() {
           setWordName(data.wordArray);
           setSelectedLetters(data.selectedLetters);
           setExistElement(true)
-          setWord(data.selectedWord);
           setPlayerTurn(data.turn)
-          setPlayers({
-            p1: data.p1,
-            p2: data.p2
-          });
+          setWord(data.selectedWord);
         }
 
         if (data.p1.restartGame && data.p2.restartGame) {
@@ -88,6 +84,11 @@ export default function Game() {
           updates['hangman/' + code + '/newGame'] = true;
           
           update(ref(database), updates);
+          
+          setPlayers({
+            p1: data.p1,
+            p2: data.p2
+          });
         }
 
         // Verificar se é a vez do jogador atual
@@ -116,12 +117,6 @@ export default function Game() {
         return char === letter ? char : wordName[index];
       });
 
-      if (code) {
-        updates['hangman/' + code + '/selectedLetters'] = [...selectedLetters, letter];;
-        updates['hangman/' + code + '/wordArray'] = newWordName;
-        updates['hangman/' + code + '/turn'] = players.p1.uid === currentPlayerUID ? 'p1' : 'p2';
-      }  
-
       const isNotEmpty = newWordName.every((char) => char !== '');
       if (isNotEmpty) {
         handleVictory();
@@ -131,7 +126,13 @@ export default function Game() {
         handleIncorrectGuess();
       }
 
-      if (code) update(ref(database), updates);
+      if (code) {
+        updates['hangman/' + code + '/selectedLetters'] = [...selectedLetters, letter];;
+        updates['hangman/' + code + '/wordArray'] = newWordName;
+        updates['hangman/' + code + '/turn'] = players.p1.uid === currentPlayerUID ? 'p1' : 'p2';
+        update(ref(database), updates);
+      }  
+
       setWordName(newWordName);
     } else {
       setExistLetter(`Jà existe essa letra: ${letter}`)
@@ -202,7 +203,7 @@ export default function Game() {
 
       await update(ref(database), updates);
     } else {
-      const {selectedWord, wordArray} = generateTheme(indexTheme || 3);
+      const {selectedWord, wordArray} = generateTheme(indexTheme === undefined ? 4 : indexTheme);
 
       setExistElement(true);
       setWord(selectedWord);
@@ -218,29 +219,32 @@ export default function Game() {
     setCountErrors(0);
     setExistLetter('');
     setStatus('');
-    setWinnerMessage('VOÇE PERDEU!');
+    setWinnerMessage('');
     setSelectedLetters([]);
     setWord({name: '', dica: ''});
     setWordName([]);
     restartGameInDatabase();
   };
 
-  const RenderItemLetters = ({ item, index }: any) => (
-    <CharacterDisplay
-      key={index}
-      style={{shadowOffset: { width: 0, height: 2 }, shadowColor: '#000', shadowOpacity: 0.5, elevation: 4, backgroundColor: '#000', borderColor: '#000'}}
-      onPress={() => handleSelectLetter(item)}>
-      <LetterBoxWrapper>
-        <LetterText>{item}</LetterText>
-      </LetterBoxWrapper>
-    </CharacterDisplay>
-  );
-
-  const RenderItemWord = ({ item, index }: any) => (
-    <CharacterDisplay key={index} style={{shadowOffset: { width: 0, height: 2 }, shadowColor: '#000', shadowOpacity: 0.5}}>
-      <LetterText>{item}</LetterText>
-    </CharacterDisplay>
-  );
+  const RenderItemLetters = ({ item, index, aa }: any) => {
+    const ab = aa ? {shadowOffset: { width: 0, height: 2 }, shadowColor: '#000', shadowOpacity: 0.5, elevation: 4, backgroundColor: '#000', borderColor: '#000'} 
+    : {shadowOffset: { width: 0, height: 2 }, shadowColor: '#000', shadowOpacity: 0.5}
+    
+    return (
+      <CharacterDisplay
+        key={index}
+        style={ab}
+        onPress={() => handleSelectLetter(item)}>
+        {aa ? (
+          <LetterBoxWrapper>
+            <LetterText>{item}</LetterText>
+          </LetterBoxWrapper>
+        ) : (
+          <LetterText>{item}</LetterText>
+        )}
+      </CharacterDisplay>
+    )
+  }
 
   if (!fontsLoaded && !fontError) {
     return null;
@@ -258,7 +262,7 @@ export default function Game() {
 
       <LetterContainer style={{marginVertical: 10}}>
         {wordName.map((item, index) => (
-            <RenderItemWord key={index} item={item} />
+            <RenderItemLetters key={index} item={item} aa={false} />
           ))}
       </LetterContainer>
 
@@ -267,43 +271,33 @@ export default function Game() {
       {existElement ? (
         <LetterContainer style={{marginVertical: 10}}>
           {Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ').map((item, index) => (
-            <RenderItemLetters key={index} item={item} />
+            <RenderItemLetters key={index} item={item} aa={true} />
           ))}
         </LetterContainer>
       ) : (
         <>
-          {
-            status ? (
-              <>
-                <GuideText style={{color: '#FDE767'}}>{winnerMessage}</GuideText>
-                {!(wordName.every((char) => char !== '')) ? (<GuideText style={{color: '#FDE767'}}>A Palavra era: {word.name}</GuideText>) : null}
-                <Button press={restartGame} text='JOGAR NOVAMENTE' />
-                <Button text='SAIR' />
-              </>
-            ) : (
-              <>
-              {
-                !playerTurn ? (
-                  <GuideText style={{color: '#FDE767'}}>AGUARDANDO JOGADOR ENTRAR...</GuideText>
-                ) : (
-                  <GuideText style={{color: '#d68f54'}}>AGUARDANDO JOGADOR JOGAR...</GuideText>
-                )
-              }
-              </>
-            )
-          }
+          {status ? (
+            <>
+              <GuideText style={{color: '#FDE767'}}>{winnerMessage}</GuideText>
+              {!(wordName.every((char) => char !== '')) ? (<GuideText style={{color: '#FDE767'}}>A Palavra era: {word.name}</GuideText>) : null}
+              <Button press={restartGame} text='JOGAR NOVAMENTE' />
+              <Button text='SAIR' />
+            </>
+          ) : (
+            <GuideText style={{color: !playerTurn ? '#FDE767' : '#d68f54'}}>
+              {!playerTurn ? 'AGUARDANDO JOGADOR ENTRAR...' : 'AGUARDANDO JOGADOR JOGAR...'}
+            </GuideText>
+          )}
         </>
       )}
-      {
-        code ? (
-          <>
-            <GuideText style={{color: '#eee'}}>Compartilhe código com seu colega: {code}</GuideText>
-            <TouchableOpacity onPress={() => copyToClipboard()} style={{marginTop: 5 }}>
-              <Feather name="copy" size={24} color="#eee" />
-            </TouchableOpacity>
-          </>
-        ) : null
-      }
+      {code ? (
+        <>
+          <GuideText style={{color: '#eee'}}>Compartilhe código com seu colega: {code}</GuideText>
+          <TouchableOpacity onPress={() => copyToClipboard()} style={{marginTop: 5 }}>
+            <Feather name="copy" size={24} color="#eee" />
+          </TouchableOpacity>
+        </>
+      ) : null}
     </Main>
     </ScrollView>
   );

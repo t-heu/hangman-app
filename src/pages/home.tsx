@@ -128,14 +128,14 @@ export default function Home() {
       <FlatList
         data={DataTheme.themes}
         renderItem={({ item, index }) => renderThemes(item, index)}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         style={{marginBottom: 15}}
         numColumns={2}
       />
 
       <Button text='JOGAR OFFLINE' press={() => play(false)} />
 
-      <View style={{height: 300, alignItems: 'center'}}>
+      <View style={{height: 300, alignItems: 'center', width: '100%'}}>
 
         <Title>JOGUE COM SEU COLEGA:</Title>
 

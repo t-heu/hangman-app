@@ -84,7 +84,6 @@ export default function Game() {
           updates['hangman/' + code + '/newGame'] = true;
           
           update(ref(database), updates);
-          
           setPlayers({
             p1: data.p1,
             p2: data.p2
@@ -110,12 +109,9 @@ export default function Game() {
 
   const handleSelectLetter = (letter: string) => {
     if (!selectedLetters.includes(letter)) {
-      const updates: any = {};
       setSelectedLetters([...selectedLetters, letter]);
   
-      const newWordName = word.name.split('').map((char, index) => {
-        return char === letter ? char : wordName[index];
-      });
+      const newWordName = word.name.split('').map((char, index) => char === letter ? char : wordName[index]);
 
       const isNotEmpty = newWordName.every((char) => char !== '');
       if (isNotEmpty) {
@@ -127,6 +123,7 @@ export default function Game() {
       }
 
       if (code) {
+        const updates: any = {};
         updates['hangman/' + code + '/selectedLetters'] = [...selectedLetters, letter];;
         updates['hangman/' + code + '/wordArray'] = newWordName;
         updates['hangman/' + code + '/turn'] = players.p1.uid === currentPlayerUID ? 'p1' : 'p2';
@@ -159,13 +156,15 @@ export default function Game() {
     setStatus('victory');
     setWinnerMessage('VOCÊ GANHOU!');
   
-    const updates: any = {};
-    if (code && players.p1.uid === currentPlayerUID) {
-      updates['hangman/' + code + '/p1/victory'] = true;
-    } else if (code && players.p2.uid === currentPlayerUID) {
-      updates['hangman/' + code + '/p2/victory'] = true;
+    if (code) {
+      const updates: any = {};
+      if (players.p1.uid === currentPlayerUID) {
+        updates['hangman/' + code + '/p1/victory'] = true;
+      } else if (players.p2.uid === currentPlayerUID) {
+        updates['hangman/' + code + '/p2/victory'] = true;
+      }
+      update(ref(database), updates);
     }
-    update(ref(database), updates);
   };
 
   const handleIncorrectGuess = () => {
@@ -176,31 +175,30 @@ export default function Game() {
       setStatus('gameover');
       setWinnerMessage('VOCÊ PERDEU!');
       
-      const updates: any = {};
-      if (code && players.p1.uid === currentPlayerUID) {
-        updates['hangman/' + code + '/p1/gameover'] = true;
-        update(ref(database), updates);
-      } else if (code && players.p2.uid === currentPlayerUID) {
-        updates['hangman/' + code + '/p2/gameover'] = true;
+      if (code) {
+        const updates: any = {};
+        if (players.p1.uid === currentPlayerUID) {
+          updates['hangman/' + code + '/p1/gameover'] = true;
+        } else if (players.p2.uid === currentPlayerUID) {
+          updates['hangman/' + code + '/p2/gameover'] = true;
+        }
         update(ref(database), updates);
       }
     }
   };
 
   async function restartGameInDatabase() {
-    if (code && players.p1.uid === currentPlayerUID) {
+    if (code) {
       const updates: any = {};
-      updates['hangman/' + code + '/p1'+ '/gameover'] = false;
-      updates['hangman/' + code + '/p1'+ '/victory'] = false;
-      updates['hangman/' + code + '/p1' + '/restartGame'] = true;
-
-      await update(ref(database), updates);
-    } else if (code && players.p2.uid === currentPlayerUID) {
-      const updates: any = {};
-      updates['hangman/' + code + '/p2'+ '/gameover'] = false;
-      updates['hangman/' + code + '/p2'+ '/victory'] = false;
-      updates['hangman/' + code + '/p2' + '/restartGame'] = true;
-
+      if (players.p1.uid === currentPlayerUID) {
+        updates[`hangman/${code}/p1/gameover`] = false;
+        updates[`hangman/${code}/p1/victory`] = false;
+        updates[`hangman/${code}/p1/restartGame`] = true;
+      } else if (players.p2.uid === currentPlayerUID) {
+        updates[`hangman/${code}/p2/gameover`] = false;
+        updates[`hangman/${code}/p2/victory`] = false;
+        updates[`hangman/${code}/p2/restartGame`] = true;
+      }
       await update(ref(database), updates);
     } else {
       const {selectedWord, wordArray} = generateTheme(indexTheme === undefined ? 4 : indexTheme);

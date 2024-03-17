@@ -5,8 +5,8 @@ import { RadioButton } from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import { v4 } from 'uuid';
 import { useNavigation } from '@react-navigation/native';
-import { type StackNavigation } from "../../App";
 
+import { type StackNavigation } from "../../App";
 import { database, set, ref, update, get, child } from '../api/firebase'
 import DataTheme from '../data/themes.json';
 

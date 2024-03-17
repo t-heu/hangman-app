@@ -17,7 +17,6 @@
     "@react-navigation/native-stack": "^6.9.22",
     "expo": "~50.0.11",
     "expo-clipboard": "~5.0.1",
-    "expo-dev-client": "~3.3.9",
     "expo-font": "^11.10.3",
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.8.1",

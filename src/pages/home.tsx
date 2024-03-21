@@ -50,11 +50,12 @@ export default function Home() {
               victory: false,
               uid: uid,
               active: true,
+              ready: false,
             },
           },
           turn: 'p1',
           indexTheme: checked,
-          newGame: false,
+          gameInProgress: false,
           selectedLetters: Array('-'),
           wordArray: Array('-'),
           selectedWord: {name: '', dica: ''}
@@ -77,16 +78,27 @@ export default function Home() {
     if (code) {
       get(child(ref(database), 'hangman/' + code)).then((snapshot) => {
         if (snapshot.exists()) {
-          updates['hangman/' + code + '/players' + '/p2'] = {
-            name: nameP2 ? nameP2 : 'P2',
-            gameover: false,
-            victory: false,
-            uid: uid,
-            active: true,
+          const data = snapshot.val();
+          const playersObject = data.players || {};
+          const numPlayers = Object.keys(playersObject).length;
+
+          if (!data.gameInProgress && numPlayers < 8) {
+            const nextPlayer = '/p' + (numPlayers + 1); // Determina o próximo jogador a ser criado
+
+            updates['hangman/' + code + '/players' +  nextPlayer] = {
+              name: nameP2 ? nameP2 : 'P' + (numPlayers + 1),
+              gameover: false,
+              victory: false,
+              uid: uid,
+              active: true,
+              ready: false,
+            }
+            update(ref(database), updates);
+        
+            navigate("Lobby",  { code, currentPlayerUID: uid})
+          } else {
+            Alert.alert('Error', 'Ja foi iniciado a partida ou sala cheia')
           }
-          update(ref(database), updates);
-      
-          navigate("Lobby",  { code, currentPlayerUID: uid})
         } else {
           Alert.alert('Error', 'Código inválido')
         }

@@ -60,7 +60,7 @@ export default function Game() {
       onValue(ref(database, 'hangman/' + code), (snapshot) => {
         const data = snapshot.val();
 
-        if (data.newGame && (data.players.p1.active && data.players.p2.active) && !(data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
+        if (data.gameInProgress && (data.players.p1.active && data.players.p2.active) && !(data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
           setWordName(data.wordArray);
           setSelectedLetters(data.selectedLetters);
           setExistElement(true)
@@ -78,7 +78,7 @@ export default function Game() {
         }
 
         // Verificar se o jogo acabou por gameover ou vitória
-        if (data.newGame && (data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
+        if (data.gameInProgress && (data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
           handleGameEnd(data)
         }
       });
@@ -129,7 +129,7 @@ export default function Game() {
     }
 
     const updates: any = {};
-    updates['hangman/' + code + '/newGame'] = false;
+    updates['hangman/' + code + '/gameInProgress'] = false;
     update(ref(database), updates);
   };
 

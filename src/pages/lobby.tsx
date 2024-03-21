@@ -60,32 +60,39 @@ export default function Lobby() {
     updates['hangman/' + codeRoom + '/selectedLetters'] = Array('-');
     updates['hangman/' + codeRoom + '/selectedWord'] = selectedWord;
     updates['hangman/' + codeRoom + '/wordArray'] = wordArray;
-    updates['hangman/' + codeRoom + '/newGame'] = true;
+    updates['hangman/' + codeRoom + '/gameInProgress'] = true;
       
     update(ref(database), updates);
   }
 
   useEffect(() => {
     const minPlayers = 2;
-    const codeRoom = route.params.code;
-    setCode(route.params.code)
-    
+    const maxPlayers = 8;
+    const codeRoom = route.params.code; // Código da sala
+    setCode(route.params.code); // Define o código da sala no estado
+
     onValue(ref(database, 'hangman/' + codeRoom), (snapshot) => {
       const data = snapshot.val();
-      let playersArray: any = Object.values(data.players);
+      const playersObject = data.players || {}; // Obtém o objeto de jogadores ou inicializa como um objeto vazio
+      const numPlayers = Object.keys(playersObject).length;
+      const playersArray: any = Object.values(playersObject);
       setPlayers(playersArray)
-    
-      if (Object.keys(data.players).length >= minPlayers) {
-        if (!data.newGame && !(data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
-          createGame(codeRoom, data.indexTheme)
+
+      if (numPlayers >= minPlayers && numPlayers <= maxPlayers) { // Verifica se há jogadores suficientes
+        const allPlayersReady = playersArray.every((player: any) => 
+          !player.gameover && !player.victory // Verifica se todos os jogadores estão prontos e não acabaram o jogo
+        );
+
+        if (allPlayersReady && !data.gameInProgress) { // Verifica se todos os jogadores estão prontos e o jogo não foi iniciado
+          createGame(codeRoom, data.indexTheme);
 
           setTimeout(() => {
-            navigate("Game",  { code: codeRoom, currentPlayerUID: route.params.currentPlayerUID })
+            navigate("Game", { code: codeRoom, currentPlayerUID: route.params.currentPlayerUID });
           }, 6000);
         }
       }
-    })
-  }, [])
+    });
+  }, []);
 
   const renderThemes = (data: any, index: any) => (
     <Theme>
@@ -113,7 +120,7 @@ export default function Lobby() {
 
       <Button text='SAIR' />
 
-      <View style={{height: 500, alignItems: 'center', width: '100%'}}>
+      <View style={{marginTop: 30, height: 300, alignItems: 'center', width: '100%'}}>
         {code ? (
           <>
             <GuideText style={{color: '#eee'}}>Compartilhe código com seu colega: {code}</GuideText>

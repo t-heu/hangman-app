@@ -5,6 +5,7 @@ import { NavigationProp } from '@react-navigation/native';
 
 import HomeScreen from './src/pages/home'
 import GameScreen from './src/pages/game'
+import LobbyScreen from './src/pages/lobby'
 
 interface ThemeParams {
   selectedWord?: any; // Adjust the type according to your data structure
@@ -14,7 +15,7 @@ interface ThemeParams {
   indexTheme?: number;
 }
 
-export type ScreenNames = ["Home", "Game"] // type these manually
+export type ScreenNames = ["Home", "Game", "Lobby"] // type these manually
 export type RootStackParamList = Record<ScreenNames[number], ThemeParams>;
 export type StackNavigation = NavigationProp <RootStackParamList>;
 
@@ -27,6 +28,7 @@ export default function App() {
         headerShown: false
       }}>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Lobby" component={LobbyScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
       </Stack.Navigator>
     </NavigationContainer>

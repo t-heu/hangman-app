@@ -36,38 +36,31 @@ export default function Home() {
   const [nameP1, setNameP1] = useState('');
   const [nameP2, setNameP2] = useState('');
 
-  async function play(stauts: boolean) {
+  async function createGame(stauts: boolean) {
     try {
       if (stauts) {
         const uuid = v4();
         const uid = v4();
 
         await set(ref(database, 'hangman/' + uuid), {
-          p1: {
-            name: nameP1 ? nameP1 : 'P1',
-            gameover: false,
-            victory: false,
-            uid: uid,
-            active: true,
-            restartGame: true
-          },
-          p2: {
-            name: 'P2',
-            gameover: false,
-            victory: false,
-            uid: '',
-            active: false,
-            restartGame: false
+          players: {
+            p1: {
+              name: nameP1 ? nameP1 : 'P1',
+              gameover: false,
+              victory: false,
+              uid: uid,
+              active: true,
+            },
           },
           turn: 'p1',
           indexTheme: checked,
-          newGame: true,
+          newGame: false,
           selectedLetters: Array('-'),
           wordArray: Array('-'),
           selectedWord: {name: '', dica: ''}
         });
   
-        navigate("Game",  { code: uuid, currentPlayerUID: uid })
+        navigate("Lobby",  { code: uuid, currentPlayerUID: uid })
       } else {
         const {selectedWord, wordArray} = generateTheme(checked);
         navigate("Game",  { selectedWord, wordArray, code, indexTheme: checked })
@@ -84,13 +77,16 @@ export default function Home() {
     if (code) {
       get(child(ref(database), 'hangman/' + code)).then((snapshot) => {
         if (snapshot.exists()) {
-          updates['hangman/' + code + '/p2' + '/uid'] = uid;
-          updates['hangman/' + code + '/p2' + '/name'] = nameP2 ? nameP2 : 'P2';
-          updates['hangman/' + code + '/p2' + '/active'] = true;
-          updates['hangman/' + code + '/p2' + '/restartGame'] = true;
+          updates['hangman/' + code + '/players' + '/p2'] = {
+            name: nameP2 ? nameP2 : 'P2',
+            gameover: false,
+            victory: false,
+            uid: uid,
+            active: true,
+          }
           update(ref(database), updates);
       
-          navigate("Game",  { code, currentPlayerUID: uid})
+          navigate("Lobby",  { code, currentPlayerUID: uid})
         } else {
           Alert.alert('Error', 'Código inválido')
         }
@@ -133,7 +129,7 @@ export default function Home() {
         numColumns={2}
       />
 
-      <Button text='JOGAR OFFLINE' press={() => play(false)} />
+      <Button text='JOGAR OFFLINE' press={() => createGame(false)} />
 
       <View style={{height: 300, alignItems: 'center', width: '100%'}}>
 
@@ -143,7 +139,7 @@ export default function Home() {
           <RoomDiv>
             <Input placeholderTextColor="#888" value={nameP1} onChangeText={(text) => setNameP1(text)} placeholder='Seu nome' />
 
-            <Button text='CRIAR SALA' press={() => play(true)} />
+            <Button text='CRIAR SALA' press={() => createGame(true)} />
           </RoomDiv>
 
           <RoomDiv>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useFonts } from 'expo-font';
-import { useRoute, RouteProp } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
-import * as Clipboard from 'expo-clipboard';
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
+import { type StackNavigation } from "../../App";
 
 import { database, ref, update, onValue } from '../api/firebase'
 
@@ -43,6 +42,7 @@ export default function Game() {
     'sourceCodePro': require('../../assets/fonts/sourceCodePro/SourceCodePro-SemiBold.ttf')
   });
   const route = useRoute<RouteProp<ParamList, 'Detail'>>();
+  const { navigate } = useNavigation<StackNavigation>();
   const {code, currentPlayerUID, indexTheme} = route.params;
   const [word, setWord] = useState<Theme>({name: '', dica: ''});
   const [wordName, setWordName] = useState<string[]>([]);
@@ -52,51 +52,33 @@ export default function Game() {
   const [existElement, setExistElement] = useState(false);
   const [status, setStatus] = useState('');
   const [players, setPlayers] = useState<any>({});
-  const [playerTurn, setPlayerTurn] = useState('');
+  //const [playerTurn, setPlayerTurn] = useState('');
   const [winnerMessage, setWinnerMessage] = useState('');
-
-  const copyToClipboard = async () => {
-    await Clipboard.setStringAsync(code);
-  };
 
   useEffect(() => {
     if (code) {
       onValue(ref(database, 'hangman/' + code), (snapshot) => {
         const data = snapshot.val();
 
-        if (data.newGame && (data.p1.active && data.p2.active) && !(data.p1.gameover || data.p2.gameover || data.p1.victory || data.p2.victory)) {
+        if (data.newGame && (data.players.p1.active && data.players.p2.active) && !(data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
           setWordName(data.wordArray);
           setSelectedLetters(data.selectedLetters);
           setExistElement(true)
-          setPlayerTurn(data.turn)
           setWord(data.selectedWord);
-        }
 
-        if (data.p1.restartGame && data.p2.restartGame) {
-          const {selectedWord, wordArray} = generateTheme(data.indexTheme);
-
-          const updates: any = {};
-          updates['hangman/' + code + '/p1/restartGame'] = false;
-          updates['hangman/' + code + '/p2/restartGame'] = false;
-          updates['hangman/' + code + '/selectedLetters'] = Array('-');
-          updates['hangman/' + code + '/selectedWord'] = selectedWord;
-          updates['hangman/' + code + '/wordArray'] = wordArray;
-          updates['hangman/' + code + '/newGame'] = true;
-          
-          update(ref(database), updates);
           setPlayers({
-            p1: data.p1,
-            p2: data.p2
+            p1: data.players.p1,
+            p2: data.players.p2
           });
         }
 
         // Verificar se é a vez do jogador atual
-        if ((data.turn === 'p1' && data.p1.uid === currentPlayerUID) || (data.turn === 'p2' && data.p2.uid === currentPlayerUID)) {
+        if ((data.turn === 'p1' && data.players.p1.uid === currentPlayerUID) || (data.turn === 'p2' && data.players.p2.uid === currentPlayerUID)) {
           setExistElement(false);
         }
 
         // Verificar se o jogo acabou por gameover ou vitória
-        if (data.newGame && (data.p1.gameover || data.p2.gameover || data.p1.victory || data.p2.victory)) {
+        if (data.newGame && (data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
           handleGameEnd(data)
         }
       });
@@ -141,8 +123,8 @@ export default function Game() {
     setStatus('gameover');
     setWinnerMessage('VOÇES PERDERAM!');
   
-    if (data.p1.victory || data.p2.victory) {
-      const winner = data.p1.victory ? data.p1 : data.p2;
+    if (data.players.p1.victory || data.players.p2.victory) {
+      const winner = data.players.p1.victory ? data.players.p1 : data.players.p2;
       setWinnerMessage(`${winner.name} ganhou!`);
     }
 
@@ -158,10 +140,13 @@ export default function Game() {
   
     if (code) {
       const updates: any = {};
+      console.log(players.p1.uid, currentPlayerUID)
       if (players.p1.uid === currentPlayerUID) {
-        updates['hangman/' + code + '/p1/victory'] = true;
+        updates['hangman/' + code + '/players/p1/victory'] = true;
+        updates['hangman/' + code + '/players/p2/gameover'] = true;
       } else if (players.p2.uid === currentPlayerUID) {
-        updates['hangman/' + code + '/p2/victory'] = true;
+        updates['hangman/' + code + '/players/p2/victory'] = true;
+        updates['hangman/' + code + '/players/p1/gameover'] = true;
       }
       update(ref(database), updates);
     }
@@ -178,9 +163,11 @@ export default function Game() {
       if (code) {
         const updates: any = {};
         if (players.p1.uid === currentPlayerUID) {
-          updates['hangman/' + code + '/p1/gameover'] = true;
+          updates['hangman/' + code + '/players/p1/gameover'] = true;
+          updates['hangman/' + code + '/players/p2/gameover'] = true;
         } else if (players.p2.uid === currentPlayerUID) {
-          updates['hangman/' + code + '/p2/gameover'] = true;
+          updates['hangman/' + code + '/players/p2/gameover'] = true;
+          updates['hangman/' + code + '/players/p1/gameover'] = true;
         }
         update(ref(database), updates);
       }
@@ -191,13 +178,11 @@ export default function Game() {
     if (code) {
       const updates: any = {};
       if (players.p1.uid === currentPlayerUID) {
-        updates[`hangman/${code}/p1/gameover`] = false;
-        updates[`hangman/${code}/p1/victory`] = false;
-        updates[`hangman/${code}/p1/restartGame`] = true;
+        updates[`hangman/${code}/players/p1/gameover`] = false;
+        updates[`hangman/${code}/players/p1/victory`] = false;
       } else if (players.p2.uid === currentPlayerUID) {
-        updates[`hangman/${code}/p2/gameover`] = false;
-        updates[`hangman/${code}/p2/victory`] = false;
-        updates[`hangman/${code}/p2/restartGame`] = true;
+        updates[`hangman/${code}/players/p2/gameover`] = false;
+        updates[`hangman/${code}/players/p2/victory`] = false;
       }
       await update(ref(database), updates);
     } else {
@@ -214,14 +199,8 @@ export default function Game() {
   }
 
   const restartGame = () => {
-    setCountErrors(0);
-    setExistLetter('');
-    setStatus('');
-    setWinnerMessage('');
-    setSelectedLetters([]);
-    setWord({name: '', dica: ''});
-    setWordName([]);
     restartGameInDatabase();
+    navigate("Lobby",  { code, currentPlayerUID })
   };
 
   const RenderItemLetters = ({ item, index, aa }: any) => {
@@ -282,20 +261,10 @@ export default function Game() {
               <Button text='SAIR' />
             </>
           ) : (
-            <GuideText style={{color: !playerTurn ? '#FDE767' : '#d68f54'}}>
-              {!playerTurn ? 'AGUARDANDO JOGADOR ENTRAR...' : 'AGUARDANDO JOGADOR JOGAR...'}
-            </GuideText>
+            <GuideText style={{color: '#FDE767'}}>AGUARDANDO JOGADOR JOGAR...</GuideText>
           )}
         </>
       )}
-      {code ? (
-        <>
-          <GuideText style={{color: '#eee'}}>Compartilhe código com seu colega: {code}</GuideText>
-          <TouchableOpacity onPress={() => copyToClipboard()} style={{marginTop: 5 }}>
-            <Feather name="copy" size={24} color="#eee" />
-          </TouchableOpacity>
-        </>
-      ) : null}
     </Main>
     </ScrollView>
   );

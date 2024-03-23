@@ -84,9 +84,9 @@ export default function Lobby() {
         );
 
         if (allPlayersReady && !data.gameInProgress) { // Verifica se todos os jogadores estão prontos e o jogo não foi iniciado
-          createGame(codeRoom, data.indexTheme);
-
+          
           setTimeout(() => {
+            createGame(codeRoom, data.indexTheme);
             navigate("Game", { code: codeRoom, currentPlayerUID: route.params.currentPlayerUID });
           }, 6000);
         }

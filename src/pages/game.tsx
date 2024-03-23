@@ -52,33 +52,50 @@ export default function Game() {
   const [existElement, setExistElement] = useState(false);
   const [status, setStatus] = useState('');
   const [players, setPlayers] = useState<any>({});
-  //const [playerTurn, setPlayerTurn] = useState('');
+  const [playerTurn, setPlayerTurn] = useState('');
   const [winnerMessage, setWinnerMessage] = useState('');
 
   useEffect(() => {
     if (code) {
       onValue(ref(database, 'hangman/' + code), (snapshot) => {
         const data = snapshot.val();
+        const playersObject = data.players || {}; // Obtém o objeto de jogadores ou inicializa como um objeto vazio
+        const playersArray: any = Object.values(playersObject);
+        const numPlayers = Object.keys(data.players).length;
+        const allPlayersReady = playersArray.every((player: any) => 
+          player.active && !player.gameover && !player.victory // Verifica se todos os jogadores estão prontos e não acabaram o jogo
+        );
 
-        if (data.gameInProgress && (data.players.p1.active && data.players.p2.active) && !(data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
+        if (data.gameInProgress && allPlayersReady) {
           setWordName(data.wordArray);
           setSelectedLetters(data.selectedLetters);
-          setExistElement(true)
+          if (currentPlayerUID === isCurrentPlayerTurn(data)) {
+            setExistElement(true);
+          } else {
+            setExistElement(false);
+          }
           setWord(data.selectedWord);
+          setPlayerTurn(data.turn)
 
-          setPlayers({
-            p1: data.players.p1,
-            p2: data.players.p2
-          });
+          // Cria um objeto para armazenar todos os jogadores
+          const allPlayers: any = {};
+
+          // Popula o objeto com os jogadores existentes
+          for (let i = 1; i <= numPlayers; i++) {
+            allPlayers['p' + i] = data.players['p' + i];
+          }
+
+          // Atualiza o estado de players com todos os jogadores existentes
+          setPlayers(allPlayers);
         }
 
-        // Verificar se é a vez do jogador atual
-        if ((data.turn === 'p1' && data.players.p1.uid === currentPlayerUID) || (data.turn === 'p2' && data.players.p2.uid === currentPlayerUID)) {
-          setExistElement(false);
-        }
-
+        // Verifica se algum jogador acabou o jogo ou alcançou a vitória
+        const anyPlayerGameOverOrVictory = playersArray.every((player: any) =>
+          player.gameover || player.victory
+        );
+        console.log(anyPlayerGameOverOrVictory)
         // Verificar se o jogo acabou por gameover ou vitória
-        if (data.gameInProgress && (data.players.p1.gameover || data.players.p2.gameover || data.players.p1.victory || data.players.p2.victory)) {
+        if (data.gameInProgress && anyPlayerGameOverOrVictory) {
           handleGameEnd(data)
         }
       });
@@ -88,6 +105,15 @@ export default function Game() {
       setWordName(route.params.wordArray);
     }
   }, []);
+
+  const isCurrentPlayerTurn = (data: any) => {
+    for (const key in data.players) {
+      if (key === data.turn) {
+        return data.players[key].uid; // Retorna o objeto encontrado
+      }
+    }
+    return false
+  };
 
   const handleSelectLetter = (letter: string) => {
     if (!selectedLetters.includes(letter)) {
@@ -106,9 +132,19 @@ export default function Game() {
 
       if (code) {
         const updates: any = {};
+        const numPlayers = Object.keys(players).length;
+        const playerNumber = parseInt(playerTurn.replace(/\D/g, ''), 10);
+
         updates['hangman/' + code + '/selectedLetters'] = [...selectedLetters, letter];;
         updates['hangman/' + code + '/wordArray'] = newWordName;
-        updates['hangman/' + code + '/turn'] = players.p1.uid === currentPlayerUID ? 'p1' : 'p2';
+
+        if (playerNumber >= numPlayers) {
+          updates['hangman/' + code + '/turn'] = 'p1';
+        } else {
+          const nextPlayerIndex = playerNumber + 1;
+          const nextPlayer = 'p' + nextPlayerIndex;
+          updates['hangman/' + code + '/turn'] = nextPlayer;
+        }
         update(ref(database), updates);
       }  
 
@@ -118,14 +154,24 @@ export default function Game() {
     }
   };
 
+  function getWinnerMessage(playersData: any) {
+    for (const key in playersData) {
+        if (playersData[key].victory) {
+          return `${playersData[key].name} ganhou!`;
+        }
+    }
+    return null; // Retorna null se nenhum jogador ganhou
+  }
+
   const handleGameEnd = (data: any) => {
     setExistElement(false);
     setStatus('gameover');
     setWinnerMessage('VOÇES PERDERAM!');
   
-    if (data.players.p1.victory || data.players.p2.victory) {
-      const winner = data.players.p1.victory ? data.players.p1 : data.players.p2;
-      setWinnerMessage(`${winner.name} ganhou!`);
+    const winnerMessage = getWinnerMessage(data.players);
+
+    if (winnerMessage) {
+      setWinnerMessage(winnerMessage);
     }
 
     const updates: any = {};
@@ -137,19 +183,30 @@ export default function Game() {
     setExistElement(false);
     setStatus('victory');
     setWinnerMessage('VOCÊ GANHOU!');
-  
+
     if (code) {
       const updates: any = {};
-      console.log(players.p1.uid, currentPlayerUID)
-      if (players.p1.uid === currentPlayerUID) {
-        updates['hangman/' + code + '/players/p1/victory'] = true;
-        updates['hangman/' + code + '/players/p2/gameover'] = true;
-      } else if (players.p2.uid === currentPlayerUID) {
-        updates['hangman/' + code + '/players/p2/victory'] = true;
-        updates['hangman/' + code + '/players/p1/gameover'] = true;
+  
+      // Adicione verificações para todos os jogadores existentes
+      for (let i = 1; i <= Object.keys(players).length; i++) {
+        const currentPlayer = players['p' + i];
+          
+        if (currentPlayer && currentPlayer.uid === currentPlayerUID) {
+          updates['hangman/' + code + '/players/p' + i + '/victory'] = true;
+              
+          // Define todos os outros jogadores como "gameover"
+          for (let j = 1; j <= Object.keys(players).length; j++) {
+            if (j !== i) {
+              updates['hangman/' + code + '/players/p' + j + '/gameover'] = true;
+            }
+          }
+              
+          break; // Interrompe o loop após encontrar o jogador atual
+        }
       }
+      
       update(ref(database), updates);
-    }
+    }  
   };
 
   const handleIncorrectGuess = () => {
@@ -162,27 +219,47 @@ export default function Game() {
       
       if (code) {
         const updates: any = {};
-        if (players.p1.uid === currentPlayerUID) {
-          updates['hangman/' + code + '/players/p1/gameover'] = true;
-          updates['hangman/' + code + '/players/p2/gameover'] = true;
-        } else if (players.p2.uid === currentPlayerUID) {
-          updates['hangman/' + code + '/players/p2/gameover'] = true;
-          updates['hangman/' + code + '/players/p1/gameover'] = true;
+    
+        // Adicione verificações para todos os jogadores existentes
+        for (let i = 1; i <= Object.keys(players).length; i++) {
+          const currentPlayer = players['p' + i];
+            
+          if (currentPlayer && currentPlayer.uid === currentPlayerUID) {
+            updates['hangman/' + code + '/players/p' + i + '/gameover'] = true;
+                
+            // Define todos os outros jogadores como "gameover"
+            for (let j = 1; j <= Object.keys(players).length; j++) {
+              if (j !== i) {
+                updates['hangman/' + code + '/players/p' + j + '/gameover'] = true;
+              }
+            }
+                
+            break; // Interrompe o loop após encontrar o jogador atual
+          }
         }
+        
         update(ref(database), updates);
-      }
+      } 
     }
   };
+
+  function getPlayerUid(uid: string) {
+    for (const key in players) {
+        if (players[key].uid === uid) {
+            return key // Retorna o uid se o nome do jogador for encontrado
+        }
+    }
+    return null; // Retorna null se o jogador não for encontrado
+  }
 
   async function restartGameInDatabase() {
     if (code) {
       const updates: any = {};
-      if (players.p1.uid === currentPlayerUID) {
-        updates[`hangman/${code}/players/p1/gameover`] = false;
-        updates[`hangman/${code}/players/p1/victory`] = false;
-      } else if (players.p2.uid === currentPlayerUID) {
-        updates[`hangman/${code}/players/p2/gameover`] = false;
-        updates[`hangman/${code}/players/p2/victory`] = false;
+      const playerIs = getPlayerUid(currentPlayerUID as string);
+
+      if (playerIs) {
+        updates[`hangman/${code}/players/${playerIs}/gameover`] = false;
+        updates[`hangman/${code}/players/${playerIs}/victory`] = false;
       }
       await update(ref(database), updates);
     } else {

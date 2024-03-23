@@ -41,8 +41,7 @@ export default function Lobby() {
   const { navigate } = useNavigation<StackNavigation>();
   const route = useRoute<RouteProp<ParamList, 'Detail'>>();
   const [code, setCode] = useState('');
-  const [players, setPlayers] = useState('');
-  //const [gameCreated, setGameCreated] = useState(false);
+  const [players, setPlayers] = useState<any>({});
 
   const [fontsLoaded, fontError] = useFonts({
     'YanoneKaffeesatz': require('../../assets/fonts/yanone/YanoneKaffeesatz-SemiBold.ttf'),
@@ -65,38 +64,67 @@ export default function Lobby() {
     update(ref(database), updates);
   }
 
+  function getPlayerUid(uid: string) {
+    for (const key in players) {
+      if (players[key].uid === uid) {
+        return key
+      }
+    }
+    return null;
+  }
+
+  function playReady() {
+    const codeRoom = route.params.code;
+    const currentPlayerUID = route.params.currentPlayerUID
+    const updates: any = {};
+
+    const key = 'p' + (1 + Number(getPlayerUid(currentPlayerUID as string)))
+
+    if (players[Number(getPlayerUid(currentPlayerUID as string))].ready) {
+      updates[`hangman/${codeRoom}/players/${key}/ready`] = false;
+    } else {
+      updates[`hangman/${codeRoom}/players/${key}/ready`] = true;
+    }
+    update(ref(database), updates);
+  }
+
   useEffect(() => {
     const minPlayers = 2;
     const maxPlayers = 8;
-    const codeRoom = route.params.code; // Código da sala
-    setCode(route.params.code); // Define o código da sala no estado
+    const codeRoom = route.params.code;
+    setCode(route.params.code);
 
     onValue(ref(database, 'hangman/' + codeRoom), (snapshot) => {
       const data = snapshot.val();
-      const playersObject = data.players || {}; // Obtém o objeto de jogadores ou inicializa como um objeto vazio
+      const playersObject = data.players || {};
       const numPlayers = Object.keys(playersObject).length;
       const playersArray: any = Object.values(playersObject);
       setPlayers(playersArray)
 
-      if (numPlayers >= minPlayers && numPlayers <= maxPlayers) { // Verifica se há jogadores suficientes
+      if (numPlayers >= minPlayers && numPlayers <= maxPlayers) {
         const allPlayersReady = playersArray.every((player: any) => 
-          !player.gameover && !player.victory // Verifica se todos os jogadores estão prontos e não acabaram o jogo
+          player.ready && !player.gameover && !player.victory // Verifica se todos os jogadores estão prontos e não acabaram o jogo
         );
 
-        if (allPlayersReady && !data.gameInProgress) { // Verifica se todos os jogadores estão prontos e o jogo não foi iniciado
-          
-          setTimeout(() => {
-            createGame(codeRoom, data.indexTheme);
-            navigate("Game", { code: codeRoom, currentPlayerUID: route.params.currentPlayerUID });
-          }, 6000);
+        if (allPlayersReady && !data.gameInProgress) {
+          createGame(codeRoom, data.indexTheme);
+          navigate("Game", { code: codeRoom, currentPlayerUID: route.params.currentPlayerUID });
         }
       }
     });
   }, []);
 
   const renderThemes = (data: any, index: any) => (
-    <Theme>
-      <TextNameTheme>{data.name}</TextNameTheme>
+    <Theme style={{marginLeft: 10, marginRight: 10}}>
+      <TextNameTheme style={{width: 'auto', paddingRight: 10}}>{data.owner ? '👑 ' : null}{data.name}</TextNameTheme>
+      {
+        data.uid === route.params.currentPlayerUID ? 
+        (
+          <Button widthD={35} press={() => playReady()} text={!data.ready ? '▷' : '↻'} />
+        ) : (
+          <GuideText style={{color: data.ready ? '#36AA4D' : '#e2584d'}}>{data.ready ? 'OK' : 'NOT'}</GuideText>
+        )
+      }
     </Theme>
   );
 

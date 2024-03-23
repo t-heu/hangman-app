@@ -93,7 +93,7 @@ export default function Game() {
         const anyPlayerGameOverOrVictory = playersArray.every((player: any) =>
           player.gameover || player.victory
         );
-        console.log(anyPlayerGameOverOrVictory)
+
         // Verificar se o jogo acabou por gameover ou vitória
         if (data.gameInProgress && anyPlayerGameOverOrVictory) {
           handleGameEnd(data)
@@ -245,9 +245,9 @@ export default function Game() {
 
   function getPlayerUid(uid: string) {
     for (const key in players) {
-        if (players[key].uid === uid) {
-            return key // Retorna o uid se o nome do jogador for encontrado
-        }
+      if (players[key].uid === uid) {
+        return key // Retorna o uid se o nome do jogador for encontrado
+      }
     }
     return null; // Retorna null se o jogador não for encontrado
   }
@@ -260,6 +260,7 @@ export default function Game() {
       if (playerIs) {
         updates[`hangman/${code}/players/${playerIs}/gameover`] = false;
         updates[`hangman/${code}/players/${playerIs}/victory`] = false;
+        updates[`hangman/${code}/players/${playerIs}/ready`] = false;
       }
       await update(ref(database), updates);
     } else {

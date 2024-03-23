@@ -7,9 +7,10 @@ import {ButtonText, ButtonWrapper, Button} from '../pages/style'
 interface PropsButton {
   text: string;
   press?: any;
+  widthD?: number;
 }
 
-export default function BackButton({text, press}: PropsButton) {
+export default function BackButton({text, press, widthD}: PropsButton) {
   const { goBack } = useNavigation<StackNavigation>();
   const [fontsLoaded, fontError] = useFonts({
     'YanoneKaffeesatz': require('../../assets/fonts/yanone/YanoneKaffeesatz-SemiBold.ttf'),
@@ -24,8 +25,8 @@ export default function BackButton({text, press}: PropsButton) {
     <>
     {
       press ? (
-        <Button onPress={() => press()}>
-          <ButtonWrapper>
+        <Button style={{width: widthD ? widthD : 140}} onPress={() => press()}>
+          <ButtonWrapper style={{width: widthD ? widthD : 140}}>
             <ButtonText>{text}</ButtonText>
           </ButtonWrapper>
         </Button>

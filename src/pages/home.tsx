@@ -51,6 +51,7 @@ export default function Home() {
               uid: uid,
               active: true,
               ready: false,
+              owner: true
             },
           },
           turn: 'p1',
@@ -92,6 +93,7 @@ export default function Home() {
               uid: uid,
               active: true,
               ready: false,
+              owner: false
             }
             update(ref(database), updates);
         

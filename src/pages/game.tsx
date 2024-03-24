@@ -57,7 +57,7 @@ export default function Game() {
 
   useEffect(() => {
     if (code) {
-      onValue(ref(database, 'hangman/' + code), (snapshot) => {
+      onValue(ref(database, 'hangman/rooms/' + code), (snapshot) => {
         const data = snapshot.val();
         const playersObject = data.players || {};
         const playersArray: any = Object.values(playersObject);
@@ -123,13 +123,13 @@ export default function Game() {
         const numPlayers = Object.keys(players).length;
         const playerNumber = parseInt(playerTurn.replace(/\D/g, ''), 10);
 
-        updates['hangman/' + code + '/selectedLetters'] = [...selectedLetters, letter];;
-        updates['hangman/' + code + '/wordArray'] = newWordName;
+        updates['hangman/rooms/' + code + '/selectedLetters'] = [...selectedLetters, letter];;
+        updates['hangman/rooms/' + code + '/wordArray'] = newWordName;
 
         const nextPlayerIndex = playerNumber + 1;
         const nextPlayer = 'p' + nextPlayerIndex;
 
-        updates['hangman/' + code + '/turn'] = playerNumber >= numPlayers ? 'p1' : nextPlayer
+        updates['hangman/rooms/' + code + '/turn'] = playerNumber >= numPlayers ? 'p1' : nextPlayer
         update(ref(database), updates);
       }  
 
@@ -161,7 +161,7 @@ export default function Game() {
     }
 
     const updates: any = {};
-    updates['hangman/' + code + '/gameInProgress'] = false;
+    updates['hangman/rooms/' + code + '/gameInProgress'] = false;
     update(ref(database), updates);
   };
 
@@ -178,12 +178,12 @@ export default function Game() {
         const currentPlayer = players['p' + i];
           
         if (currentPlayer && currentPlayer.uid === currentPlayerUID) {
-          updates['hangman/' + code + '/players/p' + i + '/victory'] = true;
+          updates['hangman/rooms/' + code + '/players/p' + i + '/victory'] = true;
               
           // Define todos os outros jogadores como "gameover"
           for (let j = 1; j <= Object.keys(players).length; j++) {
             if (j !== i) {
-              updates['hangman/' + code + '/players/p' + j + '/gameover'] = true;
+              updates['hangman/rooms/' + code + '/players/p' + j + '/gameover'] = true;
             }
           }
               
@@ -211,12 +211,12 @@ export default function Game() {
           const currentPlayer = players['p' + i];
             
           if (currentPlayer && currentPlayer.uid === currentPlayerUID) {
-            updates['hangman/' + code + '/players/p' + i + '/gameover'] = true;
+            updates['hangman/rooms/' + code + '/players/p' + i + '/gameover'] = true;
                 
             // Define todos os outros jogadores como "gameover"
             for (let j = 1; j <= Object.keys(players).length; j++) {
               if (j !== i) {
-                updates['hangman/' + code + '/players/p' + j + '/gameover'] = true;
+                updates['hangman/rooms/' + code + '/players/p' + j + '/gameover'] = true;
               }
             }
                 
@@ -244,9 +244,9 @@ export default function Game() {
       const playerIs = getPlayerUid(currentPlayerUID as string);
 
       if (playerIs) {
-        updates[`hangman/${code}/players/${playerIs}/gameover`] = false;
-        updates[`hangman/${code}/players/${playerIs}/victory`] = false;
-        updates[`hangman/${code}/players/${playerIs}/ready`] = false;
+        updates[`hangman/rooms/${code}/players/${playerIs}/gameover`] = false;
+        updates[`hangman/rooms/${code}/players/${playerIs}/victory`] = false;
+        updates[`hangman/rooms/${code}/players/${playerIs}/ready`] = false;
       }
       await update(ref(database), updates);
     } else {
@@ -275,7 +275,7 @@ export default function Game() {
       <CharacterDisplay
         key={index}
         style={ab}
-        onPress={() => handleSelectLetter(item)}>
+        onPress={aa ? () => handleSelectLetter(item) : () => {}}>
         {aa ? (
           <LetterBoxWrapper>
             <LetterText>{item}</LetterText>
@@ -302,18 +302,14 @@ export default function Game() {
       </InfoHeader>
 
       <LetterContainer style={{marginVertical: 10}}>
-        {wordName.map((item, index) => (
-            <RenderItemLetters key={index} item={item} aa={false} />
-          ))}
+        {wordName.map((item, index) => <RenderItemLetters key={index} item={item} aa={false} />)}
       </LetterContainer>
 
       <GuideText style={{width: 300}}>{word.dica ? `Dica: ${word.dica}` : null}</GuideText>
 
       {existElement ? (
         <LetterContainer style={{marginVertical: 10}}>
-          {Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ').map((item, index) => (
-            <RenderItemLetters key={index} item={item} aa={true} />
-          ))}
+          {Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ').map((item, index) => <RenderItemLetters key={index} item={item} aa={true} />)}
         </LetterContainer>
       ) : (
         <>

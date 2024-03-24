@@ -42,7 +42,7 @@ export default function Home() {
         const uuid = v4();
         const uid = v4();
 
-        await set(ref(database, 'hangman/' + uuid), {
+        await set(ref(database, 'hangman/rooms/' + uuid), {
           players: {
             p1: {
               name: nameP1 ? nameP1 : 'P1',
@@ -77,7 +77,7 @@ export default function Home() {
     const updates: any = {};
 
     if (code) {
-      get(child(ref(database), 'hangman/' + code)).then((snapshot) => {
+      get(child(ref(database), 'hangman/rooms/' + code)).then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
           const playersObject = data.players || {};
@@ -86,7 +86,7 @@ export default function Home() {
           if (!data.gameInProgress && numPlayers < 8) {
             const nextPlayer = '/p' + (numPlayers + 1); // Determina o próximo jogador a ser criado
 
-            updates['hangman/' + code + '/players' +  nextPlayer] = {
+            updates['hangman/rooms/' + code + '/players' +  nextPlayer] = {
               name: nameP2 ? nameP2 : 'P' + (numPlayers + 1),
               gameover: false,
               victory: false,

@@ -54,10 +54,10 @@ export default function Lobby() {
     const {selectedWord, wordArray} = generateTheme(indexTheme);
     const updates: any = {};
         
-    updates['hangman/' + codeRoom + '/selectedLetters'] = Array('-');
-    updates['hangman/' + codeRoom + '/selectedWord'] = selectedWord;
-    updates['hangman/' + codeRoom + '/wordArray'] = wordArray;
-    updates['hangman/' + codeRoom + '/gameInProgress'] = true;
+    updates['hangman/rooms/' + codeRoom + '/selectedLetters'] = Array('-');
+    updates['hangman/rooms/' + codeRoom + '/selectedWord'] = selectedWord;
+    updates['hangman/rooms/' + codeRoom + '/wordArray'] = wordArray;
+    updates['hangman/rooms/' + codeRoom + '/gameInProgress'] = true;
       
     update(ref(database), updates);
   }
@@ -65,7 +65,10 @@ export default function Lobby() {
   function getPlayerUid(uid: string) {
     for (const key in players) {
       if (players[key].uid === uid) {
-        return key
+        return {
+          key: key,
+          data: players[key]
+        }
       }
     }
     return null;
@@ -74,8 +77,8 @@ export default function Lobby() {
   function playReady() {
     const updates: any = {};
 
-    const key = 'p' + (1 + Number(getPlayerUid(currentPlayerUID as string)))
-    updates[`hangman/${code}/players/${key}/ready`] = players[Number(getPlayerUid(currentPlayerUID as string))].ready ? false : true
+    const key = 'p' + (1 + Number(getPlayerUid(currentPlayerUID as string)?.key))
+    updates[`hangman/rooms/${code}/players/${key}/ready`] = players[Number(getPlayerUid(currentPlayerUID as string)?.key)].ready ? false : true
     update(ref(database), updates);
   }
 
@@ -83,7 +86,7 @@ export default function Lobby() {
     const minPlayers = 2;
     const maxPlayers = 8;
 
-    onValue(ref(database, 'hangman/' + code), (snapshot) => {
+    onValue(ref(database, 'hangman/rooms/' + code), (snapshot) => {
       const data = snapshot.val();
       const playersObject = data.players || {};
       const numPlayers = Object.keys(playersObject).length;
@@ -102,16 +105,13 @@ export default function Lobby() {
   }, []);
 
   const renderThemes = (data: any, index: any) => (
-    <Theme style={{marginLeft: 10, marginRight: 10}}>
-      <TextNameTheme style={{width: 'auto', paddingRight: 10}}>{data.owner ? '👑 ' : null}{data.name}</TextNameTheme>
-      {
-        data.uid === route.params.currentPlayerUID ? 
-        (
-          <Button widthD={35} press={() => playReady()} text={!data.ready ? '▷' : '↻'} />
-        ) : (
-          <GuideText style={{color: data.ready ? '#36AA4D' : '#e2584d'}}>{data.ready ? 'OK' : 'NOT'}</GuideText>
-        )
-      }
+    <Theme style={{marginLeft: 10, marginRight: 10, maxWidth: 150, minWidth: 'auto'}}>
+      <GuideText>{data.owner ? '👑 ' : null}</GuideText>
+      <TextNameTheme style={{width: 'auto', paddingRight: 10}}>{data.name}</TextNameTheme>
+      {data.uid === route.params.currentPlayerUID ? 
+        null : (
+        <GuideText style={{color: data.ready ? '#36AA4D' : '#e2584d'}}>{data.ready ? 'READY' : 'PREPARING'}</GuideText>
+      )}
     </Theme>
   );
 
@@ -129,10 +129,13 @@ export default function Lobby() {
         data={players}
         renderItem={({ item, index }) => renderThemes(item, index)}
         keyExtractor={(_, index) => index.toString()}
-        style={{marginBottom: 15, height: 200}}
+        style={{marginBottom: 15, height: 300}}
         numColumns={2}
       />
 
+      {getPlayerUid(currentPlayerUID as string) ? (
+        <Button widthD={100} press={() => playReady()} text={!getPlayerUid(currentPlayerUID as string)?.data.ready ? 'READY' : 'CANCEL'} />
+      ) : null}
       <Button text='SAIR' />
 
       <View style={{marginTop: 30, height: 300, alignItems: 'center', width: '100%'}}>

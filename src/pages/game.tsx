@@ -59,25 +59,18 @@ export default function Game() {
     if (code) {
       onValue(ref(database, 'hangman/' + code), (snapshot) => {
         const data = snapshot.val();
-        const playersObject = data.players || {}; // Obtém o objeto de jogadores ou inicializa como um objeto vazio
+        const playersObject = data.players || {};
         const playersArray: any = Object.values(playersObject);
         const numPlayers = Object.keys(data.players).length;
-        const allPlayersReady = playersArray.every((player: any) => 
-          player.active && !player.gameover && !player.victory // Verifica se todos os jogadores estão prontos e não acabaram o jogo
-        );
+        const allPlayersReady = playersArray.every((player: any) =>  player.active && !player.gameover && !player.victory );
 
         if (data.gameInProgress && allPlayersReady) {
           setWordName(data.wordArray);
           setSelectedLetters(data.selectedLetters);
-          if (currentPlayerUID === isCurrentPlayerTurn(data)) {
-            setExistElement(true);
-          } else {
-            setExistElement(false);
-          }
+          setExistElement(currentPlayerUID === isCurrentPlayerTurn(data))
           setWord(data.selectedWord);
           setPlayerTurn(data.turn)
 
-          // Cria um objeto para armazenar todos os jogadores
           const allPlayers: any = {};
 
           // Popula o objeto com os jogadores existentes
@@ -85,16 +78,11 @@ export default function Game() {
             allPlayers['p' + i] = data.players['p' + i];
           }
 
-          // Atualiza o estado de players com todos os jogadores existentes
           setPlayers(allPlayers);
         }
 
         // Verifica se algum jogador acabou o jogo ou alcançou a vitória
-        const anyPlayerGameOverOrVictory = playersArray.every((player: any) =>
-          player.gameover || player.victory
-        );
-
-        // Verificar se o jogo acabou por gameover ou vitória
+        const anyPlayerGameOverOrVictory = playersArray.every((player: any) => player.gameover || player.victory);
         if (data.gameInProgress && anyPlayerGameOverOrVictory) {
           handleGameEnd(data)
         }
@@ -138,13 +126,10 @@ export default function Game() {
         updates['hangman/' + code + '/selectedLetters'] = [...selectedLetters, letter];;
         updates['hangman/' + code + '/wordArray'] = newWordName;
 
-        if (playerNumber >= numPlayers) {
-          updates['hangman/' + code + '/turn'] = 'p1';
-        } else {
-          const nextPlayerIndex = playerNumber + 1;
-          const nextPlayer = 'p' + nextPlayerIndex;
-          updates['hangman/' + code + '/turn'] = nextPlayer;
-        }
+        const nextPlayerIndex = playerNumber + 1;
+        const nextPlayer = 'p' + nextPlayerIndex;
+
+        updates['hangman/' + code + '/turn'] = playerNumber >= numPlayers ? 'p1' : nextPlayer
         update(ref(database), updates);
       }  
 
@@ -156,22 +141,23 @@ export default function Game() {
 
   function getWinnerMessage(playersData: any) {
     for (const key in playersData) {
-        if (playersData[key].victory) {
-          return `${playersData[key].name} ganhou!`;
-        }
+      if (playersData[key].victory) {
+        return `${playersData[key].name} ganhou!`;
+      }
     }
-    return null; // Retorna null se nenhum jogador ganhou
+    return null;
   }
 
   const handleGameEnd = (data: any) => {
     setExistElement(false);
     setStatus('gameover');
-    setWinnerMessage('VOÇES PERDERAM!');
-  
+
     const winnerMessage = getWinnerMessage(data.players);
 
     if (winnerMessage) {
       setWinnerMessage(winnerMessage);
+    } else {
+      setWinnerMessage('VOÇES PERDERAM!');
     }
 
     const updates: any = {};

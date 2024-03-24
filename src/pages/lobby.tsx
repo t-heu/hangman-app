@@ -40,7 +40,7 @@ type ParamList = {
 export default function Lobby() {
   const { navigate } = useNavigation<StackNavigation>();
   const route = useRoute<RouteProp<ParamList, 'Detail'>>();
-  const [code, setCode] = useState('');
+  const {code, currentPlayerUID} = route.params
   const [players, setPlayers] = useState<any>({});
 
   const [fontsLoaded, fontError] = useFonts({
@@ -48,9 +48,7 @@ export default function Lobby() {
     'sourceCodePro': require('../../assets/fonts/sourceCodePro/SourceCodePro-SemiBold.ttf')
   });
 
-  const copyToClipboard = async () => {
-    await Clipboard.setStringAsync(code);
-  };
+  const copyToClipboard = async () => await Clipboard.setStringAsync(code);
 
   function createGame(codeRoom: string, indexTheme: number) {
     const {selectedWord, wordArray} = generateTheme(indexTheme);
@@ -74,27 +72,18 @@ export default function Lobby() {
   }
 
   function playReady() {
-    const codeRoom = route.params.code;
-    const currentPlayerUID = route.params.currentPlayerUID
     const updates: any = {};
 
     const key = 'p' + (1 + Number(getPlayerUid(currentPlayerUID as string)))
-
-    if (players[Number(getPlayerUid(currentPlayerUID as string))].ready) {
-      updates[`hangman/${codeRoom}/players/${key}/ready`] = false;
-    } else {
-      updates[`hangman/${codeRoom}/players/${key}/ready`] = true;
-    }
+    updates[`hangman/${code}/players/${key}/ready`] = players[Number(getPlayerUid(currentPlayerUID as string))].ready ? false : true
     update(ref(database), updates);
   }
 
   useEffect(() => {
     const minPlayers = 2;
     const maxPlayers = 8;
-    const codeRoom = route.params.code;
-    setCode(route.params.code);
 
-    onValue(ref(database, 'hangman/' + codeRoom), (snapshot) => {
+    onValue(ref(database, 'hangman/' + code), (snapshot) => {
       const data = snapshot.val();
       const playersObject = data.players || {};
       const numPlayers = Object.keys(playersObject).length;
@@ -102,13 +91,11 @@ export default function Lobby() {
       setPlayers(playersArray)
 
       if (numPlayers >= minPlayers && numPlayers <= maxPlayers) {
-        const allPlayersReady = playersArray.every((player: any) => 
-          player.ready && !player.gameover && !player.victory // Verifica se todos os jogadores estão prontos e não acabaram o jogo
-        );
+        const allPlayersReady = playersArray.every((player: any) => player.ready && !player.gameover && !player.victory);
 
         if (allPlayersReady && !data.gameInProgress) {
-          createGame(codeRoom, data.indexTheme);
-          navigate("Game", { code: codeRoom, currentPlayerUID: route.params.currentPlayerUID });
+          createGame(code, data.indexTheme);
+          navigate("Game", { code: code, currentPlayerUID: currentPlayerUID });
         }
       }
     });

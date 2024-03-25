@@ -1,5 +1,4 @@
-import 'react-native-get-random-values';
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { FlatList, TouchableOpacity, View, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -32,13 +31,13 @@ type ParamList = {
     selectedWord?: any;
     wordArray?: any;
     code: string;
-    currentPlayerUID?: string;
+    currentPlayerUID?: number;
     indexTheme?: number;
   };
 };
 
 export default function Lobby() {
-  const { navigate } = useNavigation<StackNavigation>();
+  const navigation = useNavigation<StackNavigation>();
   const route = useRoute<RouteProp<ParamList, 'Detail'>>();
   const {code, currentPlayerUID} = route.params
   const [players, setPlayers] = useState<any>({});
@@ -47,6 +46,29 @@ export default function Lobby() {
     'YanoneKaffeesatz': require('../../assets/fonts/yanone/YanoneKaffeesatz-SemiBold.ttf'),
     'sourceCodePro': require('../../assets/fonts/sourceCodePro/SourceCodePro-SemiBold.ttf')
   });
+
+  useEffect(() =>
+    navigation.addListener('beforeRemove', (e) => {
+      if (!Boolean(code)) {
+        return;
+      }
+
+      e.preventDefault();
+
+      Alert.alert(
+        'Tem certeza?',
+        'Se você sair da partida, vai perder sua posição!',
+        [
+          { text: "Cancelar", style: 'cancel', onPress: () => {} },
+          {
+            text: 'Continuar',
+            style: 'destructive',
+            onPress: () => navigation.dispatch(e.data.action),
+          },
+        ]
+      );
+    }),
+  [navigation, code]);
 
   const copyToClipboard = async () => await Clipboard.setStringAsync(code);
 
@@ -62,7 +84,7 @@ export default function Lobby() {
     update(ref(database), updates);
   }
 
-  function getPlayerUid(uid: string) {
+  function getPlayerUid(uid: number) {
     for (const key in players) {
       if (players[key].uid === uid) {
         return {
@@ -77,8 +99,8 @@ export default function Lobby() {
   function playReady() {
     const updates: any = {};
 
-    const key = 'p' + (1 + Number(getPlayerUid(currentPlayerUID as string)?.key))
-    updates[`hangman/rooms/${code}/players/${key}/ready`] = players[Number(getPlayerUid(currentPlayerUID as string)?.key)].ready ? false : true
+    const key = 'p' + (1 + Number(getPlayerUid(currentPlayerUID as number)?.key))
+    updates[`hangman/rooms/${code}/players/${key}/ready`] = players[Number(getPlayerUid(currentPlayerUID as number)?.key)].ready ? false : true
     update(ref(database), updates);
   }
 
@@ -98,7 +120,7 @@ export default function Lobby() {
 
         if (allPlayersReady && !data.gameInProgress) {
           createGame(code, data.indexTheme);
-          navigate("Game", { code: code, currentPlayerUID: currentPlayerUID });
+          navigation.navigate("Game", { code: code, currentPlayerUID: currentPlayerUID });
         }
       }
     });
@@ -133,16 +155,17 @@ export default function Lobby() {
         numColumns={2}
       />
 
-      {getPlayerUid(currentPlayerUID as string) ? (
-        <Button widthD={100} press={() => playReady()} text={!getPlayerUid(currentPlayerUID as string)?.data.ready ? 'READY' : 'CANCEL'} />
+      {getPlayerUid(currentPlayerUID as number) ? (
+        <Button press={() => playReady()} text={!getPlayerUid(currentPlayerUID as number)?.data.ready ? 'READY' : 'CANCEL'} />
       ) : null}
       <Button text='SAIR' />
 
       <View style={{marginTop: 30, height: 300, alignItems: 'center', width: '100%'}}>
         {code ? (
           <>
-            <GuideText style={{color: '#eee'}}>Compartilhe código com seu colega: {code}</GuideText>
-            <TouchableOpacity onPress={() => copyToClipboard()} style={{marginTop: 5 }}>
+            <GuideText style={{color: '#eee'}}>Compartilhe código com seu colega:</GuideText>
+            <TouchableOpacity onPress={() => copyToClipboard()} style={{marginTop: 5, flexDirection: 'row'}}>
+              <GuideText style={{color: '#eee', marginRight: 5}}>{code}</GuideText>
               <Feather name="copy" size={24} color="#eee" />
             </TouchableOpacity>
           </>

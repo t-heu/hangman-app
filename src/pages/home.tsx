@@ -1,10 +1,8 @@
-import 'react-native-get-random-values';
 import { FlatList, View, Alert } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RadioButton } from 'react-native-paper';
 import { useFonts } from 'expo-font';
-import { v4 } from 'uuid';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationAction } from '@react-navigation/native';
 
 import { type StackNavigation } from "../../App";
 import { database, set, ref, update, get, child } from '../api/firebase'
@@ -26,21 +24,30 @@ import {
 } from './style'
 
 export default function Home() {
-  const { navigate } = useNavigation<StackNavigation>();
+  const {navigate} = useNavigation<StackNavigation>();
   const [fontsLoaded, fontError] = useFonts({
     'YanoneKaffeesatz': require('../../assets/fonts/yanone/YanoneKaffeesatz-SemiBold.ttf'),
     'sourceCodePro': require('../../assets/fonts/sourceCodePro/SourceCodePro-SemiBold.ttf')
   });
-  const [checked, setChecked] = useState(0);
+  const [checked, setChecked] = useState(4);
   const [code, setCode] = useState('');
   const [nameP1, setNameP1] = useState('');
   const [nameP2, setNameP2] = useState('');
 
+  function generateRandomWord(length: number) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let randomWord = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomWord += characters.charAt(randomIndex);
+    }
+    return randomWord;
+  }
+
   async function createGame(stauts: boolean) {
     try {
       if (stauts) {
-        const uuid = v4();
-        const uid = v4();
+        const uuid = generateRandomWord(6);
 
         await set(ref(database, 'hangman/rooms/' + uuid), {
           players: {
@@ -48,7 +55,7 @@ export default function Home() {
               name: nameP1 ? nameP1 : 'P1',
               gameover: false,
               victory: false,
-              uid: uid,
+              uid: 1,
               active: true,
               ready: false,
               owner: true
@@ -62,7 +69,7 @@ export default function Home() {
           selectedWord: {name: '', dica: ''}
         });
   
-        navigate("Lobby",  { code: uuid, currentPlayerUID: uid })
+        navigate("Lobby",  { code: uuid, currentPlayerUID: 1 })
       } else {
         const {selectedWord, wordArray} = generateTheme(checked);
         navigate("Game",  { selectedWord, wordArray, code, indexTheme: checked })
@@ -72,8 +79,7 @@ export default function Home() {
     }
   }
 
-  function enterRoom() {
-    const uid = v4();
+  function play() {
     const updates: any = {};
 
     if (code) {
@@ -84,20 +90,20 @@ export default function Home() {
           const numPlayers = Object.keys(playersObject).length;
 
           if (!data.gameInProgress && numPlayers < 8) {
-            const nextPlayer = '/p' + (numPlayers + 1); // Determina o próximo jogador a ser criado
+            const nextPlayer = (numPlayers + 1); // Determina o próximo jogador a ser criado
 
-            updates['hangman/rooms/' + code + '/players' +  nextPlayer] = {
-              name: nameP2 ? nameP2 : 'P' + (numPlayers + 1),
+            updates['hangman/rooms/' + code + '/players' +  '/p' + nextPlayer] = {
+              name: nameP2 ? nameP2 : 'P' + nextPlayer,
               gameover: false,
               victory: false,
-              uid: uid,
+              uid: numPlayers + 1,
               active: true,
               ready: false,
               owner: false
             }
             update(ref(database), updates);
         
-            navigate("Lobby",  { code, currentPlayerUID: uid})
+            navigate("Lobby",  { code, currentPlayerUID: nextPlayer })
           } else {
             Alert.alert('Error', 'Ja foi iniciado a partida ou sala cheia')
           }
@@ -109,7 +115,49 @@ export default function Home() {
         Alert.alert('Error', 'Tente novamente')
       });
     } else {
-      Alert.alert('Error', 'Preencha código')
+      const updates: any = {};
+  
+      // Buscar todas as salas no banco de dados
+      get(child(ref(database), 'hangman/rooms')).then((snapshot) => {
+        if (snapshot.exists()) {
+          const rooms = snapshot.val();
+          
+          Object.keys(rooms).some((roomKey) => {
+            const room = rooms[roomKey];
+            const playersObject = room.players || {};
+            const numPlayers = Object.keys(playersObject).length;
+            
+            // Verificar se a sala atende aos critérios
+            if (!room.gameInProgress && numPlayers < 8) {
+              const nextPlayer =  (numPlayers + 1); // Determinar o próximo jogador a ser criado
+    
+              updates['hangman/rooms/' + roomKey + '/players' + '/p' + nextPlayer] = {
+                name: nameP2 ? nameP2 : 'P' + nextPlayer,
+                gameover: false,
+                victory: false,
+                uid: nextPlayer,
+                active: true,
+                ready: false,
+                owner: false
+              };
+              update(ref(database), updates);
+              navigate("Lobby",  { code: roomKey, currentPlayerUID: nextPlayer });
+              return true
+            }
+          });
+    
+          // Se nenhuma sala disponível for encontrada, criar uma nova
+          if (!Object.keys(updates).length) {
+            createGame(true);
+          }
+        } else {
+          // Se não houver salas no banco de dados, criar uma nova
+          createGame(true);
+        }
+      }).catch((error) => {
+        console.error(error);
+        Alert.alert('Error', 'Tente novamente');
+      });
     }
   }
 
@@ -146,20 +194,18 @@ export default function Home() {
       <Button text='JOGAR OFFLINE' press={() => createGame(false)} />
 
       <View style={{height: 300, alignItems: 'center', width: '100%'}}>
-
         <Title>JOGUE COM SEU COLEGA:</Title>
 
         <OnlineRoomDiv>
           <RoomDiv>
             <Input placeholderTextColor="#888" value={nameP1} onChangeText={(text) => setNameP1(text)} placeholder='Seu nome' />
-
             <Button text='CRIAR SALA' press={() => createGame(true)} />
           </RoomDiv>
 
           <RoomDiv>
             <Input placeholderTextColor="#888" value={nameP2} onChangeText={(text) => setNameP2(text)} placeholder='Seu nome' />
             <Input placeholderTextColor="#888" value={code} onChangeText={(text) => setCode(text)} placeholder='Code' />
-            <Button text='ENTRAR NA SALA' press={() => enterRoom()} />
+            <Button text='JOGAR' press={() => play()} />
           </RoomDiv>
         </OnlineRoomDiv>
       </View>

@@ -11,13 +11,18 @@ interface ThemeParams {
   selectedWord?: any; // Adjust the type according to your data structure
   code: string;
   wordArray?: any
-  currentPlayerUID?: string;
+  currentPlayerUID?: number;
   indexTheme?: number;
 }
 
-export type ScreenNames = ["Home", "Game", "Lobby"] // type these manually
-export type RootStackParamList = Record<ScreenNames[number], ThemeParams>;
-export type StackNavigation = NavigationProp <RootStackParamList>;
+export type ScreenNames = "Home"| "Game" | "Lobby"
+// Defina o tipo de navegação para cada tela
+export type RootStackParamList = {
+  Home: undefined; // Tela "Home" sem parâmetros
+  Game: ThemeParams; // Tela "Game" com parâmetros de ThemeParams
+  Lobby: ThemeParams; // Tela "Lobby" com parâmetros de ThemeParams
+};
+export type StackNavigation = NavigationProp<RootStackParamList>;
 
 const Stack = createNativeStackNavigator();
 

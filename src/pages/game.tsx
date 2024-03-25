@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { type StackNavigation } from "../../App";
@@ -31,7 +31,7 @@ type ParamList = {
     selectedWord?: any;
     wordArray?: any;
     code: string;
-    currentPlayerUID?: string;
+    currentPlayerUID?: number;
     indexTheme?: number;
   };
 };
@@ -42,7 +42,7 @@ export default function Game() {
     'sourceCodePro': require('../../assets/fonts/sourceCodePro/SourceCodePro-SemiBold.ttf')
   });
   const route = useRoute<RouteProp<ParamList, 'Detail'>>();
-  const { navigate } = useNavigation<StackNavigation>();
+  const navigation = useNavigation<StackNavigation>();
   const {code, currentPlayerUID, indexTheme} = route.params;
   const [word, setWord] = useState<Theme>({name: '', dica: ''});
   const [wordName, setWordName] = useState<string[]>([]);
@@ -54,6 +54,29 @@ export default function Game() {
   const [players, setPlayers] = useState<any>({});
   const [playerTurn, setPlayerTurn] = useState('');
   const [winnerMessage, setWinnerMessage] = useState('');
+
+  useEffect(() =>
+    navigation.addListener('beforeRemove', (e) => {
+      if (!Boolean(code)) {
+        return;
+      }
+
+      e.preventDefault();
+
+      Alert.alert(
+        'Tem certeza?',
+        'Se você sair da partida, vai perder sua posição!',
+        [
+          { text: "Cancelar", style: 'cancel', onPress: () => {} },
+          {
+            text: 'Continuar',
+            style: 'destructive',
+            onPress: () => navigation.dispatch(e.data.action),
+          },
+        ]
+      );
+    }),
+  [code]);
 
   useEffect(() => {
     if (code) {
@@ -229,7 +252,7 @@ export default function Game() {
     }
   };
 
-  function getPlayerUid(uid: string) {
+  function getPlayerUid(uid: number) {
     for (const key in players) {
       if (players[key].uid === uid) {
         return key // Retorna o uid se o nome do jogador for encontrado
@@ -241,7 +264,7 @@ export default function Game() {
   async function restartGameInDatabase() {
     if (code) {
       const updates: any = {};
-      const playerIs = getPlayerUid(currentPlayerUID as string);
+      const playerIs = getPlayerUid(currentPlayerUID as number);
 
       if (playerIs) {
         updates[`hangman/rooms/${code}/players/${playerIs}/gameover`] = false;
@@ -264,7 +287,7 @@ export default function Game() {
 
   const restartGame = () => {
     restartGameInDatabase();
-    navigate("Lobby",  { code, currentPlayerUID })
+    navigation.navigate("Lobby",  { code, currentPlayerUID })
   };
 
   const RenderItemLetters = ({ item, index, aa }: any) => {

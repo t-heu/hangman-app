@@ -404,6 +404,86 @@
       "name": "Aleatório",
       "words": [
         {
+          "name": "EXTRAVAGANTE",
+          "dica": "Que chama a atenção pela extravagância ou excentricidade."
+        },
+        {
+          "name": "PARALELEPÍPEDO",
+          "dica": "Sólido geométrico com seis faces retangulares, cujas faces opostas são paralelas e congruentes."
+        },
+        {
+          "name": "INCOMPREENSÍVEL",
+          "dica": "Que não pode ser entendido ou compreendido facilmente."
+        },
+        {
+          "name": "DETERMINAÇÃO",
+          "dica": "Vontade firme e perseverante para alcançar um objetivo."
+        },
+        {
+          "name": "ESQUECIMENTO",
+          "dica": "Ato ou efeito de esquecer; perda da memória."
+        },
+        {
+          "name": "AVENTUREIRO",
+          "dica": "Indivíduo que busca aventuras ou se arrisca em novas empreitadas."
+        },
+        {
+          "name": "SUSPENSÃO",
+          "dica": "Ato ou efeito de suspender; interrupção temporária."
+        },
+        {
+          "name": "INDEPENDENTE",
+          "dica": "Que não depende de algo ou alguém para existir ou agir."
+        },
+        {
+          "name": "FUNDAMENTAL",
+          "dica": "Essencial; básico; que serve de base ou fundamento."
+        },
+        {
+          "name": "DESENVOLVIMENTO",
+          "dica": "Processo de crescimento, evolução ou progresso."
+        },
+        {
+          "name": "ELETROENCEFALOGRAFISTA",
+          "dica": "Profissional médico especializado em realizar e interpretar exames de eletroencefalografia."
+        },
+        {
+          "name": "HIPERCALCAREAMENTO",
+          "dica": "Excesso de cálcio no sangue ou nos tecidos do corpo."
+        },
+        {
+          "name": "PSICOSSOMATIZAÇÃO",
+          "dica": "Processo pelo qual problemas emocionais se manifestam fisicamente."
+        },
+        {
+          "name": "ULTRAMICROSCOPICAMENTE",
+          "dica": "De maneira ultramicroscópica; em uma escala extremamente pequena."
+        },
+        {
+          "name": "DESINSTITUCIONALIZAÇÃO",
+          "dica": "Processo de retirada de pessoas de instituições, como hospitais psiquiátricos, para reintegrá-las à comunidade."
+        },
+        {
+          "name": "IMUNOSSUPRESSOR",
+          "dica": "Substância que suprime ou diminui a atividade do sistema imunológico."
+        },
+        {
+          "name": "MICROSCOPIOSCOPIA",
+          "dica": "Estudo ou técnica que utiliza microscópios para observar estruturas muito pequenas."
+        },
+        {
+          "name": "ANTICONSTITUCIONALIDADE",
+          "dica": "Qualidade ou caráter do que é contrário à constituição."
+        },
+        {
+          "name": "PARASSIMPATICOMIMÉTICO",
+          "dica": "Substância que mimetiza ou imita a ação do sistema nervoso parassimpático."
+        },
+        {
+          "name": "POLITICAMENTE",
+          "dica": "De maneira política; conforme os interesses políticos ou de acordo com considerações políticas."
+        },
+        {
           "name": "VIOLINO",
           "dica": "Instrumento musical de cordas, tocado com um arco"
         },

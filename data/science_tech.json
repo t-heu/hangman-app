@@ -116,6 +116,26 @@
     {
       "name": "GEOBIOQUÍMICA",
       "dica": "Estudo dos processos químicos e físicos que influenciam a composição e a dinâmica dos sistemas geológicos e biológicos"
+    },
+    {
+      "name": "DRONE",
+      "dica": "Dispositivo voador controlado remotamente, usado para fotografia ou entregas"
+    },
+    {
+      "name": "HOLOGRAMA",
+      "dica": "Imagem tridimensional projetada no ar"
+    },
+    {
+      "name": "ROTEADOR",
+      "dica": "Aparelho que distribui sinal de internet sem fio"
+    },
+    {
+      "name": "TELESCÓPIO",
+      "dica": "Instrumento que observa."
+    },
+    {
+      "name": "MICROSCÓPIO",
+      "dica": "Aparelho que amplia microorganismos invisíveis a olho nu"
     }
   ]
 }

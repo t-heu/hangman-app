@@ -19,7 +19,9 @@ interface Theme {
   wordArray: string[]
 }
 
-export default function Game({lang, changeComponent, indexTheme}: any) {
+export default function Game({lang, changeComponent, indexTheme, mode}: any) {
+  const isCompetitive = mode.current === 'competitive';
+
   const [gameState, setGameState] = useState<Theme>({
     selectedWord: { name: '', dica: '' },
     wordArray: []
@@ -104,9 +106,11 @@ export default function Game({lang, changeComponent, indexTheme}: any) {
     setCountErrors(0);
     setExistLetter('');
     setStatusGame('play');
-    reset(); // reseta para 30
-    reset(30); // reseta para 60 se quiser
-    start();
+
+    if (!isCompetitive) {
+      reset();
+      start();
+    }
   }, [indexTheme])
 
   const restartGame = useCallback(() => {
@@ -120,24 +124,64 @@ export default function Game({lang, changeComponent, indexTheme}: any) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#262632' }}>
       <View style={styles.main}>
-        <View style={styles.infoHeader}>
-          <Text style={[styles.guideText, { color: '#e2584d' }]}>Errors: {countErrors}</Text>
-          <Text style={[styles.guideText, {width: 110}]}>{existLetter}</Text>
 
-          <View style={styles.timeContainer}>
-            <Text style={styles.timeText}>
-              {timeRemaining < 10 ? `00:0${timeRemaining}` : `00:${timeRemaining}`}
-            </Text>
+        {/* Palavra do oponente */}
+        {isCompetitive && (
+          <>
+            <View style={styles.infoHeader}>
+              <Text style={[styles.guideText, { color: '#f55' }]}>
+                Erros do oponente: 1
+              </Text>
+            </View>
+
+            <View style={styles.opponentSection}>
+              <Text style={[styles.guideText, { color: '#aaa', marginBottom: 4 }]}>Oponente: Eva</Text>
+              <View style={styles.letterContainer}>
+                {gameState.wordArray.map((item, i) => {
+                  const displayLetter = item ? '#' : item;
+
+                  return (
+                    <Letter
+                      key={`op-${i}`}
+                      item={displayLetter}
+                      handleSelectLetter={() => {}}
+                    />
+                  );
+                })}
+              </View>
+            </View>
+          </>
+        )}
+
+        {/* Palavra do jogador */}
+        <View style={styles.infoHeader}>
+          <Text style={[styles.guideText, { color: '#e2584d' }]}>
+            Errors: {countErrors}
+          </Text>
+
+          <Text style={[styles.guideText, { width: 110 }]}>
+            {existLetter}
+          </Text>
+
+          {!isCompetitive && (
+            <View style={styles.timeContainer}>
+              <Text style={styles.timeText}>
+                {timeRemaining < 10 ? `00:0${timeRemaining}` : `00:${timeRemaining}`}
+              </Text>
+            </View>
+          )}
+        </View>
+
+        <View style={styles.mySection}>
+          {isCompetitive && (<Text style={[styles.guideText, { color: '#eee', marginBottom: 4 }]}>Você</Text>)}
+          <View style={styles.letterContainer}>
+            {gameState.wordArray.map((item, i) => (
+              <Letter key={`me-${i}`} item={item} handleSelectLetter={() => {}} />
+            ))}
           </View>
         </View>
 
-        <View style={styles.letterContainer}>
-          {gameState.wordArray.map((item: string, i: number) => (
-            <Letter key={i} item={item} handleSelectLetter={() => {}} />
-          ))}
-        </View>
-
-        <Text style={[styles.guideText, { color: '#579b38' }]}>
+        <Text style={[styles.guideText, { color: '#eee', marginTop: 10 }]}>
           {gameState.selectedWord.dica ? `Dica: ${gameState.selectedWord.dica}` : null}
         </Text>
 
@@ -173,6 +217,8 @@ export default function Game({lang, changeComponent, indexTheme}: any) {
             <Button press={() => changeComponent('Home')} text='SAIR' />
           </View>
         )}
+
+        {mode.current === 'solo' && (<Text style={[styles.guideText, { marginTop: 8, color: '#eee' }]}>Dica extra: A cada acerto você ganha +2s</Text>)}
       </View>
     </ScrollView>
   );
@@ -185,16 +231,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
     marginBottom: 5,
-    marginTop: 15,
+    marginTop: 10,
   },
-
   infoHeader: {
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 15,
     width: '100%',
   },
-
   guideText: {
     color: '#FDE767',
     fontSize: 14,
@@ -203,8 +247,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     paddingVertical: 2,
     paddingHorizontal: 10,
+    fontFamily: 'SourceCode'
   },
-
   timeContainer: {
     borderWidth: 3,
     borderColor: '#fff',
@@ -213,7 +257,6 @@ const styles = StyleSheet.create({
     height: 32,
     justifyContent: 'center',
   },
-
   timeText: {
     backgroundColor: '#f5f5fa',
     textAlign: 'center',
@@ -222,10 +265,18 @@ const styles = StyleSheet.create({
     borderWidth: 2.6,
     borderColor: '#ddd',
     color: '#000',
+    fontFamily: 'SourceCode'
   },
-
   main: {
     flex: 1,
-    paddingHorizontal: 16, // ou o que achar melhor
+    paddingHorizontal: 16,
+  },
+  opponentSection: {
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  mySection: {
+    alignItems: 'center',
+    marginBottom: 16,
   },
 });

@@ -100,6 +100,342 @@
     {
       "name": "PÃO",
       "dica": "Alimento básico feito com farinha, água, sal e fermento, assado no forno"
+    },
+    {
+      "name": "ACARAJÉ",
+      "dica": "Bolinho de feijão-fradinho típico da Bahia, frito no azeite de dendê e recheado com vatapá"
+    },
+    {
+      "name": "AÇAÍ",
+      "dica": "Fruto amazônico consumido como creme gelado, geralmente com granola e frutas"
+    },
+    {
+      "name": "ARROZDOCE",
+      "dica": "Sobremesa tradicional feita com arroz, leite, açúcar e canela"
+    },
+    {
+      "name": "BACALHAU",
+      "dica": "Peixe salgado e seco, base de diversos pratos da culinária portuguesa"
+    },
+    {
+      "name": "BAIÃODEDOIS",
+      "dica": "Prato nordestino com arroz, feijão-verde, queijo coalho e carne seca"
+    },
+    {
+      "name": "BEIJINHO",
+      "dica": "Doce brasileiro de leite condensado e coco, enrolado em granulado"
+    },
+    {
+      "name": "BIFEAPARMEGIANA",
+      "dica": "Filé empanado coberto com molho de tomate e queijo derretido"
+    },
+    {
+      "name": "BOLODECENOURA",
+      "dica": "Bolo úmido com cobertura de chocolate, feito com cenoura ralada"
+    },
+    {
+      "name": "BRIGADEIRO",
+      "dica": "Doce brasileiro de chocolate feito com leite condensado e chocolate em pó"
+    },
+    {
+      "name": "BROA",
+      "dica": "Pão de milho tradicional, de origem portuguesa"
+    },
+    {
+      "name": "BURRITO",
+      "dica": "Prato mexicano com tortilla de trigo recheada de carne, feijão e outros ingredientes"
+    },
+    {
+      "name": "CACHAÇA",
+      "dica": "Bebida alcoólica brasileira destilada da cana-de-açúcar"
+    },
+    {
+      "name": "CANJICA",
+      "dica": "Doce brasileiro feito com grãos de milho branco, leite e canela"
+    },
+    {
+      "name": "CAPUCCINO",
+      "dica": "Bebida italiana com café, leite vaporizado e espuma de leite"
+    },
+    {
+      "name": "CARURU",
+      "dica": "Prato baiano feito com quiabo, camarão seco e azeite de dendê"
+    },
+    {
+      "name": "CEVICHE",
+      "dica": "Prato peruano de peixe cru marinado em suco de limão"
+    },
+    {
+      "name": "CHIMARRÃO",
+      "dica": "Bebida tradicional do sul do Brasil feita com erva-mate"
+    },
+    {
+      "name": "CHURRASCO",
+      "dica": "Carne assada na grelha, tradição gaúcha"
+    },
+    {
+      "name": "CUSCUZ",
+      "dica": "Prato feito com farinha de milho ou mandioca, típico do Nordeste"
+    },
+    {
+      "name": "DADINHO",
+      "dica": "Petisco feito com queijo coalho e tapioca, grelhado"
+    },
+    {
+      "name": "EMPADÃOGOIÁ",
+      "dica": "Empada com recheio de frango com pequi, típica de Goiás"
+    },
+    {
+      "name": "ESCONDIDINHO",
+      "dica": "Prato feito com purê de mandioca ou batata e carne seca desfiada"
+    },
+    {
+      "name": "FEIJOADA",
+      "dica": "Prato brasileiro com feijão preto e diversas carnes de porco"
+    },
+    {
+      "name": "FEIJÃOTROPEIRO",
+      "dica": "Prato mineiro com feijão, farinha de mandioca, linguiça e ovos"
+    },
+    {
+      "name": "FRALDINHA",
+      "dica": "Corte bovino macio e saboroso, ideal para churrasco"
+    },
+    {
+      "name": "FRANGOXADREZ",
+      "dica": "Prato chinês-brasileiro com cubos de frango e legumes em molho escuro"
+    },
+    {
+      "name": "FAROFA",
+      "dica": "Acompanhamento brasileiro feito com farinha de mandioca torrada"
+    },
+    {
+      "name": "FIGADO",
+      "dica": "Prato feito com fígado bovino, geralmente acebolado"
+    },
+    {
+      "name": "FONDUE",
+      "dica": "Prato suíço de queijo derretido onde se mergulham pedaços de pão"
+    },
+    {
+      "name": "FRITAS",
+      "dica": "Batata cortada em palitos e frita, acompanhamento popular"
+    },
+    {
+      "name": "GELATINA",
+      "dica": "Sobremesa gelada feita com colágeno, em várias cores e sabores"
+    },
+    {
+      "name": "GOIABADA",
+      "dica": "Doce pastoso feito com goiaba e açúcar"
+    },
+    {
+      "name": "GUISADO",
+      "dica": "Prato de carne cozida lentamente com legumes e temperos"
+    },
+    {
+      "name": "HOTDOG",
+      "dica": "Sanduíche com salsicha em pão alongado e diversos acompanhamentos"
+    },
+    {
+      "name": "INHAME",
+      "dica": "Tubérculo nutritivo consumido cozido ou em sopas"
+    },
+    {
+      "name": "JILÓ",
+      "dica": "Vegetal de sabor amargo, consumido refogado ou em conserva"
+    },
+    {
+      "name": "LECHE",
+      "dica": "Doce de leite condensado cozido até caramelizar"
+    },
+    {
+      "name": "LULA",
+      "dica": "Fruto do mar preparado grelhado, frito ou em ensopados"
+    },
+    {
+      "name": "MACARRONADA",
+      "dica": "Prato de macarrão com molho de tomate e carne moída"
+    },
+    {
+      "name": "MANJAR",
+      "dica": "Sobremesa feita com leite de coco, coberta com calda de ameixa"
+    },
+    {
+      "name": "MARACUJÁ",
+      "dica": "Fruta ácida usada em sucos, sobremesas e molhos"
+    },
+    {
+      "name": "MILHO",
+      "dica": "Grão consumido cozido, assado ou em diversas receitas"
+    },
+    {
+      "name": "MUQUECA",
+      "dica": "Prato brasileiro de peixe cozido em panela de barro com dendê e coco"
+    },
+    {
+      "name": "NHOQUE",
+      "dica": "Massa feita com batata ou mandioquinha, servida com molhos"
+    },
+    {
+      "name": "OLHODEBOI",
+      "dica": "Corte bovino macio e saboroso, ideal para assar"
+    },
+    {
+      "name": "OMELETE",
+      "dica": "Preparação de ovos batidos e cozidos em frigideira"
+    },
+    {
+      "name": "OVOS",
+      "dica": "Alimento versátil preparado de diversas formas: mexidos, cozidos, fritos"
+    },
+    {
+      "name": "PANETONE",
+      "dica": "Pão doce italiano tradicional no Natal, com frutas cristalizadas"
+    },
+    {
+      "name": "PAPINHA",
+      "dica": "Alimento pastoso para bebês, feito com legumes e carnes"
+    },
+    {
+      "name": "PECADO",
+      "dica": "Peixe de água doce muito apreciado na culinária brasileira"
+    },
+    {
+      "name": "PEIXADA",
+      "dica": "Prato de peixe cozido com legumes e temperos"
+    },
+    {
+      "name": "PETITGATEAU",
+      "dica": "Sobremesa de chocolate com centro derretido, servida quente"
+    },
+    {
+      "name": "PICANHA",
+      "dica": "Corte nobre bovino, o preferido nos churrascos brasileiros"
+    },
+    {
+      "name": "PIMENTÃO",
+      "dica": "Vegetal usado como base em muitos pratos, nas cores verde, amarelo e vermelho"
+    },
+    {
+      "name": "PINGADO",
+      "dica": "Café com um pouco de leite, tradicional no café da manhã brasileiro"
+    },
+    {
+      "name": "PIPOCA",
+      "dica": "Milho estourado pelo calor, consumido como lanche"
+    },
+    {
+      "name": "PIRÃO",
+      "dica": "Acompanhamento feito com caldo de peixe e farinha de mandioca"
+    },
+    {
+      "name": "PITANGA",
+      "dica": "Fruta vermelha brasileira usada em sucos e doces"
+    },
+    {
+      "name": "PUDIM",
+      "dica": "Sobremesa cremosa à base de leite condensado e ovos"
+    },
+    {
+      "name": "QUENTÃO",
+      "dica": "Bebida quente feita com cachaça, gengibre e especiarias, típica das festas juninas"
+    },
+    {
+      "name": "QUEIJADINHA",
+      "dica": "Doce brasileiro feito com coco e queijo ralado"
+    },
+    {
+      "name": "QUIBE",
+      "dica": "Prato árabe feito com trigo bulgur e carne moída"
+    },
+    {
+      "name": "QUINDIM",
+      "dica": "Sobremesa brasileira de coco, ovos e açúcar"
+    },
+    {
+      "name": "QUIRERA",
+      "dica": "Prato gaúcho feito com milho quebrado e carne"
+    },
+    {
+      "name": "RAPADURA",
+      "dica": "Doce duro feito com caldo de cana-de-açúcar"
+    },
+    {
+      "name": "ROMEUJULIETA",
+      "dica": "Petisco mineiro com queijo e goiabada"
+    },
+    {
+      "name": "ROSCA",
+      "dica": "Pão doce em forma de anel, tradicional no café da manhã"
+    },
+    {
+      "name": "SALAME",
+      "dica": "Embutido de carne curada, consumido fatiado"
+    },
+    {
+      "name": "SARAPATEL",
+      "dica": "Prato nordestino feito com vísceras de porco"
+    },
+    {
+      "name": "SARNA",
+      "dica": "Peixe de água doce muito consumido no Norte do Brasil"
+    },
+    {
+      "name": "SORVETE",
+      "dica": "Sobremesa gelada feita com creme ou frutas"
+    },
+    {
+      "name": "SUFLÊ",
+      "dica": "Preparação leve e aerada, pode ser doce ou salgado"
+    },
+    {
+      "name": "TACACÁ",
+      "dica": "Prato paraense com tucupi, jambu e camarão seco"
+    },
+    {
+      "name": "TAPIOCA",
+      "dica": "Massa feita com goma de mandioca, recheada com diversos ingredientes"
+    },
+    {
+      "name": "TUCUPI",
+      "dica": "Caldo amarelo extraído da mandioca brava, base de pratos amazônicos"
+    },
+    {
+      "name": "TUTU",
+      "dica": "Prato mineiro feito com feijão cozido e farinha de mandioca"
+    },
+    {
+      "name": "VACAATOLADA",
+      "dica": "Prato cearense com carne seca, jerimum e outros ingredientes"
+    },
+    {
+      "name": "VATAPÁ",
+      "dica": "Prato baiano cremoso feito com pão, camarão e dendê"
+    },
+    {
+      "name": "VINAGRETE",
+      "dica": "Molho brasileiro feito com tomate, cebola e pimentão"
+    },
+    {
+      "name": "WAGYU",
+      "dica": "Carne bovina japonesa marmorizada, considerada premium"
+    },
+    {
+      "name": "XERÉM",
+      "dica": "Prato nordestino feito com milho triturado"
+    },
+    {
+      "name": "XINXIM",
+      "dica": "Prato baiano com galinha, amendoim e dendê"
+    },
+    {
+      "name": "YAKITORI",
+      "dica": "Espetinho de frango japonês grelhado"
+    },
+    {
+      "name": "ZABOR",
+      "dica": "Peixe de água doce amazônico muito apreciado"
     }
   ]
 }

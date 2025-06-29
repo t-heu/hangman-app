@@ -3,103 +3,319 @@
   "words": [
     {
       "name": "VERMELHO",
-      "dica": "Cor associada à paixão, ao amor e ao fogo, muitas vezes utilizada para sinalizar perigo"
+      "dica": "Cor primária associada à paixão, energia e perigo, uma das mais visíveis no espectro"
     },
     {
       "name": "AZUL",
-      "dica": "Cor frequentemente associada ao céu e ao mar, simboliza calma e serenidade"
+      "dica": "Cor primária que evoca o céu e o mar, simbolizando tranquilidade e confiança"
     },
     {
       "name": "VERDE",
-      "dica": "Cor que representa a natureza, o crescimento e a saúde, comum em plantas e paisagens naturais"
+      "dica": "Cor secundária (azul+amarelo) que representa a natureza, renovação e esperança"
     },
     {
       "name": "AMARELO",
-      "dica": "Cor brilhante e alegre, associada ao sol, à energia e à felicidade"
+      "dica": "Cor primária associada ao sol, alegria e otimismo, a mais visível à distância"
     },
     {
       "name": "PRETO",
-      "dica": "Cor que simboliza mistério, elegância e sofisticação, muitas vezes associada ao luto"
+      "dica": "Ausência de cor, representa poder, elegância e mistério, mas também luto"
     },
     {
       "name": "BRANCO",
-      "dica": "Cor associada à pureza, à paz e à limpeza, frequentemente usada em cerimônias e simbolismos de renovação"
+      "dica": "Combinação de todas as cores, simboliza pureza, paz e limpeza"
     },
     {
       "name": "ROXO",
-      "dica": "Cor associada à realeza, ao luxo e à criatividade, muitas vezes ligada à espiritualidade"
+      "dica": "Cor real histórica (vermelho+azul) associada à criatividade e espiritualidade"
     },
     {
       "name": "LARANJA",
-      "dica": "Cor vibrante e energizante, associada ao entusiasmo, ao calor e à vitalidade"
+      "dica": "Cor energética (vermelho+amarelo) que estimula ação e entusiasmo"
     },
     {
       "name": "ROSA",
-      "dica": "Cor associada à ternura, ao romance e à feminilidade, frequentemente usada para simbolizar carinho"
+      "dica": "Tonalidade suave do vermelho, ligada ao amor romântico e delicadeza"
     },
     {
       "name": "MARROM",
-      "dica": "Cor associada à terra, à solidez e à estabilidade, comum em materiais naturais como madeira e solo"
+      "dica": "Cor terrosa que transmite estabilidade, conforto e naturalidade"
     },
     {
       "name": "CINZA",
-      "dica": "Cor neutra, associada à modernidade, à sofisticação e à formalidade"
+      "dica": "Cor neutra que representa equilíbrio, sofisticação e tecnologia"
     },
     {
       "name": "VIOLETA",
-      "dica": "Cor situada entre o azul e o roxo no espectro de cores, frequentemente associada à magia e à intuição"
+      "dica": "Cor do espectro entre azul e roxo, associada à intuição e misticismo"
     },
     {
       "name": "DOURADO",
-      "dica": "Cor associada à riqueza, ao sucesso e ao prestígio, muitas vezes usada em decorações luxuosas"
+      "dica": "Cor metálica que simboliza riqueza, sucesso e qualidade superior"
     },
     {
       "name": "PRATA",
-      "dica": "Cor metálica associada à modernidade, à inovação e à elegância"
+      "dica": "Cor metálica associada à modernidade, precisão e alta tecnologia"
     },
     {
       "name": "TURQUESA",
-      "dica": "Cor azul-esverdeada associada ao mar e à tranquilidade, frequentemente usada em joias e decoração"
+      "dica": "Azul-esverdeado que lembra águas tropicais, transmite frescor e calma"
     },
     {
       "name": "CARMESIM",
-      "dica": "Cor vermelha intensa, muitas vezes associada à paixão e à nobreza"
+      "dica": "Vermelho profundo com tom azulado, historicamente ligado à nobreza"
     },
     {
       "name": "PÚRPURA",
-      "dica": "Cor intensa e vibrante, frequentemente associada à nobreza e à criatividade"
+      "dica": "Vermelho-arroxeado intenso, cor imperial desde a antiguidade"
     },
     {
       "name": "LILÁS",
-      "dica": "Cor suave e clara, frequentemente associada à delicadeza e à espiritualidade"
+      "dica": "Roxo claro e suave, associado à feminilidade e espiritualidade"
     },
     {
       "name": "MAGENTA",
-      "dica": "Cor vibrante situada entre o vermelho e o roxo, associada à criatividade e à energia"
+      "dica": "Cor primária no sistema CMYK, vibrante entre rosa e roxo"
     },
     {
       "name": "SALMÃO",
-      "dica": "Cor rosada com um toque de laranja, frequentemente associada à delicadeza e ao charme"
+      "dica": "Rosa-alaranjado suave que lembra a cor do peixe, transmite calor delicado"
     },
     {
       "name": "ÂMBAR",
-      "dica": "Cor amarela dourada, associada à resina fossilizada e frequentemente usada em joalheria"
+      "dica": "Amarelo-dourado transparente como a resina fossilizada"
     },
     {
       "name": "AÇAFRÃO",
-      "dica": "Cor amarela alaranjada, associada à especiaria valiosa e utilizada em culinária e tingimento"
+      "dica": "Amarelo-alaranjado intenso da especiaria mais cara do mundo"
     },
     {
       "name": "BEGE",
-      "dica": "Cor neutra e suave, frequentemente associada à simplicidade e à elegância"
+      "dica": "Marrom muito claro, neutro e versátil para composições"
     },
     {
       "name": "ESMERALDA",
-      "dica": "Cor verde intensa, associada à pedra preciosa e à natureza exuberante"
+      "dica": "Verde profundo e vibrante como a pedra preciosa homônima"
     },
     {
       "name": "OLIVA",
-      "dica": "Cor verde amarelada, frequentemente associada à natureza e à sofisticação"
+      "dica": "Verde-acinzentado que lembra a azeitona, cor militar clássica"
+    },
+    {
+      "name": "CELESTE",
+      "dica": "Azul claro que lembra o céu diurno, transmite tranquilidade"
+    },
+    {
+      "name": "ÍNDIGO",
+      "dica": "Azul-arroxeado profundo, uma das cores do arco-íris"
+    },
+    {
+      "name": "CAQUI",
+      "dica": "Marrom-amarelado terroso, nome derivado da fruta"
+    },
+    {
+      "name": "BORDO",
+      "dica": "Vermelho escuro e sério como o vinho da região francesa"
+    },
+    {
+      "name": "FERRO",
+      "dica": "Cinza metálico escuro que lembra o metal oxidado"
+    },
+    {
+      "name": "CHAMPANHE",
+      "dica": "Amarelo muito pálido com reflexos dourados"
+    },
+    {
+      "name": "CARAMELO",
+      "dica": "Marrom-dourado que lembra o doce de leite cozido"
+    },
+    {
+      "name": "CORAL",
+      "dica": "Laranja-rosado que lembra os pólipos marinhos"
+    },
+    {
+      "name": "CREME",
+      "dica": "Branco amarelado suave como o laticínio"
+    },
+    {
+      "name": "ÉBANO",
+      "dica": "Preto profundo com reflexos, como a madeira rara"
+    },
+    {
+      "name": "FERRO",
+      "dica": "Cinza metálico escuro que lembra o metal oxidado"
+    },
+    {
+      "name": "FÚCSIA",
+      "dica": "Rosa-arroxeado vibrante nomeado pela flor"
+    },
+    {
+      "name": "GRAFITE",
+      "dica": "Cinza escuro com tom azulado, como o mineral"
+    },
+    {
+      "name": "JADE",
+      "dica": "Verde suave e leitoso da pedra semipreciosa"
+    },
+    {
+      "name": "LAVANDA",
+      "dica": "Roxo muito claro e suave como a flor aromática"
+    },
+    {
+      "name": "LIMÃO",
+      "dica": "Amarelo-esverdeado vibrante como a fruta cítrica"
+    },
+    {
+      "name": "MALVA",
+      "dica": "Roxo-pálido suave, mais claro que o lilás"
+    },
+    {
+      "name": "MENTA",
+      "dica": "Verde-claro refrescante que lembra a erva"
+    },
+    {
+      "name": "MOSTARDA",
+      "dica": "Amarelo-terroso intenso como o condimento"
+    },
+    {
+      "name": "OURO",
+      "dica": "Amarelo metálico brilhante do metal precioso"
+    },
+    {
+      "name": "PÊSSEGO",
+      "dica": "Laranja-claro rosado como a polpa da fruta"
+    },
+    {
+      "name": "RUBRO",
+      "dica": "Vermelho intenso com tom levemente azulado"
+    },
+    {
+      "name": "SÉPIA",
+      "dica": "Marrom-amarelado das antigas fotografias"
+    },
+    {
+      "name": "TERRACOTA",
+      "dica": "Laranja-marrom avermelhado da argila cozida"
+    },
+    {
+      "name": "ULTRAMAR",
+      "dica": "Azul profundo e intenso como o pigmento histórico"
+    },
+    {
+      "name": "VERMILION",
+      "dica": "Vermelho-alaranjado vibrante do pigmento de mercúrio"
+    },
+    {
+      "name": "ZAFIRA",
+      "dica": "Azul profundo e saturado como a pedra preciosa"
+    },
+    {
+      "name": "AMETISTA",
+      "dica": "Roxo médio translúcido como o quartzo precioso"
+    },
+    {
+      "name": "AÇAÍ",
+      "dica": "Roxo-escuro quase preto como a fruta amazônica"
+    },
+    {
+      "name": "BRONZE",
+      "dica": "Marrom-dourado metálico da liga de cobre"
+    },
+    {
+      "name": "CÉU",
+      "dica": "Azul claro e suave da atmosfera diurna"
+    },
+    {
+      "name": "CHOCOLATE",
+      "dica": "Marrom médio e quente como o cacau processado"
+    },
+    {
+      "name": "DENIM",
+      "dica": "Azul médio desbotado como o tecido de jeans"
+    },
+    {
+      "name": "ELETRICO",
+      "dica": "Azul neon vibrante que parece emitir luz"
+    },
+    {
+      "name": "FERRUGEM",
+      "dica": "Laranja-marrom avermelhado da oxidação do ferro"
+    },
+    {
+      "name": "GENGIBRE",
+      "dica": "Marrom-avermelhado quente como a raiz"
+    },
+    {
+      "name": "HORTELÃ",
+      "dica": "Verde-claro vibrante e refrescante"
+    },
+    {
+      "name": "JET",
+      "dica": "Preto profundo e fosco como o mineral"
+    },
+    {
+      "name": "KIWI",
+      "dica": "Verde médio com tom amarelado como a fruta"
+    },
+    {
+      "name": "LUA",
+      "dica": "Branco-prateado suave com reflexos frios"
+    },
+    {
+      "name": "MEL",
+      "dica": "Amarelo-dourado translúcido como o alimento"
+    },
+    {
+      "name": "NOZ",
+      "dica": "Marrom médio com tons acinzentados"
+    },
+    {
+      "name": "ÓXIDO",
+      "dica": "Laranja queimado intenso como a ferrugem"
+    },
+    {
+      "name": "PETRÓLEO",
+      "dica": "Verde-azulado escuro e profundo"
+    },
+    {
+      "name": "QUARTZO",
+      "dica": "Branco translúcido com reflexos cristalinos"
+    },
+    {
+      "name": "ROSAQUEIMADO",
+      "dica": "Rosa-terroso com tom acinzentado"
+    },
+    {
+      "name": "SANGUE",
+      "dica": "Vermelho médio intenso e orgânico"
+    },
+    {
+      "name": "TÂMARA",
+      "dica": "Marrom-avermelhado escuro como a fruta seca"
+    },
+    {
+      "name": "UVAS",
+      "dica": "Roxo profundo e aveludado como a casca da fruta"
+    },
+    {
+      "name": "VINHO",
+      "dica": "Vermelho-arroxeado profundo como a bebida envelhecida"
+    },
+    {
+      "name": "WENGUÉ",
+      "dica": "Marrom quase preto com veios escuros"
+    },
+    {
+      "name": "XADREZ",
+      "dica": "Padrão de cores contrastantes em quadrados"
+    },
+    {
+      "name": "YINYANG",
+      "dica": "Preto e branco em equilíbrio complementar"
+    },
+    {
+      "name": "ZINCO",
+      "dica": "Cinza metálico azulado como o elemento químico"
     }
   ]
 }

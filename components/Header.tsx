@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
     color: '#e2584d',
     fontSize: 12,
     fontWeight: 'bold',
+    fontFamily: 'SourceCode'
   }
 });

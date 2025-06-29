@@ -47,18 +47,21 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
     }
   }
 
-  function play(modeGame: string) {
-    if (!name) return showAlert(lang.copied_alert);
-    if (!/^[a-zA-Z\s]*$/.test(name)) return showAlert(lang.invalid_copied_alert);
-
-    createGame(modeGame); // <- Corrigido
-  }
-
   async function createUser() {
-    if (!name.trim()) return;
+    const trimmedName = name?.trim();
+
+    if (!trimmedName) {
+      showAlert(lang.copied_alert);
+      return;
+    }
+
+    const isValidName = /^[a-zA-Z\s]+$/.test(trimmedName);
+    if (!isValidName) {
+      showAlert(lang.invalid_copied_alert);
+      return;
+    }
 
     const uidSalvo = await AsyncStorage.getItem('local_user');
-
     if (uidSalvo) return uidSalvo;
 
     await AsyncStorage.setItem('local_user', name.trim());
@@ -74,7 +77,7 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
 
         {show ? (
           <>
-            <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10 }}>Escolha seu tema favorito:</Text>
+            <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10, fontFamily: 'SourceCode' }}>Escolha seu tema favorito:</Text>
             <ScrollView style={{ height: 220 }}>
               {themes.length > 0 ? themes.map((data, i) => <ThemeOption checked={checked} setChecked={setChecked} key={i} index={i} theme={data[i]} />) : <Text style={{ color: '#fff' }}>....</Text>}
             </ScrollView>
@@ -83,7 +86,7 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
           </>
         ):(
           <>
-            <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10 }}>Escolha seu nome primeiro:</Text>
+            <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10, fontFamily: 'SourceCode' }}>Escolha seu nome primeiro:</Text>
             <View style={[styles.roomDiv, { marginTop: 20 }]}>
               <TextInput
                 placeholderTextColor="#888"
@@ -92,7 +95,7 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
                 placeholder='Seu nome'
                 style={styles.input}
               />
-              <Button text='ENTER' press={() => createUser()} />
+              <Button text='SALVAR' press={() => createUser()} />
             </View>
           </>
         )}
@@ -102,13 +105,6 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
 
           <View style={styles.onlineRoomDiv}>
             <View style={styles.roomDiv}>
-              <TextInput
-                placeholderTextColor="#888"
-                value={name}
-                onChangeText={(text) => setName(text)}
-                placeholder='Seu nome'
-                style={styles.input}
-              />
               <TextInput
                 placeholderTextColor="#888"
                 value={codeRoom}
@@ -135,21 +131,19 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
     color: '#777',
-    // fontFamily: 'sourceCodePro', // se tiver custom, configure via linking
+    fontFamily: 'SourceCode',
     paddingVertical: 5,
     paddingHorizontal: 10,
     height: 40,
     width: 140,
     marginBottom: 5,
   },
-
   onlineRoomDiv: {
     justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 10,
   },
-
   roomDiv: {
     alignItems: 'center',
     justifyContent: 'center',

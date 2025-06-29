@@ -8,7 +8,7 @@ const isExpoGo = Constants.executionEnvironment === 'storeClient';
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SourceCode: require('../assets/fonts/SourceCodePro-Medium.ttf'),
   });
 
   if (!loaded) {

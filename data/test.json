@@ -1,17 +1,21 @@
 {
-  "name": "Test",
+  "name": "TEST",
   "words": [
     {
-      "name": "MELÃO",
-      "dica": "Ork Kent"
+      "name": "CAMU-CAMU",
+      "dica": "Fruta amazônica com altíssimo teor de vitamina C"
     },
     {
-      "name": "MAÇÃ",
-      "dica": "Ork Kent"
+      "name": "DADO",
+      "dica": "Pequeno cubo com pontos de 1 a 6, usado em jogos"
     },
     {
-      "name": "CRISPR-CAS9",
-      "dica": "Tecnologia de edição genética que pode modificar o DNA com alta precisão"
+      "name": "LÂMPADA",
+      "dica": "Fonte de luz artificial que ilumina ambientes"
+    },
+    {
+      "name": "TELESCÓPIO ESPACIAL",
+      "dica": "Instrumento que observa galáxias distantes"
     }
   ]
 }

@@ -48,7 +48,7 @@ export default function HomeScreen() {
   return (
     <ParallaxScrollView>
       <Header mode={mode.current} />
-      {componentToRender === 'Game' && <Game lang={lang.game} changeComponent={changeComponent} indexTheme={indexTheme} />}
+      {componentToRender === 'Game' && <Game lang={lang.game} changeComponent={changeComponent} indexTheme={indexTheme} mode={mode} />}
       {componentToRender === 'Home' && <Home lang={lang.home} changeComponent={changeComponent} indexTheme={setIndexTheme} mode={mode} />}
       {!isDev && BannerAd && (
         <View style={styles.container}>

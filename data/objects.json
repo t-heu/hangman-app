@@ -1,0 +1,373 @@
+{
+  "name": "Objetos",
+  "words": [
+    {
+      "name": "ABAJUR",
+      "dica": "Objeto que ilumina ambientes com luz suave, geralmente em mesas de cabeceira"
+    },
+    {
+      "name": "BORRACHA",
+      "dica": "Item escolar usado para apagar marcas de lápis"
+    },
+    {
+      "name": "CADEADO",
+      "dica": "Dispositivo de segurança que trava portões ou armários"
+    },
+    {
+      "name": "DADO",
+      "dica": "Pequeno cubo com pontos de 1 a 6, usado em jogos"
+    },
+    {
+      "name": "ESPELHO",
+      "dica": "Superfície refletiva que mostra nossa imagem"
+    },
+    {
+      "name": "FACA",
+      "dica": "Utensílio de cozinha afiado para cortar alimentos"
+    },
+    {
+      "name": "HARMÔNICA",
+      "dica": "Pequeno instrumento musical de sopro com palhetas"
+    },
+    {
+      "name": "ISQUEIRO",
+      "dica": "Dispositivo portátil que produz chama"
+    },
+    {
+      "name": "JARRA",
+      "dica": "Recipiente para servir água ou suco"
+    },
+    {
+      "name": "LÂMPADA",
+      "dica": "Fonte de luz artificial que ilumina ambientes"
+    },
+    {
+      "name": "MARTELO",
+      "dica": "Ferramenta para bater pregos ou quebrar coisas"
+    },
+    {
+      "name": "NECESSAIRE",
+      "dica": "Pequena bolsa para guardar itens de higiene"
+    },
+    {
+      "name": "ÓCULOS",
+      "dica": "Acessório com lentes para corrigir a visão ou proteger do sol"
+    },
+    {
+      "name": "PINCEL",
+      "dica": "Instrumento com cerdas para pintar ou maquiar"
+    },
+    {
+      "name": "RÁDIO",
+      "dica": "Aparelho que transmite música e notícias por ondas"
+    },
+    {
+      "name": "SAPATO",
+      "dica": "Calçado que protege os pés"
+    },
+    {
+      "name": "TESOURA",
+      "dica": "Instrumento para cortar papel, tecido ou cabelo"
+    },
+    {
+      "name": "URNA",
+      "dica": "Recipiente para votar em eleições"
+    },
+    {
+      "name": "VENTILADOR",
+      "dica": "Eletrodoméstico que movimenta ar para refrescar"
+    },
+    {
+      "name": "WHISKY",
+      "dica": "Bebida alcoólica destilada de grãos"
+    },
+    {
+      "name": "XÍCARA",
+      "dica": "Pequeno recipiente para tomar café ou chá"
+    },
+    {
+      "name": "YOYO",
+      "dica": "Brinquedo que sobe e desce por um fio"
+    },
+    {
+      "name": "ZÍPER",
+      "dica": "Fechamento de roupas com dentes entrelaçados"
+    },
+    {
+      "name": "ALFINETE",
+      "dica": "Pequeno objeto metálico para pregar tecidos"
+    },
+    {
+      "name": "BENGALA",
+      "dica": "Acessório para auxiliar na caminhada"
+    },
+    {
+      "name": "CANDEEIRO",
+      "dica": "Luminária de mesa ou parede"
+    },
+    {
+      "name": "DINHEIRO",
+      "dica": "Meio de troca em forma de cédulas ou moedas"
+    },
+    {
+      "name": "ESCADA",
+      "dica": "Objeto para alcançar lugares altos"
+    },
+    {
+      "name": "FONE DE OUVIDO",
+      "dica": "Dispositivo para ouvir música privadamente"
+    },
+    {
+      "name": "GARFO",
+      "dica": "Talher com dentes para espetar alimentos"
+    },
+    {
+      "name": "HÉLICE",
+      "dica": "Objeto que gira para movimentar barcos ou aviões"
+    },
+    {
+      "name": "IMÃ",
+      "dica": "Objeto que atrai metais como ferro e níquel"
+    },
+    {
+      "name": "JALECO",
+      "dica": "Vestimenta usada por profissionais da saúde"
+    },
+    {
+      "name": "LIVRO",
+      "dica": "Conjunto de páginas com informações ou histórias"
+    },
+    {
+      "name": "MÓVEL",
+      "dica": "Objeto como sofá ou armário para decorar casas"
+    },
+    {
+      "name": "NITROGÊNIO",
+      "dica": "Gás presente no ar, usado em pneus de corrida"
+    },
+    {
+      "name": "OVO",
+      "dica": "Alimento comum em formato oval"
+    },
+    {
+      "name": "PAPEL",
+      "dica": "Material fino para escrever ou embrulhar"
+    },
+    {
+      "name": "QUADRO",
+      "dica": "Moldura com pintura ou foto para decorar paredes"
+    },
+    {
+      "name": "RELOGIO",
+      "dica": "Objeto que marca as horas"
+    },
+    {
+      "name": "SINO",
+      "dica": "Objeto que emite sons ao ser tocado"
+    },
+    {
+      "name": "TAMPA",
+      "dica": "Cobertura para vasilhas ou recipientes"
+    },
+    {
+      "name": "UNHA",
+      "dica": "Parte dura na ponta dos dedos"
+    },
+    {
+      "name": "VASSOURA",
+      "dica": "Utensílio para varrer o chão"
+    },
+    {
+      "name": "WOK",
+      "dica": "Panela asiática para fritar em alta temperatura"
+    },
+    {
+      "name": "XILOFONE",
+      "dica": "Instrumento musical de madeira com lâminas"
+    },
+    {
+      "name": "YAKULT",
+      "dica": "Bebida probiótica em pequenos frascos"
+    },
+    {
+      "name": "ZEPELIM",
+      "dica": "Aeronave mais leve que o ar, em formato alongado"
+    },
+    {
+      "name": "ÁLBUM",
+      "dica": "Coleção de fotos, figurinhas ou músicas"
+    },
+    {
+      "name": "BÚSSOLA",
+      "dica": "Instrumento que aponta o norte magnético"
+    },
+    {
+      "name": "CHAVE",
+      "dica": "Objeto para abrir portas ou dar partida em carros"
+    },
+    {
+      "name": "DADO",
+      "dica": "Pequeno cubo com números usado em jogos"
+    },
+    {
+      "name": "ESTÁTUA",
+      "dica": "Escultura que representa pessoas ou animais"
+    },
+    {
+      "name": "FAROL",
+      "dica": "Luz potente para orientar navios ou carros"
+    },
+    {
+      "name": "GIZ",
+      "dica": "Material para escrever em quadros negros"
+    },
+    {
+      "name": "HALTERE",
+      "dica": "Peso usado para exercícios físicos"
+    },
+    {
+      "name": "INTERRUPTOR",
+      "dica": "Dispositivo para ligar ou desligar a luz"
+    },
+    {
+      "name": "JARRO",
+      "dica": "Vaso alto para flores ou decoração"
+    },
+    {
+      "name": "LATA",
+      "dica": "Recipiente metálico para alimentos ou bebidas"
+    },
+    {
+      "name": "MOLA",
+      "dica": "Objeto elástico que armazena energia"
+    },
+    {
+      "name": "NARGUILE",
+      "dica": "Dispositivo para fumar com água e aromas"
+    },
+    {
+      "name": "ÓLEO",
+      "dica": "Líquido gorduroso usado na cozinha ou motor"
+    },
+    {
+      "name": "POTE",
+      "dica": "Recipiente para guardar alimentos"
+    },
+    {
+      "name": "QUADRO",
+      "dica": "Pintura emoldurada para decorar paredes"
+    },
+    {
+      "name": "RODA",
+      "dica": "Objeto circular que permite movimento"
+    },
+    {
+      "name": "SAPO",
+      "dica": "Objeto de decoração em forma de anfíbio"
+    },
+    {
+      "name": "TACO",
+      "dica": "Instrumento para bater no beisebol ou sinuca"
+    },
+    {
+      "name": "UMIDIFICADOR",
+      "dica": "Aparelho que aumenta a umidade do ar"
+    },
+    {
+      "name": "VESTIDO",
+      "dica": "Peça de roupa feminina em uma única peça"
+    },
+    {
+      "name": "WATER",
+      "dica": "Objeto que lembra um vaso sanitário"
+    },
+    {
+      "name": "XADREZ",
+      "dica": "Jogo de tabuleiro com peças como rei e rainha"
+    },
+    {
+      "name": "YINYANG",
+      "dica": "Símbolo de equilíbrio em preto e branco"
+    },
+    {
+      "name": "ZÍPER",
+      "dica": "Fecho de roupas com dentes entrelaçados"
+    },
+    {
+      "name": "GRAMPEADOR",
+      "dica": "Dispositivo que une papéis com grampos metálicos"
+    },
+    {
+      "name": "FÓSSIL",
+      "dica": "Resto petrificado de um ser vivo de eras passadas"
+    },
+    {
+      "name": "GEODO",
+      "dica": "Rocha oca com cristais em seu interior"
+    },
+    {
+      "name": "PAPIRO",
+      "dica": "Material antigo usado para escrita, feito de plantas"
+    },
+    {
+      "name": "MOSAICO",
+      "dica": "Arte feita com pequenas peças coloridas de vidro ou pedra"
+    },
+    {
+      "name": "TRAMPOLIM",
+      "dica": "Estrutura elástica para saltos acrobáticos"
+    },
+    {
+      "name": "SNORKEL",
+      "dica": "Tubo para respirar debaixo d'água"
+    },
+    {
+      "name": "PÊNDULO",
+      "dica": "Peso suspenso que oscila regularmente"
+    },
+    {
+      "name": "CATAVENTO",
+      "dica": "Estrutura gigante que gera energia eólica"
+    },
+    {
+      "name": "AQUEDUTO",
+      "dica": "Construção antiga para transportar água"
+    },
+    {
+      "name": "MINIATURA",
+      "dica": "Réplica em escala reduzida de objetos ou lugares"
+    },
+    {
+      "name": "BOTÃO",
+      "dica": "Pequeno disco para fechar roupas"
+    },
+    {
+      "name": "KATANA",
+      "dica": "Espada japonesa curva usada por samurais"
+    },
+    {
+      "name": "LÁPIDE",
+      "dica": "Pedra com inscrições funerárias"
+    },
+    {
+      "name": "PIRÂMIDE",
+      "dica": "Estrutura geométrica associada ao Egito antigo"
+    },
+    {
+      "name": "TOTEM",
+      "dica": "Estrutura esculpida por indígenas norte-americanos"
+    },
+    {
+      "name": "WALKMAN",
+      "dica": "Antigo aparelho portátil para ouvir fitas cassete"
+    },
+    {
+      "name": "XILOGRAVURA",
+      "dica": "Técnica de impressão usando matriz de madeira"
+    },
+    {
+      "name": "ZEPPELIN",
+      "dica": "Aeronave rígida cheia de gás, usada no século XX"
+    }
+  ]
+}

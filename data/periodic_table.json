@@ -1,0 +1,477 @@
+{
+  "name": "Tabela Periódica",
+  "words": [
+    {
+      "name": "HIDROGÊNIO",
+      "dica": "Elemento mais abundante no universo, número atômico 1, símbolo H"
+    },
+    {
+      "name": "HÉLIO",
+      "dica": "Gás nobre usado em balões, número atômico 2, símbolo He"
+    },
+    {
+      "name": "LÍTIO",
+      "dica": "Metal alcalino usado em baterias, número atômico 3, símbolo Li"
+    },
+    {
+      "name": "BERÍLIO",
+      "dica": "Metal alcalino-terroso tóxico, número atômico 4, símbolo Be"
+    },
+    {
+      "name": "BORO",
+      "dica": "Semimetal usado em vidros temperados, número atômico 5, símbolo B"
+    },
+    {
+      "name": "CARBONO",
+      "dica": "Base da vida orgânica, número atômico 6, símbolo C"
+    },
+    {
+      "name": "NITROGÊNIO",
+      "dica": "Gás que compõe 78% do ar, número atômico 7, símbolo N"
+    },
+    {
+      "name": "OXIGÊNIO",
+      "dica": "Gás essencial para a respiração, número atômico 8, símbolo O"
+    },
+    {
+      "name": "FLÚOR",
+      "dica": "Halogênio mais reativo, usado em pastas de dente, símbolo F"
+    },
+    {
+      "name": "NEÔNIO",
+      "dica": "Gás nobre usado em letreiros luminosos, símbolo Ne"
+    },
+    {
+      "name": "SÓDIO",
+      "dica": "Metal alcalino reativo, componente do sal de cozinha, símbolo Na"
+    },
+    {
+      "name": "MAGNÉSIO",
+      "dica": "Metal alcalino-terroso usado em ligas leves, símbolo Mg"
+    },
+    {
+      "name": "ALUMÍNIO",
+      "dica": "Metal leve usado em latas e aeronaves, símbolo Al"
+    },
+    {
+      "name": "SILÍCIO",
+      "dica": "Semimetal essencial para chips eletrônicos, símbolo Si"
+    },
+    {
+      "name": "FÓSFORO",
+      "dica": "Elemento crucial para o DNA, símbolo P"
+    },
+    {
+      "name": "ENXOFRE",
+      "dica": "Não-metal amarelo com odor característico, símbolo S"
+    },
+    {
+      "name": "CLORO",
+      "dica": "Halogênio usado para purificar água, símbolo Cl"
+    },
+    {
+      "name": "ARGÔNIO",
+      "dica": "Gás nobre inerte usado em lâmpadas, símbolo Ar"
+    },
+    {
+      "name": "POTÁSSIO",
+      "dica": "Metal alcalino vital para a função nervosa, símbolo K"
+    },
+    {
+      "name": "CÁLCIO",
+      "dica": "Metal alcalino-terroso essencial para ossos, símbolo Ca"
+    },
+    {
+      "name": "FERRO",
+      "dica": "Metal de transição crucial para a hemoglobina, símbolo Fe"
+    },
+    {
+      "name": "COBRE",
+      "dica": "Metal de transição usado em fios elétricos, símbolo Cu"
+    },
+    {
+      "name": "ZINCO",
+      "dica": "Metal usado em galvanização e protetor solar, símbolo Zn"
+    },
+    {
+      "name": "PRATA",
+      "dica": "Metal precioso com melhor condutividade elétrica, símbolo Ag"
+    },
+    {
+      "name": "OURO",
+      "dica": "Metal nobre usado em joias e eletrônicos, símbolo Au"
+    },
+    {
+      "name": "MERCÚRIO",
+      "dica": "Único metal líquido à temperatura ambiente, símbolo Hg"
+    },
+    {
+      "name": "CHUMBO",
+      "dica": "Metal pesado tóxico usado em baterias, símbolo Pb"
+    },
+    {
+      "name": "URÂNIO",
+      "dica": "Elemento radioativo usado em energia nuclear, símbolo U"
+    },
+    {
+      "name": "PLATINA",
+      "dica": "Metal precioso resistente à corrosão, símbolo Pt"
+    },
+    {
+      "name": "IODO",
+      "dica": "Halogênio essencial para a tireoide, símbolo I"
+    },
+    {
+      "name": "TUNGSTÊNIO",
+      "dica": "Metal com o mais alto ponto de fusão, símbolo W"
+    },
+    {
+      "name": "RÁDIO",
+      "dica": "Elemento radioativo descoberto por Marie Curie, símbolo Ra"
+    },
+    {
+      "name": "CÉSIO",
+      "dica": "Metal alcalino usado em relógios atômicos, símbolo Cs"
+    },
+    {
+      "name": "GÁLIO",
+      "dica": "Metal que derrete na mão, símbolo Ga"
+    },
+    {
+      "name": "BROMO",
+      "dica": "Único halogênio líquido à temperatura ambiente, símbolo Br"
+    },
+    {
+      "name": "KRIPTÔNIO",
+      "dica": "Gás nobre que inspirou o nome do planeta de Super-Homem, símbolo Kr"
+    },
+    {
+      "name": "XENÔNIO",
+      "dica": "Gás nobre usado em faróis de carros, símbolo Xe"
+    },
+    {
+      "name": "RADÔNIO",
+      "dica": "Gás nobre radioativo, símbolo Rn"
+    },
+    {
+      "name": "TITÂNIO",
+      "dica": "Metal resistente usado em implantes médicos, símbolo Ti"
+    },
+    {
+      "name": "NÍQUEL",
+      "dica": "Metal usado em moedas e baterias recarregáveis, símbolo Ni"
+    },
+    {
+      "name": "CROMO",
+      "dica": "Metal que dá resistência ao aço inoxidável, símbolo Cr"
+    },
+    {
+      "name": "MANGANÊS",
+      "dica": "Metal de transição essencial para a produção de aço, símbolo Mn"
+    },
+    {
+      "name": "MOLIBDÊNIO",
+      "dica": "Metal de transição usado em ligas resistentes, símbolo Mo"
+    },
+    {
+      "name": "TECNÉCIO",
+      "dica": "Primeiro elemento artificial, símbolo Tc"
+    },
+    {
+      "name": "RUTHÊNIO",
+      "dica": "Metal de transição raro da família da platina, símbolo Ru"
+    },
+    {
+      "name": "PALÁDIO",
+      "dica": "Metal precioso usado em catalisadores automotivos, símbolo Pd"
+    },
+    {
+      "name": "CÁDMIO",
+      "dica": "Metal tóxico usado em baterias antigas, símbolo Cd"
+    },
+    {
+      "name": "ÍNDIO",
+      "dica": "Metal usado em telas touchscreen, símbolo In"
+    },
+    {
+      "name": "ESTANHO",
+      "dica": "Metal que evita a corrosão do aço (latinha), símbolo Sn"
+    },
+    {
+      "name": "ANTIMÔNIO",
+      "dica": "Semimetal usado em retardantes de chama, símbolo Sb"
+    },
+    {
+      "name": "TELÚRIO",
+      "dica": "Semimetal raro usado em painéis solares, símbolo Te"
+    },
+    {
+      "name": "IODO",
+      "dica": "Halogênio essencial para a tireoide, símbolo I"
+    },
+    {
+      "name": "XENÔNIO",
+      "dica": "Gás nobre usado em faróis de carros, símbolo Xe"
+    },
+    {
+      "name": "CÉRIO",
+      "dica": "Lantanídeo usado em pedras de isqueiro, símbolo Ce"
+    },
+    {
+      "name": "TÚLIO",
+      "dica": "Lantanídeo usado em lasers médicos, símbolo Tm"
+    },
+    {
+      "name": "ITÉRBIO",
+      "dica": "Lantanídeo usado em relógios atômicos, símbolo Yb"
+    },
+    {
+      "name": "LUTÉCIO",
+      "dica": "Lantanídeo mais pesado e mais duro, símbolo Lu"
+    },
+    {
+      "name": "HÁFNIO",
+      "dica": "Metal de transição usado em reatores nucleares, símbolo Hf"
+    },
+    {
+      "name": "TÂNTALO",
+      "dica": "Metal resistente à corrosão usado em eletrônicos, símbolo Ta"
+    },
+    {
+      "name": "RÊNIO",
+      "dica": "Um dos metais mais raros da crosta terrestre, símbolo Re"
+    },
+    {
+      "name": "ÓSMIO",
+      "dica": "Metal mais denso conhecido, símbolo Os"
+    },
+    {
+      "name": "IRÍDIO",
+      "dica": "Metal raro associado a eventos de extinção em massa, símbolo Ir"
+    },
+    {
+      "name": "PLATINA",
+      "dica": "Metal precioso resistente à corrosão, símbolo Pt"
+    },
+    {
+      "name": "OURO",
+      "dica": "Metal nobre usado em joias e eletrônicos, símbolo Au"
+    },
+    {
+      "name": "MERCÚRIO",
+      "dica": "Único metal líquido à temperatura ambiente, símbolo Hg"
+    },
+    {
+      "name": "TÁLIO",
+      "dica": "Metal altamente tóxico usado em detectores infravermelhos, símbolo Tl"
+    },
+    {
+      "name": "CHUMBO",
+      "dica": "Metal pesado tóxico usado em baterias, símbolo Pb"
+    },
+    {
+      "name": "BISMUTO",
+      "dica": "Metal pesado menos tóxico, usado em cosméticos, símbolo Bi"
+    },
+    {
+      "name": "POLÔNIO",
+      "dica": "Elemento radioativo descoberto por Marie Curie, símbolo Po"
+    },
+    {
+      "name": "ASTATO",
+      "dica": "Elemento mais raro na natureza (halogênio radioativo), símbolo At"
+    },
+    {
+      "name": "RADÔNIO",
+      "dica": "Gás nobre radioativo, símbolo Rn"
+    },
+    {
+      "name": "FRÂNCIO",
+      "dica": "Metal alcalino mais instável, símbolo Fr"
+    },
+    {
+      "name": "RÁDIO",
+      "dica": "Elemento radioativo descoberto por Marie Curie, símbolo Ra"
+    },
+    {
+      "name": "ACTÍNIO",
+      "dica": "Elemento radioativo que dá nome à série dos actinídeos, símbolo Ac"
+    },
+    {
+      "name": "TÓRIO",
+      "dica": "Actinídeo usado como combustível nuclear potencial, símbolo Th"
+    },
+    {
+      "name": "PROTACTÍNIO",
+      "dica": "Actinídeo extremamente raro, símbolo Pa"
+    },
+    {
+      "name": "URÂNIO",
+      "dica": "Elemento radioativo usado em energia nuclear, símbolo U"
+    },
+    {
+      "name": "NETÚNIO",
+      "dica": "Primeiro elemento transurânico sintetizado, símbolo Np"
+    },
+    {
+      "name": "PLUTÔNIO",
+      "dica": "Elemento usado em armas nucleares e energia, símbolo Pu"
+    },
+    {
+      "name": "AMÉRICO",
+      "dica": "Elemento usado em detectores de fumaça, símbolo Am"
+    },
+    {
+      "name": "CÚRIO",
+      "dica": "Elemento radioativo nomeado em homenagem a Marie e Pierre Curie, símbolo Cm"
+    },
+    {
+      "name": "BERQUÉLIO",
+      "dica": "Elemento sintético nomeado em homenagem a Berkeley, símbolo Bk"
+    },
+    {
+      "name": "CALIFÓRNIO",
+      "dica": "Elemento usado em nêutrons para ativação, símbolo Cf"
+    },
+    {
+      "name": "EINSTÊNIO",
+      "dica": "Elemento nomeado em homenagem a Albert Einstein, símbolo Es"
+    },
+    {
+      "name": "FÉRMIO",
+      "dica": "Elemento nomeado em homenagem a Enrico Fermi, símbolo Fm"
+    },
+    {
+      "name": "MENDELEVIO",
+      "dica": "Elemento nomeado em homenagem ao criador da tabela periódica, símbolo Md"
+    },
+    {
+      "name": "NOBÉLIO",
+      "dica": "Elemento nomeado em homenagem a Alfred Nobel, símbolo No"
+    },
+    {
+      "name": "LAURÊNCIO",
+      "dica": "Elemento nomeado em homenagem ao inventor do ciclotron, símbolo Lr"
+    },
+    {
+      "name": "NITROGÊNIO",
+      "dica": "Gás que forma 78% da atmosfera, símbolo N (já estava na lista, mas sem número atômico)"
+    },
+    {
+      "name": "SCÂNDIO",
+      "dica": "Metal de transição usado em luzes de alta intensidade, símbolo Sc, número 21"
+    },
+    {
+      "name": "VANÁDIO",
+      "dica": "Metal usado em ligas de aço resistentes, símbolo V, número 23"
+    },
+    {
+      "name": "COBALTO",
+      "dica": "Componente de baterias de íon-lítio, símbolo Co, número 27"
+    },
+    {
+      "name": "GÁDIO",
+      "dica": "Metal magnético usado em ressonâncias, símbolo Gd, número 64"
+    },
+    {
+      "name": "DISPRÓSIO",
+      "dica": "Lantanídeo usado em lasers e reatores, símbolo Dy, número 66"
+    },
+    {
+      "name": "HÓLMIO",
+      "dica": "Lantanídeo com propriedades magnéticas, símbolo Ho, número 67"
+    },
+    {
+      "name": "ÉRBIO",
+      "dica": "Usado em fibras ópticas, símbolo Er, número 68"
+    },
+    {
+      "name": "TÉRBIO",
+      "dica": "Lantanídeo usado em dispositivos verdes, símbolo Tb, número 65"
+    },
+    {
+      "name": "PRASEODÍMIO",
+      "dica": "Lantanídeo usado em ligas de metais, símbolo Pr, número 59"
+    },
+    {
+      "name": "NEODÍMIO",
+      "dica": "Ímãs poderosos (HDs e fones), símbolo Nd, número 60"
+    },
+    {
+      "name": "PROMÉCIO",
+      "dica": "Elemento radioativo usado em baterias, símbolo Pm, número 61"
+    },
+    {
+      "name": "SAMÁRIO",
+      "dica": "Lantanídeo usado em ímãs e tratamento de câncer, símbolo Sm, número 62"
+    },
+    {
+      "name": "EUROPIUM",
+      "dica": "Usado em cédulas para anti-falsificação, símbolo Eu, número 63"
+    },
+    {
+      "name": "NIOBIO",
+      "dica": "Metal resistente usado em foguetes, símbolo Nb, número 41"
+    },
+    {
+      "name": "RUTHERFÓRDIO",
+      "dica": "Elemento sintético superpesado, símbolo Rf, número 104"
+    },
+    {
+      "name": "DÚBNIO",
+      "dica": "Elemento sintético altamente radioativo, símbolo Db, número 105"
+    },
+    {
+      "name": "SEABÓRGIO",
+      "dica": "Elemento sintético nomeado em homenagem a Glenn Seaborg, símbolo Sg, número 106"
+    },
+    {
+      "name": "BÓHRIO",
+      "dica": "Elemento sintético nomeado em homenagem a Niels Bohr, símbolo Bh, número 107"
+    },
+    {
+      "name": "HÁSSIO",
+      "dica": "Elemento sintético superpesado, símbolo Hs, número 108"
+    },
+    {
+      "name": "MEITNÉRIO",
+      "dica": "Elemento sintético nomeado em homenagem a Lise Meitner, símbolo Mt, número 109"
+    },
+    {
+      "name": "DARMSTÁDTIO",
+      "dica": "Elemento sintético descoberto em Darmstadt, símbolo Ds, número 110"
+    },
+    {
+      "name": "ROENTGÊNIO",
+      "dica": "Elemento sintético nomeado em homenagem a Wilhelm Röntgen, símbolo Rg, número 111"
+    },
+    {
+      "name": "COPERNÍCIO",
+      "dica": "Elemento sintético nomeado em homenagem a Nicolau Copérnico, símbolo Cn, número 112"
+    },
+    {
+      "name": "NIHÔNIO",
+      "dica": "Primeiro elemento nomeado em homenagem ao Japão (Nihon), símbolo Nh, número 113"
+    },
+    {
+      "name": "FLERÓVIO",
+      "dica": "Elemento sintético superpesado, símbolo Fl, número 114"
+    },
+    {
+      "name": "MOSCÓVIO",
+      "dica": "Elemento nomeado em homenagem a Moscou, símbolo Mc, número 115"
+    },
+    {
+      "name": "LIVERMÓRIO",
+      "dica": "Elemento sintético nomeado em homenagem ao laboratório Lawrence Livermore, símbolo Lv, número 116"
+    },
+    {
+      "name": "TENNESSO",
+      "dica": "Elemento sintético nomeado em homenagem ao Tennessee (EUA), símbolo Ts, número 117"
+    },
+    {
+      "name": "OGANESSON",
+      "dica": "Elemento mais pesado conhecido (gás nobre sintético), símbolo Og, número 118"
+    }
+  ]
+}

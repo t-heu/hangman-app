@@ -104,6 +104,322 @@
     {
       "name": "MARACUJÁ",
       "dica": "Fruta de casca dura e enrugada, com polpa amarela e ácida, usada para sucos"
+    },
+    {
+      "name": "AÇAÍ",
+      "dica": "Fruto roxo amazônico, consumido como creme gelado com granola"
+    },
+    {
+      "name": "AMÊNDOA",
+      "dica": "Semente comestível do pessegueiro, rica em nutrientes"
+    },
+    {
+      "name": "ARATICUM",
+      "dica": "Fruta do cerrado com polpa cremosa e sabor marcante"
+    },
+    {
+      "name": "ATEMOIA",
+      "dica": "Híbrido da cherimoia com fruta-pinha, de polpa doce"
+    },
+    {
+      "name": "BACURI",
+      "dica": "Fruta amazônica com casca dura e polpa ácida"
+    },
+    {
+      "name": "BIRIBÁ",
+      "dica": "Fruta tropical de polpa branca e sabor doce-ácido"
+    },
+    {
+      "name": "CACAU",
+      "dica": "Fruto que dá origem ao chocolate, de semente amarga"
+    },
+    {
+      "name": "CAMBUCI",
+      "dica": "Fruta nativa da Mata Atlântica em formato de disco"
+    },
+    {
+      "name": "CUPUAÇU",
+      "dica": "Parente do cacau, usado para sucos e doces na Amazônia"
+    },
+    {
+      "name": "DAMASCO",
+      "dica": "Fruta pequena e alaranjada, consumida fresca ou seca"
+    },
+    {
+      "name": "EMBAÚBA",
+      "dica": "Fruta alongada que alimenta animais silvestres"
+    },
+    {
+      "name": "FIGODAÍNDIA",
+      "dica": "Fruta de cacto com casca espinhosa e polpa doce"
+    },
+    {
+      "name": "FRUTADOCONDE",
+      "dica": "Fruta nordestina com sementes comestíveis crocantes"
+    },
+    {
+      "name": "GRAVIOLA",
+      "dica": "Fruta grande com casca verde e polpa branca cremosa"
+    },
+    {
+      "name": "GUABIRUBA",
+      "dica": "Fruta pequena e amarela do litoral brasileiro"
+    },
+    {
+      "name": "INGÁ",
+      "dica": "Vagem longa com sementes envoltas em polpa doce"
+    },
+    {
+      "name": "JABUTICABA",
+      "dica": "Fruta brasileira que nasce diretamente no tronco da árvore"
+    },
+    {
+      "name": "JAMBO",
+      "dica": "Fruta perfumada em formato de sino, de polpa crocante"
+    },
+    {
+      "name": "JATOBÁ",
+      "dica": "Fruto do cerrado usado para fazer farinha e bebidas"
+    },
+    {
+      "name": "JENIPAPO",
+      "dica": "Fruta verde usada para fazer licor e corante natural"
+    },
+    {
+      "name": "JUÁ",
+      "dica": "Mini fruta amarela do sertão, parente da berinjela"
+    },
+    {
+      "name": "LITCHI",
+      "dica": "Fruta exótica com casca áspera e polpa translúcida"
+    },
+    {
+      "name": "MAMÃO",
+      "dica": "Fruta tropical de polpa alaranjada e sementes pretas"
+    },
+    {
+      "name": "MANGABA",
+      "dica": "Fruta do cerrado que só cai quando está madura"
+    },
+    {
+      "name": "MANGOSTIM",
+      "dica": "Fruta asiática considerada a 'rainha das frutas'"
+    },
+    {
+      "name": "MELANCIA",
+      "dica": "Fruta grande e suculenta, com polpa vermelha ou amarela"
+    },
+    {
+      "name": "MELÃO",
+      "dica": "Fruta redonda de polpa doce e aroma marcante"
+    },
+    {
+      "name": "NONI",
+      "dica": "Fruta polinésia de cheiro forte e benefícios medicinais"
+    },
+    {
+      "name": "PEPINO",
+      "dica": "Fruto geralmente consumido como legume em saladas"
+    },
+    {
+      "name": "PESSEGUEIRO",
+      "dica": "Árvore que produz pêssegos, frutas aveludadas e doces"
+    },
+    {
+      "name": "PITANGA",
+      "dica": "Fruta vermelha brasileira de sabor agridoce"
+    },
+    {
+      "name": "PITOMBA",
+      "dica": "Fruta pequena e amarela, típica do Nordeste brasileiro"
+    },
+    {
+      "name": "POMELO",
+      "dica": "Maior fruta cítrica, parente da toranja"
+    },
+    {
+      "name": "RAMBUTÃO",
+      "dica": "Fruta asiática peluda, parente da lichia"
+    },
+    {
+      "name": "SAPOTI",
+      "dica": "Fruta marrom com polpa doce e textura farinhenta"
+    },
+    {
+      "name": "SIRIGUELA",
+      "dica": "Fruta pequena e amarelo-avermelhada, de sabor doce"
+    },
+    {
+      "name": "TAMARILLO",
+      "dica": "Fruta ovóide vermelha ou amarela, parente do tomate"
+    },
+    {
+      "name": "TAMARINDO",
+      "dica": "Fruta tropical de polpa ácida dentro de uma vagem"
+    },
+    {
+      "name": "TANGERINA",
+      "dica": "Citrus de fácil descascamento, também chamada de mexerica"
+    },
+    {
+      "name": "TOMATE",
+      "dica": "Fruta geralmente usada como legume em preparações salgadas"
+    },
+    {
+      "name": "TORANJA",
+      "dica": "Citrus grande e amargo, também conhecido como grapefruit"
+    },
+    {
+      "name": "UMBU",
+      "dica": "Fruta do sertão nordestino, muito refrescante"
+    },
+    {
+      "name": "UVAIA",
+      "dica": "Fruta amarela e azeda da Mata Atlântica"
+    },
+    {
+      "name": "VELUDINHO",
+      "dica": "Fruta pequena e aveludada do cerrado brasileiro"
+    },
+    {
+      "name": "WATERAPPLE",
+      "dica": "Fruta asiática crocante e levemente adocicada"
+    },
+    {
+      "name": "XIXÁ",
+      "dica": "Fruta da caatinga com polpa fibrosa e sementes grandes"
+    },
+    {
+      "name": "YELLOWPASSION",
+      "dica": "Variedade amarela do maracujá, menos ácida"
+    },
+    {
+      "name": "ZABUCAO",
+      "dica": "Variedade gigante de jabuticaba"
+    },
+    {
+      "name": "ABIU",
+      "dica": "Fruta amazônica de polpa translúcida e doce"
+    },
+    {
+      "name": "ACEROLA",
+      "dica": "Fruta pequena e vermelha, campeã em vitamina C"
+    },
+    {
+      "name": "ARAÇÁ",
+      "dica": "Parente pequeno da goiaba, com sabor marcante"
+    },
+    {
+      "name": "BURITI",
+      "dica": "Fruta do cerrado usada para sucos e doces"
+    },
+    {
+      "name": "CAGUITA",
+      "dica": "Fruta pequena do cerrado, também chamada de cagaita"
+    },
+    {
+      "name": "CAMU-CAMU",
+      "dica": "Fruta amazônica com altíssimo teor de vitamina C"
+    },
+    {
+      "name": "CARAMURU",
+      "dica": "Fruta alongada e doce do Nordeste brasileiro"
+    },
+    {
+      "name": "CUBIU",
+      "dica": "Parente do tomate cultivado na Amazônia"
+    },
+    {
+      "name": "DOVYALIS",
+      "dica": "Fruta exótica amarela ou vermelha, muito ácida"
+    },
+    {
+      "name": "FEIJOA",
+      "dica": "Fruta verde com aroma marcante, também chamada de goiaba-serrana"
+    },
+    {
+      "name": "GOGI",
+      "dica": "Fruta vermelha considerada superalimento"
+    },
+    {
+      "name": "GUARANÁ",
+      "dica": "Fruta amazônica estimulante, usada em refrigerantes"
+    },
+    {
+      "name": "HALA",
+      "dica": "Fruta tropical de polpa fibrosa e sabor único"
+    },
+    {
+      "name": "ICACO",
+      "dica": "Fruta arroxeada que cresce em regiões litorâneas"
+    },
+    {
+      "name": "JUNCA",
+      "dica": "Fruta alongada e doce do cerrado brasileiro"
+    },
+    {
+      "name": "KINO",
+      "dica": "Fruta asiática parecida com o caqui"
+    },
+    {
+      "name": "LOURO",
+      "dica": "Árvore cujos frutos são usados como tempero"
+    },
+    {
+      "name": "MURICI",
+      "dica": "Fruta amarela e aromática do cerrado e caatinga"
+    },
+    {
+      "name": "NECTARINA",
+      "dica": "Variedade de pêssego com casca lisa"
+    },
+    {
+      "name": "OROBLANCO",
+      "dica": "Híbrido de toranja e pomelo, menos amargo"
+    },
+    {
+      "name": "PEQUI",
+      "dica": "Fruto do cerrado com espinhos na polpa, usado na culinária"
+    },
+    {
+      "name": "QUINA",
+      "dica": "Fruta pequena usada na medicina tradicional"
+    },
+    {
+      "name": "ROMA",
+      "dica": "Variedade de maçã vermelha e doce"
+    },
+    {
+      "name": "SAPUCAIA",
+      "dica": "Fruta com castanhas comestíveis dentro de uma cápsula dura"
+    },
+    {
+      "name": "TAPEREBÁ",
+      "dica": "Nome indígena para a fruta cajá"
+    },
+    {
+      "name": "UCHUVA",
+      "dica": "Fruta dourada envolta em uma casca fina, também chamada de fisális"
+    },
+    {
+      "name": "VINHO",
+      "dica": "Bebida produzida a partir da fermentação de uvas"
+    },
+    {
+      "name": "WAMPI",
+      "dica": "Fruta asiática parecida com lichia, mas em cachos"
+    },
+    {
+      "name": "XIMENIA",
+      "dica": "Fruta silvestre usada na medicina popular"
+    },
+    {
+      "name": "YUZU",
+      "dica": "Citrus japonês aromático, usado na culinária"
+    },
+    {
+      "name": "ZIMBRO",
+      "dica": "Fruto usado para aromatizar o gin"
     }
   ]
 }

@@ -3,111 +3,559 @@
   "words": [
     {
       "name": "LEÃO",
-      "dica": "Grande felino conhecido por sua juba"
+      "dica": "Grande felino conhecido por sua juba, chamado de 'rei da selva'"
     },
     {
       "name": "ELEFANTE",
-      "dica": "Maior mamífero terrestre, caracterizado por sua tromba"
+      "dica": "Maior mamífero terrestre, caracterizado por sua tromba e presas de marfim"
     },
     {
-      "name": "GIRAÇÃO",
-      "dica": "Planta comum em jardins, que acompanha a trajetória do sol"
+      "name": "GIRAFA",
+      "dica": "Animal mais alto do mundo, com pescoço longo e padrão de manchas único"
     },
     {
       "name": "CACHORRO",
-      "dica": "Animal doméstico conhecido por sua lealdade"
+      "dica": "Melhor amigo do homem, animal doméstico de diversas raças"
     },
     {
       "name": "GATO",
-      "dica": "Animal doméstico de estimação, conhecido por sua independência"
+      "dica": "Animal doméstico independente, conhecido por sua agilidade e bigodes"
     },
     {
       "name": "TIGRE",
-      "dica": "Grande felino listrado, encontrado em diversas regiões da Ásia"
+      "dica": "Maior felino do mundo, com listras verticais e força impressionante"
     },
     {
       "name": "URSO",
-      "dica": "Animal mamífero, conhecido por sua pelagem espessa e habilidade de hibernar"
+      "dica": "Mamífero grande e forte, inclui espécies como o urso-polar e pardo"
     },
     {
       "name": "SERPENTE",
-      "dica": "Réptil alongado, muitas vezes associado a veneno e estrangulamento"
+      "dica": "Réptil sem pernas, algumas espécies são venenosas"
     },
     {
       "name": "MACACO",
-      "dica": "Primate conhecido por sua agilidade e comportamento social"
+      "dica": "Primata inteligente que vive em grupos sociais"
     },
     {
       "name": "COBRA",
-      "dica": "Réptil venenoso, geralmente caracterizado por seu padrão de cores e movimentos rápidos"
+      "dica": "Serpente venenosa, muitas vezes com capelo ou padrões coloridos"
     },
     {
       "name": "CAMELO",
-      "dica": "Animal adaptado para viver em ambientes áridos, com uma ou duas corcovas"
+      "dica": "Animal do deserto que armazena água em suas corcovas"
     },
     {
       "name": "CROCODILO",
-      "dica": "Réptil semelhante a um lagarto, com mandíbulas poderosas e adaptado para viver em ambientes aquáticos"
+      "dica": "Grande réptil aquático com mandíbulas poderosas"
     },
     {
       "name": "PATO",
-      "dica": "Ave aquática comum em lagos e rios, conhecida por sua vocalização característica"
+      "dica": "Ave aquática com bico achatado e conhecido por seu 'quá quá'"
     },
     {
       "name": "PÁSSARO",
-      "dica": "Animal vertebrado de sangue quente, caracterizado por possuir penas e asas"
+      "dica": "Animal com penas, asas e capacidade de voar (na maioria)"
     },
     {
       "name": "RATO",
-      "dica": "Pequeno mamífero roedor, comum em áreas urbanas e rurais"
+      "dica": "Pequeno roedor que se adapta bem a ambientes urbanos"
     },
     {
       "name": "ZEBRA",
-      "dica": "Animal selvagem da família dos equídeos, conhecido por suas listras"
+      "dica": "Equídeo africano com listras pretas e brancas únicas"
     },
     {
       "name": "GALINHA",
-      "dica": "Ave doméstica comum em criações agrícolas, conhecida por botar ovos"
+      "dica": "Ave doméstica criada por sua carne e ovos"
     },
     {
       "name": "ABELHA",
-      "dica": "Inseto conhecido por sua importância na polinização das plantas"
+      "dica": "Inseto polinizador que produz mel"
     },
     {
       "name": "BODE",
-      "dica": "Animal ruminante comum em criações agrícolas, conhecido por seu leite e carne"
+      "dica": "Animal ruminante com chifres, parente da cabra"
     },
     {
       "name": "PANDA",
-      "dica": "Ursídeo conhecido por sua pelagem branca e preta, nativo da China"
+      "dica": "Ursídeo preto e branco que se alimenta de bambu"
     },
     {
       "name": "GAZELA",
-      "dica": "Antílope ágil, conhecido por seus saltos graciosos"
+      "dica": "Antílope ágil das savanas africanas"
     },
     {
       "name": "PUMA",
-      "dica": "Felino selvagem também conhecido como onça-parda ou suçuarana"
+      "dica": "Grande felino também conhecido como leão-da-montanha"
     },
     {
       "name": "COALA",
-      "dica": "Marsupial arbóreo nativo da Austrália, conhecido por se alimentar principalmente de folhas de eucalipto"
+      "dica": "Marsupial australiano que dorme até 20 horas por dia"
     },
     {
       "name": "ARARA",
-      "dica": "Ave psitaciforme de cores vibrantes, conhecida por sua inteligência e capacidade de imitar sons"
+      "dica": "Papagaio grande e colorido das florestas tropicais"
     },
     {
       "name": "ORANGOTANGO",
-      "dica": "Primate conhecido por sua inteligência e semelhança com os seres humanos, nativo das florestas tropicais do Sudeste Asiático"
+      "dica": "Grande primata vermelho das florestas da Ásia"
     },
     {
       "name": "GALO",
-      "dica": "Macho da galinha, conhecido por seu canto matinal"
+      "dica": "Macho da galinha, conhecido por cantar ao amanhecer"
     },
     {
       "name": "IGUANA",
-      "dica": "Réptil de grande porte, comum em regiões tropicais, conhecido por sua coloração verde e hábitos arborícolas"
+      "dica": "Grande lagarto verde que vive em árvores"
+    },
+    {
+      "name": "LONTRA",
+      "dica": "Mamífero aquático brincalhão que come mariscos"
+    },
+    {
+      "name": "TARTARUGA",
+      "dica": "Réptil com casco duro que pode viver muitos anos"
+    },
+    {
+      "name": "BALEIA",
+      "dica": "Maior animal do planeta, mamífero marinho"
+    },
+    {
+      "name": "TUBARÃO",
+      "dica": "Predador dos mares com múltiplas fileiras de dentes"
+    },
+    {
+      "name": "POLVO",
+      "dica": "Molusco inteligente com oito braços e capacidade de camuflagem"
+    },
+    {
+      "name": "GOLFINHO",
+      "dica": "Mamífero marinho inteligente e sociável"
+    },
+    {
+      "name": "CORUJA",
+      "dica": "Ave noturna com visão aguçada e vôo silencioso"
+    },
+    {
+      "name": "FOCA",
+      "dica": "Mamífero marinho que nada com nadadeiras e descansa em gelo"
+    },
+    {
+      "name": "RINOCERONTE",
+      "dica": "Grande mamífero com chifre nasal, em perigo de extinção"
+    },
+    {
+      "name": "HIPOPÓTAMO",
+      "dica": "Grande animal semi-aquático agressivo"
+    },
+    {
+      "name": "GORILA",
+      "dica": "Maior primata, vive em grupos familiares"
+    },
+    {
+      "name": "CHIMPANZÉ",
+      "dica": "Primata inteligente mais próximo dos humanos"
+    },
+    {
+      "name": "BUFALO",
+      "dica": "Grande bovino selvagem com chifres curvos"
+    },
+    {
+      "name": "ALCE",
+      "dica": "Maior cervídeo, com chifres largos e achatados"
+    },
+    {
+      "name": "CERVO",
+      "dica": "Animal elegante com chifres ramificados"
+    },
+    {
+      "name": "RAPOSA",
+      "dica": "Canídeo esperto com cauda peluda"
+    },
+    {
+      "name": "LOBO",
+      "dica": "Parente selvagem do cachorro, vive em alcateias"
+    },
+    {
+      "name": "LINCE",
+      "dica": "Felino de orelhas pontudas com tufos de pelo"
+    },
+    {
+      "name": "LEOPARDO",
+      "dica": "Grande felino com pelagem manchada (rosetas)"
+    },
+    {
+      "name": "GUEPARDO",
+      "dica": "Animal terrestre mais rápido, com marcas de lágrima no rosto"
+    },
+    {
+      "name": "JAGUAR",
+      "dica": "Maior felino das Américas, com mordida poderosa"
+    },
+    {
+      "name": "Hiena",
+      "dica": "Carnívoro africano conhecido por seu riso"
+    },
+    {
+      "name": "MORCEGO",
+      "dica": "Único mamífero capaz de voar, usa ecolocalização"
+    },
+    {
+      "name": "ESQUILO",
+      "dica": "Pequeno roedor que armazena nozes e sementes"
+    },
+    {
+      "name": "TOUPEIRA",
+      "dica": "Pequeno mamífero que vive em túneis subterrâneos"
+    },
+    {
+      "name": "TAMANDUÁ",
+      "dica": "Animal com focinho longo que come formigas e cupins"
+    },
+    {
+      "name": "TATU",
+      "dica": "Animal com carapaça óssea que se enrola em bola"
+    },
+    {
+      "name": "PORCOESPINHO",
+      "dica": "Roedor coberto por espinhos afiados"
+    },
+    {
+      "name": "CASTOR",
+      "dica": "Roedor aquático que constrói represas"
+    },
+    {
+      "name": "LAGARTO",
+      "dica": "Réptil com quatro patas e cauda longa"
+    },
+    {
+      "name": "CAMALEÃO",
+      "dica": "Lagarto que muda de cor e tem olhos independentes"
+    },
+    {
+      "name": "JACARÉ",
+      "dica": "Réptil semelhante ao crocodilo, mas com focinho mais largo"
+    },
+    {
+      "name": "SAPO",
+      "dica": "Anfíbio sem cauda com pele úmida e saltos potentes"
+    },
+    {
+      "name": "RÃ",
+      "dica": "Parente do sapo, com pele mais lisa e pernas traseiras longas"
+    },
+    {
+      "name": "SALAMANDRA",
+      "dica": "Anfíbio com cauda que se assemelha a um lagarto"
+    },
+    {
+      "name": "CARANGUEJO",
+      "dica": "Crustáceo com dez patas e carapaça dura"
+    },
+    {
+      "name": "LAGOSTA",
+      "dica": "Crustáceo marinho com garras grandes e corpo alongado"
+    },
+    {
+      "name": "CAVALOMARINHO",
+      "dica": "Peixe com cabeça equina e corpo segmentado"
+    },
+    {
+      "name": "ESTRELA DOMAR",
+      "dica": "Animal marinho em forma de estrela que regenera braços"
+    },
+    {
+      "name": "OURIÇO DOMAR",
+      "dica": "Animal marinho redondo coberto por espinhos"
+    },
+    {
+      "name": "ÁGUIA",
+      "dica": "Grande ave de rapina com visão extremamente aguçada"
+    },
+    {
+      "name": "FALCÃO",
+      "dica": "Ave de rapina pequena e veloz"
+    },
+    {
+      "name": "CORVO",
+      "dica": "Ave preta considerada uma das mais inteligentes"
+    },
+    {
+      "name": "PINGUIM",
+      "dica": "Ave que não voa, adaptada à vida na Antártida"
+    },
+    {
+      "name": "AVESTRUZ",
+      "dica": "Maior ave do mundo, não voa mas corre rápido"
+    },
+    {
+      "name": "EMA",
+      "dica": "Parente sul-americano do avestruz"
+    },
+    {
+      "name": "CISNE",
+      "dica": "Grande ave aquática de pescoço longo e elegante"
+    },
+    {
+      "name": "GAVIÃO",
+      "dica": "Ave de rapina de médio porte"
+    },
+    {
+      "name": "BEMTEVI",
+      "dica": "Ave brasileira conhecida por seu canto característico"
+    },
+    {
+      "name": "TUCANO",
+      "dica": "Ave tropical com bico grande e colorido"
+    },
+    {
+      "name": "PAPAGAIO",
+      "dica": "Ave conhecida por imitar a voz humana"
+    },
+    {
+      "name": "PERU",
+      "dica": "Ave doméstica grande, tradicional em festas"
+    },
+    {
+      "name": "GANSOS",
+      "dica": "Aves aquáticas que voam em formação em V"
+    },
+    {
+      "name": "PELICANO",
+      "dica": "Ave aquática com bolsa sob o bico para pegar peixes"
+    },
+    {
+      "name": "FLAMINGO",
+      "dica": "Ave pernalta com plumagem rosa ou vermelha"
+    },
+    {
+      "name": "GARÇA",
+      "dica": "Ave pernalta branca que vive perto de água"
+    },
+    {
+      "name": "ANDORINHA",
+      "dica": "Pequena ave migratória que voa em bandos"
+    },
+    {
+      "name": "BEIJAFLOR",
+      "dica": "Pequena ave que bate as asas muito rápido para pairar no ar"
+    },
+    {
+      "name": "BORBOLETA",
+      "dica": "Inseto com asas coloridas que surge de uma lagarta"
+    },
+    {
+      "name": "FORMIGA",
+      "dica": "Inseto social que vive em colônias organizadas"
+    },
+    {
+      "name": "CUPIM",
+      "dica": "Inseto que se alimenta de madeira e constrói ninhos grandes"
+    },
+    {
+      "name": "GAFANHOTO",
+      "dica": "Inseto saltador que pode formar nuvens devastadoras"
+    },
+    {
+      "name": "LAGARTA",
+      "dica": "Fase larval de borboletas e mariposas"
+    },
+    {
+      "name": "BESOURO",
+      "dica": "Inseto com asas anteriores endurecidas (élitros)"
+    },
+    {
+      "name": "JOANINHA",
+      "dica": "Pequeno besouro colorido com pintas pretas"
+    },
+    {
+      "name": "MOSQUITO",
+      "dica": "Inseto voador que suga sangue e transmite doenças"
+    },
+    {
+      "name": "LIBÉLULA",
+      "dica": "Inseto voador com asas transparentes e corpo alongado"
+    },
+    {
+      "name": "LOMBRIGA",
+      "dica": "Verme que vive no solo e melhora sua qualidade"
+    },
+    {
+      "name": "MINHOCA",
+      "dica": "Verme anelídeo que aerifica o solo"
+    },
+    {
+      "name": "SANGUESSUGA",
+      "dica": "Verme que se alimenta de sangue e era usado na medicina"
+    },
+    {
+      "name": "CARPA",
+      "dica": "Peixe de água doce comum em lagos e rios"
+    },
+    {
+      "name": "SALMÃO",
+      "dica": "Peixe que migra do mar para os rios para se reproduzir"
+    },
+    {
+      "name": "ATUM",
+      "dica": "Grande peixe oceânico muito usado na culinária"
+    },
+    {
+      "name": "BAGRE",
+      "dica": "Peixe com barbilhões sensoriais ao redor da boca"
+    },
+    {
+      "name": "LAMBARI",
+      "dica": "Pequeno peixe de água doce comum no Brasil"
+    },
+    {
+      "name": "PIABA",
+      "dica": "Pequeno peixe de riacho"
+    },
+    {
+      "name": "DOURADO",
+      "dica": "Peixe de água doce com coloração amarelada"
+    },
+    {
+      "name": "TUBARÃOBALEIA",
+      "dica": "Maior peixe do mundo, alimenta-se de plâncton"
+    },
+    {
+      "name": "CAVALO",
+      "dica": "Animal domesticado usado para montaria e tração"
+    },
+    {
+      "name": "VACA",
+      "dica": "Animal bovino criado por seu leite e carne"
+    },
+    {
+      "name": "PORCO",
+      "dica": "Animal de criação conhecido por sua inteligência"
+    },
+    {
+      "name": "CARNEIRO",
+      "dica": "Ovelha macho, criada por sua lã e carne"
+    },
+    {
+      "name": "CABRA",
+      "dica": "Animal ruminante criado por seu leite"
+    },
+    {
+      "name": "ASNO",
+      "dica": "Parente do cavalo conhecido por sua resistência"
+    },
+    {
+      "name": "MULA",
+      "dica": "Híbrido entre cavalo e jumenta, conhecida por sua força"
+    },
+    {
+      "name": "RAPOSADOCAMPO",
+      "dica": "Canídeo brasileiro também chamado de graxaim"
+    },
+    {
+      "name": "TATUPEBA",
+      "dica": "Tatu de pequeno porte que se enrola em bola"
+    },
+    {
+      "name": "QUATI",
+      "dica": "Mamífero sul-americano com cauda longa e anelada"
+    },
+    {
+      "name": "MICO",
+      "dica": "Pequeno primata brasileiro, como o mico-leão-dourado"
+    },
+    {
+      "name": "SAGUI",
+      "dica": "Pequeno macaco comum nas matas brasileiras"
+    },
+    {
+      "name": "BICHO PREGUIÇA",
+      "dica": "Mamífero lento que vive pendurado em árvores"
+    },
+    {
+      "name": "TAMANDUÁBANDEIRA",
+      "dica": "Maior espécie de tamanduá, com cauda peluda"
+    },
+    {
+      "name": "CAPIVARA",
+      "dica": "Maior roedor do mundo, comum no Pantanal"
+    },
+    {
+      "name": "PACAS",
+      "dica": "Roedor brasileiro de pelagem manchada"
+    },
+    {
+      "name": "CUTIAS",
+      "dica": "Pequeno roedor que enterra sementes"
+    },
+    {
+      "name": "PREÁ",
+      "dica": "Pequeno roedor comum no cerrado brasileiro"
+    },
+    {
+      "name": "EMA",
+      "dica": "Maior ave brasileira, similar ao avestruz"
+    },
+    {
+      "name": "SERIEMA",
+      "dica": "Ave do cerrado conhecida por seu canto alto"
+    },
+    {
+      "name": "JACU",
+      "dica": "Ave brasileira da família dos galináceos"
+    },
+    {
+      "name": "MUTUM",
+      "dica": "Grande ave florestal brasileira ameaçada de extinção"
+    },
+    {
+      "name": "ARAPONGA",
+      "dica": "Ave brasileira conhecida por seu canto metálico"
+    },
+    {
+      "name": "SABIÁ",
+      "dica": "Pássaro símbolo do Brasil, conhecido por seu canto"
+    },
+    {
+      "name": "SANHAÇO",
+      "dica": "Pássaro comum nas cidades brasileiras"
+    },
+    {
+      "name": "COLEIRO",
+      "dica": "Pequeno pássaro canoro muito apreciado"
+    },
+    {
+      "name": "CANÁRIO",
+      "dica": "Pássaro doméstico conhecido por seu canto"
+    },
+    {
+      "name": "CALOPSITA",
+      "dica": "Pequena cacatua criada como animal de estimação"
+    },
+    {
+      "name": "PERIQUITO",
+      "dica": "Pequeno papagaio de cores vivas"
+    },
+    {
+      "name": "JABUTI",
+      "dica": "Tartaruga terrestre brasileira"
+    },
+    {
+      "name": "CÁGADO",
+      "dica": "Tartaruga de água doce"
+    },
+    {
+      "name": "SUCURI",
+      "dica": "Uma das maiores serpentes do mundo, não venenosa"
+    },
+    {
+      "name": "JIBOIA",
+      "dica": "Grande serpente constritora"
+    },
+    {
+      "name": "CASCÁVEL",
+      "dica": "Serpente venenosa com chocalho na cauda"
     }
   ]
 }

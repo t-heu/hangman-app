@@ -1,5 +1,7 @@
+import { RefreshCw } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { database, get, ref } from '../../api/firebase';
 
 // Dados fake (exemplo com 15)
@@ -25,48 +27,45 @@ export default function TabTwoScreen() {
   const meuNome = 'Matheus'; // ou resgatado do contexto/local
   const [minhaPosicao, setMinhaPosicao] = useState<number | null>(null);
 
-  useEffect(() => {
-    async function fetchRanking() {
-      const refRanking = ref(database, 'hangman/rankings');
-      const snapshot = await get(refRanking);
+  async function fetchRanking() {
+    const refRanking = ref(database, 'hangman/rankings');
+    const snapshot = await get(refRanking);
 
-      if (!snapshot.exists()) {
-        setRanking([]);
-        return;
-      }
-
-      const dados = Object.values(snapshot.val()).map((item: any) => ({
-        nome: item.name,
-        vitorias: item.victories,
-        tempoMedio: Math.round(item.totalTime / item.victories),
-      }));
-
-      const ordenado = dados.sort((a, b) =>
-        b.vitorias === a.vitorias
-          ? a.tempoMedio - b.tempoMedio
-          : b.vitorias - a.vitorias
-      );
-
-      setRanking(ordenado);
-
-      const idx = ordenado.findIndex((r) => r.nome === meuNome);
-      setMinhaPosicao(idx);
+    if (!snapshot.exists()) {
+      setRanking([]);
+      return;
     }
 
+    const dados = Object.values(snapshot.val()).map((item: any) => ({
+      nome: item.name,
+      vitorias: item.victories,
+      tempoMedio: Math.round(item.totalTime / item.victories),
+    }));
+
+    const ordenado = dados.sort((a, b) =>
+      b.vitorias === a.vitorias
+        ? a.tempoMedio - b.tempoMedio
+        : b.vitorias - a.vitorias
+    );
+
+    setRanking(ordenado);
+
+    const idx = ordenado.findIndex((r) => r.nome === meuNome);
+    setMinhaPosicao(idx);
+  }
+
+  useEffect(() => {
     fetchRanking();
   }, []);
-  // Ordenar por vitórias e depois por menor tempo
-  /*const rankingOrdenado = [...rankingFake].sort((a, b) =>
-    b.vitorias === a.vitorias
-      ? a.tempoMedio - b.tempoMedio
-      : b.vitorias - a.vitorias
-  );
-
-  const minhaPosicao = rankingOrdenado.findIndex(r => r.nome === meuNome);*/
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>🏅 Ranking semanal</Text>
+       <View style={styles.headerContainer}>
+          <Text style={styles.title}>🏅 Ranking semanal</Text>
+          <TouchableOpacity onPress={() => fetchRanking()}>
+            <RefreshCw color="#eee" size={24} />
+          </TouchableOpacity>
+        </View>
 
       <FlatList
         data={ranking.slice(0, 10)} // Top 10
@@ -106,7 +105,14 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#1C1C28' },
-  title: { fontSize: 26, fontWeight: 'bold', color: '#fff', marginBottom: 12, marginTop: 20 },
+  title: { fontSize: 26, fontWeight: 'bold', color: '#fff'},
+   headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 16,
+    marginBottom: 12, marginTop: 12 
+  },
   item: {
     marginBottom: 10,
     padding: 12,

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#eee',
     textTransform: 'uppercase',
-    // fontFamily: 'sourceCodePro', // se tiver, pode incluir via linking
+    fontFamily: 'SourceCode',
     fontSize: 14,
     textAlign: 'center',
   },

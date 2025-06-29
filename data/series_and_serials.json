@@ -1,0 +1,201 @@
+{
+  "name": "Séries e Seriados",
+  "words": [
+    {
+      "name": "FRIENDS",
+      "dica": "Sitcom icônica dos anos 90 sobre seis amigos em Nova York"
+    },
+    {
+      "name": "BREAKING BAD",
+      "dica": "Drama sobre um professor de química que se torna um produtor de metanfetamina"
+    },
+    {
+      "name": "GAME OF THRONES",
+      "dica": "Série de fantasia épica baseada nos livros de George R.R. Martin"
+    },
+    {
+      "name": "STRANGER THINGS",
+      "dica": "Série de ficção científica com elementos de terror dos anos 80"
+    },
+    {
+      "name": "THE OFFICE",
+      "dica": "Sitcom mockumentary sobre o cotidiano de um escritório"
+    },
+    {
+      "name": "GREY'S ANATOMY",
+      "dica": "Drama médico de longa duração sobre cirurgiões em Seattle"
+    },
+    {
+      "name": "THE MANDALORIAN",
+      "dica": "Série do universo Star Wars sobre um caçador de recompensas"
+    },
+    {
+      "name": "LA CASA DE PAPEL",
+      "dica": "Série espanhola sobre um assalto à Casa da Moeda"
+    },
+    {
+      "name": "THE WALKING DEAD",
+      "dica": "Drama pós-apocalíptico sobre sobreviventes de um apocalipse zumbi"
+    },
+    {
+      "name": "BLACK MIRROR",
+      "dica": "Série antológica que explora os lados sombrios da tecnologia"
+    },
+    {
+      "name": "THE CROWN",
+      "dica": "Drama histórico sobre o reinado da Rainha Elizabeth II"
+    },
+    {
+      "name": "BROOKLYN NINE-NINE",
+      "dica": "Sitcom policial sobre uma delegacia excêntrica em Nova York"
+    },
+    {
+      "name": "THE BIG BANG THEORY",
+      "dica": "Sitcom sobre um grupo de cientistas socialmente desajeitados"
+    },
+    {
+      "name": "PEAKY BLINDERS",
+      "dica": "Drama histórico sobre uma família criminosa em Birmingham"
+    },
+    {
+      "name": "THE WITCHER",
+      "dica": "Série de fantasia baseada nos livros de Andrzej Sapkowski"
+    },
+    {
+      "name": "LUCIFER",
+      "dica": "Drama sobrenatural sobre o Diabo vivendo em Los Angeles"
+    },
+    {
+      "name": "MONEY HEIST",
+      "dica": "Série espanhola sobre assaltos elaborados (original: La Casa de Papel)"
+    },
+    {
+      "name": "NARCOS",
+      "dica": "Drama sobre o cartel de Pablo Escobar e o tráfico de drogas"
+    },
+    {
+      "name": "THE QUEEN'S GAMBIT",
+      "dica": "Minissérie sobre uma jovem prodígio do xadrez"
+    },
+    {
+      "name": "THE BOYS",
+      "dica": "Série de super-heróis com uma abordagem sombria e satírica"
+    },
+    {
+      "name": "DARK",
+      "dica": "Série alemã de ficção científica sobre viagem no tempo"
+    },
+    {
+      "name": "THE UMBRELLA ACADEMY",
+      "dica": "Série sobre super-heróis disfuncionais criados juntos"
+    },
+    {
+      "name": "MINDHUNTER",
+      "dica": "Série sobre os primeiros perfis criminais do FBI"
+    },
+    {
+      "name": "OZARK",
+      "dica": "Drama sobre um consultor financeiro que lava dinheiro para cartéis"
+    },
+    {
+      "name": "SEX EDUCATION",
+      "dica": "Comédia dramática sobre um adolescente que dá conselhos sobre sexo"
+    },
+    {
+      "name": "THE HAUNTING OF HILL HOUSE",
+      "dica": "Série de terror sobre uma família assombrada por seu passado"
+    },
+    {
+      "name": "RICK AND MORTY",
+      "dica": "Animação adulta sobre viagens interdimensionais"
+    },
+    {
+      "name": "SUPERNATURAL",
+      "dica": "Drama sobrenatural sobre dois irmãos caçadores de monstros"
+    },
+    {
+      "name": "HOW I MET YOUR MOTHER",
+      "dica": "Sitcom sobre um pai contando aos filhos como conheceu a mãe deles"
+    },
+    {
+      "name": "THE GOOD PLACE",
+      "dica": "Comédia sobre a vida após a morte e filosofia moral"
+    },
+    {
+      "name": "MODERN FAMILY",
+      "dica": "Sitcom mockumentary sobre uma família diversificada"
+    },
+    {
+      "name": "SHERLOCK",
+      "dica": "Adaptação moderna dos contos de Sherlock Holmes"
+    },
+    {
+      "name": "VIKINGS",
+      "dica": "Drama histórico sobre os guerreiros nórdicos"
+    },
+    {
+      "name": "THE LAST OF US",
+      "dica": "Série pós-apocalíptica baseada no videogame homônimo"
+    },
+    {
+      "name": "HOUSE OF THE DRAGON",
+      "dica": "Spin-off de Game of Thrones sobre a Casa Targaryen"
+    },
+    {
+      "name": "EUPHORIA",
+      "dica": "Drama adolescente com visual cinematográfico"
+    },
+    {
+      "name": "THE BEAR",
+      "dica": "Série sobre um chef que assume o restaurante da família"
+    },
+    {
+      "name": "WEDNESDAY",
+      "dica": "Série sobre a filha da Família Addams em uma escola peculiar"
+    },
+    {
+      "name": "THE LAST KINGDOM",
+      "dica": "Drama histórico sobre a formação da Inglaterra"
+    },
+    {
+      "name": "THE MARVELOUS MRS. MAISEL",
+      "dica": "Comédia sobre uma dona de casa que se torna comediante nos anos 50"
+    },
+    {
+      "name": "THE HANDMAID'S TALE",
+      "dica": "Distopia sobre uma sociedade teocrática e opressiva"
+    },
+    {
+      "name": "BETTER CALL SAUL",
+      "dica": "Spin-off de Breaking Bad sobre o advogado Saul Goodman"
+    },
+    {
+      "name": "BARRY",
+      "dica": "Série sobre um assassino de aluguel que quer ser ator"
+    },
+    {
+      "name": "FLEABAG",
+      "dica": "Comédia britânica ácida sobre uma mulher em Londres"
+    },
+    {
+      "name": "SUCCESSION",
+      "dica": "Drama sobre uma família disputando o controle de um império midiático"
+    },
+    {
+      "name": "WHITE LOTUS",
+      "dica": "Série antológica sobre hóspedes e funcionários de um resort luxuoso"
+    },
+    {
+      "name": "BRIDGERTON",
+      "dica": "Drama de época com diversidade racial e produções da Shonda Rhimes"
+    },
+    {
+      "name": "SQUID GAME",
+      "dica": "Série coreana sobre competição mortal por dinheiro"
+    },
+    {
+      "name": "ALL OF US ARE DEAD",
+      "dica": "Série coreana de zumbis em uma escola"
+    }
+  ]
+}

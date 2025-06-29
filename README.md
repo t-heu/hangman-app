@@ -7,10 +7,11 @@
 
 ## Capturas de telas do telefone
 <p align="center">
-  <img src="docs/Screenshot_2025-06-28-19-49-35-902_host.exp.exponent.jpg" alt="Screen 1" width="150"/>
-  <img src="docs/Screenshot_2025-06-28-21-17-23-618_host.exp.exponent.jpg" alt="Screen 2" width="150"/>
+  <img src="docs/Screenshot_2025-06-29-14-23-28-168_host.exp.exponent.jpg" alt="Screen 1" width="150"/>
+  <img src="docs/Screenshot_2025-06-29-14-22-24-744_host.exp.exponent.jpg" alt="Screen 2" width="150"/>
   <img src="docs/Screenshot_2025-06-28-21-17-38-458_host.exp.exponent.jpg" alt="Screen 3" width="150"/>
   <img src="docs/Screenshot_2025-06-28-22-03-26-234_host.exp.exponent.jpg" alt="Screen 4" width="150"/>
+  <img src="docs/Screenshot_2025-06-29-14-21-35-980_host.exp.exponent.jpg" alt="Screen 4" width="150"/>
 </p>
 
 ## Get started

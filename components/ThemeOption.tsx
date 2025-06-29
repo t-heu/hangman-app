@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 10,
     marginRight: 10,
-    maxWidth: 150,
+    maxWidth: 180,
   },
-
   themeOptionText: {
     color: '#fff',
     fontSize: 16,
-    width: 120,
+    width: 140,
+    fontFamily: 'SourceCode'
   },
 });

@@ -1,5 +1,5 @@
 {
-  "name": "Partes do corpo humano",
+  "name": "Anatomia do corpo humano",
   "words": [
     {
       "name": "CABELO",
@@ -116,6 +116,154 @@
     {
       "name": "LÁBIOS",
       "dica": "Partes moles e móveis ao redor da boca"
+    },
+    {
+      "name": "CÓRNEA",
+      "dica": "Camada transparente que cobre a frente do olho"
+    },
+    {
+      "name": "RETINA",
+      "dica": "Tecido sensível à luz no fundo do olho"
+    },
+    {
+      "name": "SOBRANCELHAS",
+      "dica": "Pelos arqueados acima dos olhos que protegem do suor"
+    },
+    {
+      "name": "CÍLIOS",
+      "dica": "Pelos curtos nas pálpebras que protegem os olhos"
+    },
+    {
+      "name": "UVULA",
+      "dica": "Pequena estrutura pendurada no fundo da garganta"
+    },
+    {
+      "name": "DIAFRAGMA",
+      "dica": "Músculo que separa o tórax do abdômen e auxilia na respiração"
+    },
+    {
+      "name": "BAÇO",
+      "dica": "Órgão que filtra o sangue e armazena plaquetas"
+    },
+    {
+      "name": "PÂNCREAS",
+      "dica": "Órgão que produz insulina e suco digestivo"
+    },
+    {
+      "name": "ADRENAL",
+      "dica": "Glândula que produz adrenalina, localizada sobre os rins"
+    },
+    {
+      "name": "ESÔFAGO",
+      "dica": "Tubo que leva comida da boca ao estômago"
+    },
+    {
+      "name": "TENDÃO",
+      "dica": "Estrutura fibrosa que liga músculos aos ossos"
+    },
+    {
+      "name": "MENISCO",
+      "dica": "Amortecedor cartilaginoso nos joelhos"
+    },
+    {
+      "name": "TÍBIA",
+      "dica": "Osso frontal da perna (popularmente chamado de 'canela')"
+    },
+    {
+      "name": "FÍBULA",
+      "dica": "Osso fino ao lado da tíbia"
+    },
+    {
+      "name": "CUTÍCULA",
+      "dica": "Camada de pele na base das unhas"
+    },
+    {
+      "name": "GLÂNDULAS SUDORÍPARAS",
+      "dica": "Estruturas que produzem suor para regular a temperatura"
+    },
+    {
+      "name": "BOLSA SINOVIAL",
+      "dica": "Saco cheio de líquido que reduz atrito entre tecidos"
+    },
+    {
+      "name": "ALVÉOLOS",
+      "dica": "Pequenos sacos nos pulmões onde ocorre troca gasosa"
+    },
+    {
+      "name": "CÓRTEX CEREBRAL",
+      "dica": "Camada externa do cérebro responsável por funções complexas"
+    },
+    {
+      "name": "VESÍCULA BILIAR",
+      "dica": "Pequeno órgão que armazena bile produzida pelo fígado"
+    },
+    {
+      "name": "TROMPA DE FALÓPIO",
+      "dica": "Estrutura que liga os ovários ao útero"
+    },
+    {
+      "name": "EPIGLOTE",
+      "dica": "Válvula que fecha a traqueia durante a deglutição"
+    },
+    {
+      "name": "APÊNDICE",
+      "dica": "Pequena extensão do intestino grosso sem função vital"
+    },
+    {
+      "name": "AMÍGDALAS",
+      "dica": "Estruturas linfáticas na garganta que ajudam na imunidade"
+    },
+    {
+      "name": "AURÍCULA",
+      "dica": "Parte externa visível da orelha"
+    },
+    {
+      "name": "FALANGE",
+      "dica": "Osso dos dedos das mãos ou pés"
+    },
+    {
+      "name": "GLÂNDULA PINEAL",
+      "dica": "Pequena estrutura no cérebro que regula o sono (produz melatonina)"
+    },
+    {
+      "name": "PREGA VOCAL",
+      "dica": "Estruturas na laringe que vibram para produzir voz"
+    },
+    {
+      "name": "PLACENTA",
+      "dica": "Órgão temporário que nutre o feto durante a gravidez"
+    },
+    {
+      "name": "CORDÃO UMBILICAL",
+      "dica": "Conexão entre feto e placenta"
+    },
+    {
+      "name": "LÍQUIDO CEFALORRAQUIDIANO",
+      "dica": "Fluido que protege o cérebro e a medula espinhal"
+    },
+    {
+      "name": "VÁLVULA ÍLEOCECAL",
+      "dica": "Estrutura que controla a passagem do intestino delgado para o grosso"
+    },
+    {
+      "name": "AORTA",
+      "dica": "Maior artéria do corpo, sai do coração"
+    },
+    {
+      "name": "VEIA CAVA",
+      "dica": "Maior veia que retorna sangue ao coração"
+    },
+    {
+      "name": "HIPOTÁLAMO",
+      "dica": "Região cerebral que controla temperatura e fome"
+    },
+    {
+      "name": "MEDULA ÓSSEA",
+      "dica": "Tecido dentro dos ossos que produz células sanguíneas"
+    },
+    {
+      "name": "CÉLULAS DE KUPFFER",
+      "dica": "Células do fígado que filtram bactérias"
     }
   ]
 }

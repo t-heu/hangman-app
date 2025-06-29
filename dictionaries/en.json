@@ -1,0 +1,40 @@
+{
+  "home": {
+    "waiting_title": "Choose your favorite theme:",
+    "play_with_friends_title": "PLAY WITH YOUR FRIEND:",
+    "or_title": "OR",
+    "exit_button": "PLAY OFFLINE",
+    "play_again_button": "PLAY",
+    "create_room_button": "CREATE YOUR ROOM",
+    "your_name_input": "Your name",
+    "code_input": "Code",
+    "copied_alert": "Error: Enter your name",
+    "invalid_copied_alert": "Error: Enter a valid name!",
+    "game_started_error_alert": "Error: The game has already started or the room is full!",
+    "invalid_code_error_alert": "Error: Enter invalid code!",
+    "try_again_error_alert": "Error: Try again!"
+  },
+  "lobby": {
+    "waiting_title": "Waiting for more players to join:",
+    "exit_button": "EXIT",
+    "errors_text": "Click to copy code",
+    "word_text": "Share code with your friend",
+    "copied_alert": "Copied"
+  },
+  "game": {
+    "errors_text": "Errors",
+    "word_text": "The word was:",
+    "waiting_to_play_text_part_1": "WAITING",
+    "waiting_to_play_text_part_2": "TO PLAY...",
+    "letter_already_used_text": "has already been used",
+    "tip_text": "Tip",
+    "exit_button": "EXIT",
+    "play_again_button": "PLAY AGAIN",
+    "time_is_over_text": "TIME IS OVER!",
+    "winner_text": "won!",
+    "game_over_text": "YOU LOST!",
+    "winner_solo_text": "YOU WON!",
+    "game_over_solo_text": "YOU LOST!",
+    "game_status_text": "Game ended: All players left the game."
+  }
+}

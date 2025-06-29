@@ -1,0 +1,17 @@
+{
+  "name": "Test",
+  "words": [
+    {
+      "name": "MELÃO",
+      "dica": "Ork Kent"
+    },
+    {
+      "name": "MAÇÃ",
+      "dica": "Ork Kent"
+    },
+    {
+      "name": "CRISPR-CAS9",
+      "dica": "Tecnologia de edição genética que pode modificar o DNA com alta precisão"
+    }
+  ]
+}

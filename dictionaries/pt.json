@@ -1,0 +1,40 @@
+{
+  "home": {
+    "waiting_title": "Escolha seu tema favorito:",
+    "play_with_friends_title": "JOGUE COM SEU COLEGA:",
+    "or_title": "OU",
+    "exit_button": "JOGAR OFFLINE",
+    "play_again_button": "JOGAR",
+    "create_room_button": "CRIE SUA SALA",
+    "your_name_input": "Seu nome",
+    "code_input": "Código",
+    "copied_alert": "Error: Insira seu nome",
+    "invalid_copied_alert": "Error: Insira nome valido!",
+    "game_started_error_alert": "Error: Ja foi iniciado a partida ou sala cheia!",
+    "invalid_code_error_alert": "Error: Insira código inválido!",
+    "try_again_error_alert": "Error: Tente novamente!"
+  },
+  "lobby": {
+    "waiting_title": "Aguardando mais jogadores entrar:",
+    "exit_button": "SAIR",
+    "errors_text": "Clique para copiar código",
+    "word_text": "Compartilhe código com seu colega",
+    "copied_alert": "Copiado"
+  },
+  "game": {
+    "errors_text": "Errors",
+    "word_text": "A Palavra era:",
+    "waiting_to_play_text_part_1": "AGUARDANDO",
+    "waiting_to_play_text_part_2": "JOGAR...",
+    "letter_already_used_text": "jà foi usada",
+    "tip_text": "Dica",
+    "exit_button": "SAIR",
+    "play_again_button": "JOGAR NOVAMENTE",
+    "time_is_over_text": "TEMPO ENCERRADO!",
+    "winner_text": "ganhou!",
+    "game_over_text": "VOÇES PERDERAM!",
+    "winner_solo_text": "VOCÊ GANHOU!",
+    "game_over_solo_text": "VOCÊ PERDEU!",
+    "game_status_text": "Partida encerrada: Todos os jogadores saíram da partida."
+  }
+}

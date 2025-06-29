@@ -53,7 +53,7 @@ export default function HomeScreen() {
       {!isDev && BannerAd && (
         <View style={styles.container}>
           <BannerAd
-            unitId={__DEV__ ? TestIds.BANNER : 'ca-app-pub-7158647172444246/1840096594'}
+            unitId={__DEV__ ? TestIds.BANNER : 'ca-app-pub-7158647172444246/9751048659'}
             size={BannerAdSize.FULL_BANNER}
             requestOptions={{
               requestNonPersonalizedAdsOnly: true,

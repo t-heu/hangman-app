@@ -8,39 +8,50 @@ import { IThemeData, getThemes } from '@/data';
 import Button from '@/components/Button';
 import ThemeOption from '@/components/ThemeOption';
 
-export default function Home({lang, changeComponent, mode, indexTheme}: any) {
-  const [checked, setChecked] = useState(1);
+interface HomeProps {
+  lang: {
+    copied_alert: string;
+    invalid_copied_alert: string;
+  };
+  changeComponent: (component: string) => void;
+  mode: React.RefObject<string>;
+  indexTheme: (themeId: number) => void;
+}
+
+export default function Home({lang, changeComponent, mode, indexTheme}: HomeProps) {
+  const [selectedThemeId, setSelectedThemeId] = useState(1);
   const [name, setName] = useState('');
-  const [show, setShow] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
   const [themes, setThemes] = useState<{ [key: string]: IThemeData }[]>([]);
+  const [codeRoom, setCodeRoom] = useState('');
 
   useEffect(() => {
-    async function getStoredName() {
-      const uidSalvo = await AsyncStorage.getItem('local_user');
-      if (!uidSalvo) return null;
-      setName(uidSalvo);
-      setShow(true);
-    }
-
-    getStoredName()
-
-    const fetchThemes = async () => {
-      try {
-        const data = await getThemes();
-        setThemes(data.themes);
-      } catch (e) {
-        console.log(e)
-      }
-    };
-
-    fetchThemes();
+    loadUser();
+    fetchAvailableThemes();
   }, []);
+
+  const loadUser = async () => {
+    const savedUser = await AsyncStorage.getItem('local_user');
+    if (savedUser) {
+      setName(savedUser);
+      setIsRegistered(true);
+    }
+  };
+
+  const fetchAvailableThemes = async () => {
+    try {
+      const data = await getThemes();
+      setThemes(data.themes);
+    } catch (error) {
+      console.error('Erro ao buscar temas:', error);
+    }
+  };
 
   async function createGame(modeGame: string) {
     try {
-      changeComponent('Game')
       mode.current = modeGame;
-      indexTheme(checked)
+      indexTheme(selectedThemeId)
+      changeComponent('Game')
     } catch (e) {
       console.error('❌ Erro ao criar jogo:', e);
       console.log(e);
@@ -61,11 +72,11 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
       return;
     }
 
-    const uidSalvo = await AsyncStorage.getItem('local_user');
-    if (uidSalvo) return uidSalvo;
-
-    await AsyncStorage.setItem('local_user', name.trim());
-    setShow(true)
+    const alreadyRegistered = await AsyncStorage.getItem('local_user');
+    if (!alreadyRegistered) {
+      await AsyncStorage.setItem('local_user', trimmedName);
+      setIsRegistered(true);
+    }
   }
 
   const showAlert = (message: any) => Alert.alert(message);
@@ -75,14 +86,31 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
     <ScrollView style={{ flex: 1, backgroundColor: '#262632', marginTop: 10 }}>
       <View onLayout={onLayoutRootView} style={{ flex: 1, alignItems: 'center' }}>
 
-        {show ? (
+        {isRegistered ? (
           <>
             <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10, fontFamily: 'SourceCode' }}>Escolha seu tema favorito:</Text>
             <ScrollView style={{ height: 220 }}>
-              {themes.length > 0 ? themes.map((data, i) => <ThemeOption checked={checked} setChecked={setChecked} key={i} index={i} theme={data[i]} />) : <Text style={{ color: '#fff' }}>....</Text>}
+              {themes.length > 0 ? themes.map((data, i) => <ThemeOption checked={selectedThemeId} setChecked={setSelectedThemeId} key={i} index={i} theme={data[i]} />) : <Text style={{ color: '#fff' }}>....</Text>}
             </ScrollView>
 
             <Button text='JOGAR OFFLINE' press={() => createGame('solo')} />
+
+            <View style={{ marginTop: 20 }}>
+              <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10 }}>JOGUE COM SEU COLEGA:</Text>
+
+              <View style={styles.onlineRoomDiv}>
+                <View style={styles.roomDiv}>
+                  <TextInput
+                    placeholderTextColor="#888"
+                    value={codeRoom}
+                    onChangeText={(text) => setCodeRoom(text)}
+                    placeholder='Código da sala'
+                    style={styles.input}
+                  />
+                  <Button text='COMPETITIVO' press={() => createGame('competitive')} />
+                </View>
+              </View>
+            </View>
           </>
         ):(
           <>
@@ -99,27 +127,6 @@ export default function Home({lang, changeComponent, mode, indexTheme}: any) {
             </View>
           </>
         )}
-
-        {/*<View style={{ marginTop: 20 }}>
-          <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10 }}>JOGUE COM SEU COLEGA:</Text>
-
-          <View style={styles.onlineRoomDiv}>
-            <View style={styles.roomDiv}>
-              <TextInput
-                placeholderTextColor="#888"
-                value={codeRoom}
-                onChangeText={(text) => setCodeRoom(text)}
-                placeholder='Código'
-                style={styles.input}
-              />
-              <Button text='COMPETITIVO' press={() => play('competitive')} />
-            </View>
-
-            <Text style={{ color: '#fff', fontSize: 16, marginVertical: 10, textAlign: 'center' }}>OU:</Text>
-
-            <Button text='PVP' press={() => play('pvp')} />
-          </View>
-        </View>*/}
       </View>
     </ScrollView>
   );

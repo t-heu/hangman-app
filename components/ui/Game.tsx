@@ -19,7 +19,19 @@ interface Theme {
   wordArray: string[]
 }
 
-export default function Game({lang, changeComponent, indexTheme, mode}: any) {
+interface GameProps {
+  lang: {
+    time_is_over_text: string;
+    winner_solo_text: string;
+    game_over_solo_text: string;
+    letter_already_used_text: string;
+  };
+  changeComponent: (component: string) => void;
+  indexTheme: number;
+  mode: React.RefObject<string>;
+}
+
+export default function Game({lang, changeComponent, indexTheme, mode}: GameProps) {
   const isCompetitive = mode.current === 'competitive';
 
   const [gameState, setGameState] = useState<Theme>({
@@ -29,8 +41,8 @@ export default function Game({lang, changeComponent, indexTheme, mode}: any) {
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
   const [countErrors, setCountErrors] = useState(0);
   const [existLetter, setExistLetter] = useState('');
-  const [statusGame, setStatusGame] = useState('play');
-  const [winnerMessage, setWinnerMessage] = useState('');
+  const [gameStatus, setGameStatus] = useState<'play' | 'gameover'>('play');
+  const [finalMessage, setFinalMessage] = useState('');
   const {
     time: timeRemaining,
     start,
@@ -39,13 +51,13 @@ export default function Game({lang, changeComponent, indexTheme, mode}: any) {
     increase,
     getTime
   } = useCountdownTimer(30, () => {
-    setStatusGame('gameover');
-    setWinnerMessage(lang.time_is_over_text);
+    setGameStatus('gameover');
+    setFinalMessage(lang.time_is_over_text);
   });
 
   const handleVictory = useCallback(async () => {
-    setStatusGame('gameover');
-    setWinnerMessage(lang.winner_solo_text);
+    setGameStatus('gameover');
+    setFinalMessage(lang.winner_solo_text);
     const {uid, name} = await generateUidLocal();
     const tempoFinal = getTime()
     
@@ -55,13 +67,15 @@ export default function Game({lang, changeComponent, indexTheme, mode}: any) {
   }, [lang]);
 
   const handleIncorrectGuess = useCallback(() => {
-    setCountErrors(countErrors + 1);
-    
-    if (countErrors === 5) {
-      setStatusGame('gameover');
-      setWinnerMessage(lang.game_over_solo_text);
-      stop();
-    }
+    setCountErrors(prev => {
+      const updated = prev + 1;
+      if (updated >= 6) {
+        setGameStatus('gameover');
+        setFinalMessage(lang.game_over_solo_text);
+        stop();
+      }
+      return updated;
+    });
   }, [countErrors, lang]);
 
   const handleSelectLetter = useCallback((letter: string) => {
@@ -71,8 +85,8 @@ export default function Game({lang, changeComponent, indexTheme, mode}: any) {
       const matches = checkLetter(gameState.selectedWord.name, letter);
       const newWordName = gameState.selectedWord.name.split('').map((char, index) => matches[index] ? char : gameState.wordArray[index]);
 
-      const isNotEmpty = newWordName.every((char) => char !== '');
-      if (isNotEmpty) {
+      const wordComplete = newWordName.every((char) => char !== '');
+      if (wordComplete ) {
         handleVictory();
       }
 
@@ -96,16 +110,17 @@ export default function Game({lang, changeComponent, indexTheme, mode}: any) {
   }, [selectedLetters, gameState.selectedWord.name, gameState.wordArray, handleVictory, handleIncorrectGuess]);
 
   const startOffGame = useCallback(async () => {
-    const { selectedWord, wordArray } = await generateTheme(indexTheme === undefined ? 4 : indexTheme);
+    const themeId = indexTheme ?? 4;
+    const { selectedWord, wordArray } = await generateTheme(themeId);
 
     setGameState({
-      selectedWord: selectedWord,
-      wordArray: wordArray
+      selectedWord,
+      wordArray
     });
     setSelectedLetters([]);
     setCountErrors(0);
     setExistLetter('');
-    setStatusGame('play');
+    setGameStatus('play');
 
     if (!isCompetitive) {
       reset();
@@ -185,7 +200,7 @@ export default function Game({lang, changeComponent, indexTheme, mode}: any) {
           {gameState.selectedWord.dica ? `Dica: ${gameState.selectedWord.dica}` : null}
         </Text>
 
-        {statusGame === 'play' && (
+        {gameStatus === 'play' && (
           <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {'QWERTYUIOP'.split('').map((item, i) => (
@@ -207,9 +222,9 @@ export default function Game({lang, changeComponent, indexTheme, mode}: any) {
           </View>
         )}
 
-        {statusGame === 'gameover' && (
+        {gameStatus === 'gameover' && (
           <View style={{alignItems: 'center'}}>
-            <Text style={styles.guideText}>{winnerMessage}</Text>
+            <Text style={styles.guideText}>{finalMessage}</Text>
             {(!(gameState.wordArray.every((char: any) => char !== ''))) ? (
               <Text style={styles.guideText}>A Palavra era: {gameState.selectedWord.name}</Text>
             ) : null}

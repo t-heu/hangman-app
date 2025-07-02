@@ -5,8 +5,10 @@ import { StyleSheet, View } from 'react-native';
 
 import Header from '@/components/Header';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
+
 import Game from '@/components/ui/Game';
 import Home from '@/components/ui/Home';
+import Lobby from '@/components/ui/Lobby';
 
 import { getDictionary } from '@/utils/dictionaries';
 
@@ -27,6 +29,8 @@ if (!isDev) {
 export default function HomeScreen() {
   const [componentToRender, setComponentToRender] = useState('');
   const [indexTheme, setIndexTheme] = useState(1);
+  const [code, setCode] = useState('');
+  const [currentPlayerUID, setCurrentPlayerUID] = useState('');
   const [lang, setLang] = useState<any>(null);
   const mode = useRef('')
 
@@ -49,7 +53,9 @@ export default function HomeScreen() {
     <ParallaxScrollView>
       <Header mode={mode.current} />
       {componentToRender === 'Game' && <Game lang={lang.game} changeComponent={changeComponent} indexTheme={indexTheme} mode={mode} />}
+      {componentToRender === 'Lobby' && <Lobby code={code} currentPlayerUID={currentPlayerUID} lang={lang.lobby} changeComponent={changeComponent} indexTheme={setIndexTheme} mode={mode} />}
       {componentToRender === 'Home' && <Home lang={lang.home} changeComponent={changeComponent} indexTheme={setIndexTheme} mode={mode} />}
+      
       {!isDev && BannerAd && (
         <View style={styles.container}>
           <BannerAd

@@ -5,6 +5,8 @@ import { generateTheme } from "@/utils/generateTheme";
 import { checkLetter, normalize } from "@/utils/normalizeLetter";
 import { generateUidLocal, saveInRanking } from "@/utils/ranking";
 
+import { database, off, onValue, ref } from '../../api/firebase';
+
 import { useCountdownTimer } from '../../hooks/useCountdownTimer';
 
 import Button from '../../components/Button';
@@ -19,25 +21,34 @@ interface Theme {
   wordArray: string[]
 }
 
-interface GameProps {
-  lang: {
-    time_is_over_text: string;
-    winner_solo_text: string;
-    game_over_solo_text: string;
-    letter_already_used_text: string;
-  };
-  changeComponent: (component: string) => void;
-  indexTheme: number;
-  mode: React.RefObject<string>;
+interface PlayerData {
+  name: string;
+  gameover: boolean;
+  victory: boolean;
+  uid: string;
+  active: boolean;
+  ready: boolean;
+  owner: boolean;
+  errors: number;
+  selectedLetters: string[]; // Array de letras selecionadas (ex: ['A', 'B', '-'])
+  wordArray: string[];       // Palavra oculta como array (ex: ['-', '-', 'C', '-'])
 }
 
-export default function Game({lang, changeComponent, indexTheme, mode}: GameProps) {
-  const isCompetitive = mode.current === 'competitive';
+interface GameProps {
+  changeComponent: (component: string) => void;
+  indexTheme: number;
+  code: string
+  currentPlayerUID: string
+}
+
+export default function Game({changeComponent, indexTheme, code, currentPlayerUID}: GameProps) {
+  const isCompetitive = code && currentPlayerUID;
 
   const [gameState, setGameState] = useState<Theme>({
     selectedWord: { name: '', dica: '' },
     wordArray: []
   });
+  const [playerData, setPlayerData] = useState<PlayerData | null>(null)
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
   const [countErrors, setCountErrors] = useState(0);
   const [existLetter, setExistLetter] = useState('');
@@ -52,31 +63,53 @@ export default function Game({lang, changeComponent, indexTheme, mode}: GameProp
     getTime
   } = useCountdownTimer(30, () => {
     setGameStatus('gameover');
-    setFinalMessage(lang.time_is_over_text);
+    setFinalMessage("TEMPO ENCERRADO!");
   });
+
+  useEffect(() => {
+    const roomRef = ref(database, 'hangman/rooms/' + code);
+
+    const callback = (snapshot: any) => {
+      const data = snapshot.val();
+      if (!data || !data.players) return;
+
+      Object.entries(data.players).forEach(([uid, dados]) => {
+        if (uid !== `p${currentPlayerUID}`) {
+          //console.log("Outro jogador: ", uid, dados);
+          setPlayerData(dados as PlayerData)
+        }
+      });
+    };
+
+    onValue(roomRef, callback);
+
+    return () => {
+      off(roomRef, 'value', callback);
+    };
+  }, []);
 
   const handleVictory = useCallback(async () => {
     setGameStatus('gameover');
-    setFinalMessage(lang.winner_solo_text);
+    setFinalMessage("VOCÊ GANHOU!");
     const {uid, name} = await generateUidLocal();
     const tempoFinal = getTime()
     
     if (name) await saveInRanking(uid, name, tempoFinal);
 
     stop()
-  }, [lang]);
+  }, []);
 
   const handleIncorrectGuess = useCallback(() => {
     setCountErrors(prev => {
       const updated = prev + 1;
       if (updated >= 6) {
         setGameStatus('gameover');
-        setFinalMessage(lang.game_over_solo_text);
+        setFinalMessage("VOCÊ PERDEU!");
         stop();
       }
       return updated;
     });
-  }, [countErrors, lang]);
+  }, [countErrors]);
 
   const handleSelectLetter = useCallback((letter: string) => {
     if (!selectedLetters.includes(letter)) {
@@ -105,7 +138,7 @@ export default function Game({lang, changeComponent, indexTheme, mode}: GameProp
         wordArray: newWordName
       }));
     } else {
-      setExistLetter(`${letter} ${lang.letter_already_used_text}`)
+      setExistLetter(`${letter} ${"jà foi usada"}`)
     }
   }, [selectedLetters, gameState.selectedWord.name, gameState.wordArray, handleVictory, handleIncorrectGuess]);
 
@@ -141,18 +174,18 @@ export default function Game({lang, changeComponent, indexTheme, mode}: GameProp
       <View style={styles.main}>
 
         {/* Palavra do oponente */}
-        {isCompetitive && (
+        {isCompetitive && playerData && (
           <>
             <View style={styles.infoHeader}>
               <Text style={[styles.guideText, { color: '#f55' }]}>
-                Erros do oponente: 1
+                Errors do oponente: {playerData.errors}
               </Text>
             </View>
 
             <View style={styles.opponentSection}>
-              <Text style={[styles.guideText, { color: '#aaa', marginBottom: 4 }]}>Oponente: Eva</Text>
+              <Text style={[styles.guideText, { color: '#aaa', marginBottom: 4 }]}>Oponente: {playerData.name}</Text>
               <View style={styles.letterContainer}>
-                {gameState.wordArray.map((item, i) => {
+                {playerData.wordArray.map((item, i) => {
                   const displayLetter = item ? '#' : item;
 
                   return (
@@ -233,7 +266,7 @@ export default function Game({lang, changeComponent, indexTheme, mode}: GameProp
           </View>
         )}
 
-        {mode.current === 'solo' && (<Text style={[styles.guideText, { marginTop: 8, color: '#eee' }]}>Dica extra: A cada acerto você ganha +2s</Text>)}
+        {!isCompetitive && (<Text style={[styles.guideText, { marginTop: 8, color: '#eee' }]}>Dica extra: A cada acerto você ganha +2s</Text>)}
       </View>
     </ScrollView>
   );

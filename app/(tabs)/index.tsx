@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import Header from '@/components/Header';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 
 import Game from '@/components/ui/Game';
 import Home from '@/components/ui/Home';
@@ -28,9 +27,9 @@ if (!isDev) {
 
 export default function HomeScreen() {
   const [componentToRender, setComponentToRender] = useState('');
-  const [indexTheme, setIndexTheme] = useState(1);
-  const [code, setCode] = useState('');
+  const [selectedThemeId, setSelectedThemeId] = useState(1);
   const [currentPlayerUID, setCurrentPlayerUID] = useState('');
+  const [codeRoom, setCodeRoom] = useState('');
   const [lang, setLang] = useState<any>(null);
   const mode = useRef('')
 
@@ -50,11 +49,11 @@ export default function HomeScreen() {
   const changeComponent = (component: string) => setComponentToRender(component);
 
   return (
-    <ParallaxScrollView>
+    <>
       <Header mode={mode.current} />
-      {componentToRender === 'Game' && <Game lang={lang.game} changeComponent={changeComponent} indexTheme={indexTheme} mode={mode} />}
-      {componentToRender === 'Lobby' && <Lobby code={code} currentPlayerUID={currentPlayerUID} lang={lang.lobby} changeComponent={changeComponent} indexTheme={setIndexTheme} mode={mode} />}
-      {componentToRender === 'Home' && <Home lang={lang.home} changeComponent={changeComponent} indexTheme={setIndexTheme} mode={mode} />}
+      {componentToRender === 'Game' && <Game changeComponent={changeComponent} indexTheme={selectedThemeId} code={codeRoom} currentPlayerUID={currentPlayerUID} />}
+      {componentToRender === 'Lobby' && <Lobby code={codeRoom} currentPlayerUID={currentPlayerUID} changeComponent={changeComponent} mode={mode} />}
+      {componentToRender === 'Home' && <Home codeRoom={codeRoom} currentPlayerUID={setCurrentPlayerUID} setCodeRoom={setCodeRoom} changeComponent={changeComponent} selectedThemeId={selectedThemeId} setSelectedThemeId={setSelectedThemeId} mode={mode} />}
       
       {!isDev && BannerAd && (
         <View style={styles.container}>
@@ -67,7 +66,7 @@ export default function HomeScreen() {
           />
         </View>
       )}
-    </ParallaxScrollView>
+    </>
   );
 }
 

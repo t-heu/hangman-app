@@ -1,42 +1,30 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { IThemeData, getThemes } from '@/data';
+import { child, database, get, push, ref, set, update } from '../../api/firebase';
+import { generateRandomWord } from '../../utils/generateRandomWord';
 
 import Button from '@/components/Button';
 import ThemeOption from '@/components/ThemeOption';
 
 interface HomeProps {
-  lang: {
-    copied_alert: string;
-    invalid_copied_alert: string;
-  };
+  setCodeRoom: any
+  codeRoom: string;
   changeComponent: (component: string) => void;
   mode: React.RefObject<string>;
-  indexTheme: (themeId: number) => void;
+  selectedThemeId: number;
+  setSelectedThemeId: React.Dispatch<React.SetStateAction<number>>
+  currentPlayerUID: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function Home({lang, changeComponent, mode, indexTheme}: HomeProps) {
-  const [selectedThemeId, setSelectedThemeId] = useState(1);
+export default function Home({codeRoom, setCodeRoom, changeComponent, mode, selectedThemeId, setSelectedThemeId, currentPlayerUID}: HomeProps) {
   const [name, setName] = useState('');
-  const [isRegistered, setIsRegistered] = useState(false);
   const [themes, setThemes] = useState<{ [key: string]: IThemeData }[]>([]);
-  const [codeRoom, setCodeRoom] = useState('');
 
   useEffect(() => {
-    loadUser();
     fetchAvailableThemes();
   }, []);
-
-  const loadUser = async () => {
-    const savedUser = await AsyncStorage.getItem('local_user');
-    if (savedUser) {
-      setName(savedUser);
-      setIsRegistered(true);
-    }
-  };
 
   const fetchAvailableThemes = async () => {
     try {
@@ -47,75 +35,163 @@ export default function Home({lang, changeComponent, mode, indexTheme}: HomeProp
     }
   };
 
-  async function createGame(modeGame: string) {
+  const showAlert = (message: any) => Alert.alert(message);
+
+  // ONLINE
+  function createPlayer(roomKey: string, owner: boolean, name: string) {
     try {
-      mode.current = modeGame;
-      indexTheme(selectedThemeId)
-      changeComponent('Game')
+      const updates: any = {};
+      const playersRef = ref(database, `hangman/rooms/${roomKey}/players`);
+      const newPlayerRef = push(playersRef);
+      const nextPlayer = newPlayerRef.key;
+
+      updates[`hangman/rooms/${roomKey}/players/p${nextPlayer}`] = {
+        name,
+        gameover: false,
+        victory: false,
+        uid: nextPlayer,
+        active: true,
+        ready: false,
+        owner,
+        errors: 0,
+        selectedLetters: Array('-'),
+        wordArray: Array('-'),
+      };
+
+      if (nextPlayer) {
+        update(ref(database), updates);
+        setCodeRoom(roomKey)
+        currentPlayerUID(nextPlayer)
+        changeComponent('Lobby')
+      }
+    } catch (error) {
+      console.error('Erro ao criar jogador:', error);
+    }
+  }
+
+  async function createGame(stauts: boolean) {
+    try {
+      if (stauts) {
+        if (!name) {
+          console.error('Erro ao criar jogo: Nome do jogador não fornecido');
+          return showAlert("Error: Insira seu nome");
+        }
+
+        if (!(/^[a-zA-Z\s]*$/.test(name))) {
+          console.error('Erro ao criar jogo: Nome do jogador inválido');
+          return showAlert("Error: Insira nome valido!");
+        }
+
+        const roomKey = generateRandomWord(6);
+
+        await set(ref(database, 'hangman/rooms/' + roomKey), {
+          indexTheme: selectedThemeId,
+          gameInProgress: false,
+          selectedWord: { name: '', dica: '' }
+        });
+
+        console.info('Jogo criado com sucesso', { roomKey, playerName: name });
+        createPlayer(roomKey, true, name);
+        setCodeRoom(roomKey)
+      } else {
+        changeComponent('Game')
+        console.log('Jogo offline criado com sucesso');
+      }
     } catch (e) {
-      console.error('❌ Erro ao criar jogo:', e);
+      console.error('Erro ao criar jogo:', e);
       console.log(e);
     }
   }
 
-  async function createUser() {
-    const trimmedName = name?.trim();
+  function enterRoomCode() {
+    get(child(ref(database), 'hangman/rooms/' + codeRoom)).then((snapshot: any) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const playersObject = data.players || {};
+        const numPlayers = Object.keys(playersObject).length;
 
-    if (!trimmedName) {
-      showAlert(lang.copied_alert);
-      return;
+        if (!data.gameInProgress && numPlayers < 8) {
+          createPlayer(codeRoom, false, name);
+        } else {
+          console.warn(`Tentativa de entrada na sala ${codeRoom} falhou: sala cheia ou partida em andamento`);
+          showAlert("Error: Ja foi iniciado a partida ou sala cheia!");
+        }
+      } else {
+        console.warn(`Tentativa de entrada na sala ${codeRoom} falhou: sala inexistente`);
+        showAlert("Error: Insira código inválido!");
+      }
+    }).catch((error: any) => {
+      console.error(`Erro ao verificar a sala ${codeRoom}: ${error.message}`);
+      showAlert("Error: Tente novamente!");
+    });
+  }
+
+  function joinRoom() {
+    get(child(ref(database), 'hangman/rooms')).then((snapshot: any) => {
+      if (snapshot.exists()) {
+        const rooms = snapshot.val();
+        let foundRoom = false;
+
+        Object.keys(rooms).some((roomKey) => {
+          const room = rooms[roomKey];
+          const playersObject = room.players || {};
+          const numPlayers = Object.keys(playersObject).length;
+
+          if (!room.gameInProgress && numPlayers < 8) {
+            createPlayer(roomKey, false, name);
+            foundRoom = true;
+            return true;
+          }
+        });
+
+        if (!foundRoom) {
+          createGame(true);
+        }
+      } else {
+        createGame(true);
+        return true;
+      }
+    }).catch((error: any) => {
+      console.error(`Erro ao verificar as salas: ${error.message}`);
+      showAlert("Error: Tente novamente!");
+    });
+  }
+
+  function play() {
+    if (!name) {
+      return showAlert("Error: Insira seu nome");
     }
 
-    const isValidName = /^[a-zA-Z\s]+$/.test(trimmedName);
-    if (!isValidName) {
-      showAlert(lang.invalid_copied_alert);
-      return;
+    if (!(/^[a-zA-Z\s]*$/.test(name))) {
+      return showAlert("Error: Insira nome valido!");
     }
 
-    const alreadyRegistered = await AsyncStorage.getItem('local_user');
-    if (!alreadyRegistered) {
-      await AsyncStorage.setItem('local_user', trimmedName);
-      setIsRegistered(true);
+    if (!(/^[a-zA-Z\s]*$/.test(codeRoom))) {
+      return showAlert("Error: Insira código inválido!");
+    }
+
+    if (codeRoom) {
+      enterRoomCode();
+    } else {
+      joinRoom();
     }
   }
 
-  const showAlert = (message: any) => Alert.alert(message);
-  const onLayoutRootView = () => setTimeout(async () => await SplashScreen.hideAsync(), 1200);
-
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#262632', marginTop: 10 }}>
-      <View onLayout={onLayoutRootView} style={{ flex: 1, alignItems: 'center' }}>
+      <View style={{ flex: 1, alignItems: 'center' }}>
+        <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10, fontFamily: 'SourceCode' }}>Escolha seu tema favorito:</Text>
+        <ScrollView style={{ height: 220 }}>
+          {themes.length > 0 ? themes.map((data, i) => <ThemeOption checked={selectedThemeId} setChecked={setSelectedThemeId} key={i} index={i} theme={data[i]} />) : <Text style={{ color: '#fff' }}>....</Text>}
+        </ScrollView>
 
-        {isRegistered ? (
-          <>
-            <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10, fontFamily: 'SourceCode' }}>Escolha seu tema favorito:</Text>
-            <ScrollView style={{ height: 220 }}>
-              {themes.length > 0 ? themes.map((data, i) => <ThemeOption checked={selectedThemeId} setChecked={setSelectedThemeId} key={i} index={i} theme={data[i]} />) : <Text style={{ color: '#fff' }}>....</Text>}
-            </ScrollView>
+        <Button text='JOGAR OFFLINE' press={() => createGame(false)} />
 
-            <Button text='JOGAR OFFLINE' press={() => createGame('solo')} />
+        <View style={{ marginTop: 20 }}>
+          <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10 }}>JOGUE COM SEU COLEGA:</Text>
 
-            <View style={{ marginTop: 20 }}>
-              <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10 }}>JOGUE COM SEU COLEGA:</Text>
-
-              <View style={styles.onlineRoomDiv}>
-                <View style={styles.roomDiv}>
-                  <TextInput
-                    placeholderTextColor="#888"
-                    value={codeRoom}
-                    onChangeText={(text) => setCodeRoom(text)}
-                    placeholder='Código da sala'
-                    style={styles.input}
-                  />
-                  <Button text='COMPETITIVO' press={() => createGame('competitive')} />
-                </View>
-              </View>
-            </View>
-          </>
-        ):(
-          <>
-            <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10, fontFamily: 'SourceCode' }}>Escolha seu nome primeiro:</Text>
-            <View style={[styles.roomDiv, { marginTop: 20 }]}>
+          <View style={styles.onlineRoomDiv}>
+            <View style={styles.roomDiv}>
               <TextInput
                 placeholderTextColor="#888"
                 value={name}
@@ -123,10 +199,17 @@ export default function Home({lang, changeComponent, mode, indexTheme}: HomeProp
                 placeholder='Seu nome'
                 style={styles.input}
               />
-              <Button text='SALVAR' press={() => createUser()} />
+              <TextInput
+                placeholderTextColor="#888"
+                value={codeRoom}
+                onChangeText={(text) => setCodeRoom(text)}
+                placeholder='Código da sala'
+                style={styles.input}
+              />
+              <Button text='COMPETITIVO' press={() => play()} />
             </View>
-          </>
-        )}
+          </View>
+        </View>
       </View>
     </ScrollView>
   );

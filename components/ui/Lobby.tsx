@@ -1,7 +1,7 @@
 import { Feather } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { database, onValue, ref, update } from '../../api/firebase';
 import { generateTheme } from '../../utils/generateTheme';
@@ -9,31 +9,22 @@ import { generateTheme } from '../../utils/generateTheme';
 import Button from '../../components/Button';
 
 interface HomeProps {
-  lang: {
-    copied_alert: string;
-    invalid_copied_alert: string;
-  };
   changeComponent: (component: string) => void;
   mode: React.RefObject<string>;
-  indexTheme: (themeId: number) => void;
   code: string;
   currentPlayerUID: string;
 }
 
-export default function Lobby({lang, changeComponent, mode, indexTheme, code, currentPlayerUID}: HomeProps) {
+export default function Lobby({changeComponent, mode, code, currentPlayerUID}: HomeProps) {
   const [players, setPlayers] = useState<any>([]);
   const [playerKey, setPlayerKey] = useState<any>('');
 
-  async function createGame(codeRoom: string, indexTheme: number, playersData?: any) {
-    const nextPlayer = 'p' + `p${currentPlayerUID}`;
-    const {selectedWord, wordArray} = await generateTheme(indexTheme);
+  async function createGame(codeRoom: string, indexTheme: number) {
+    const {selectedWord} = await generateTheme(indexTheme);
     const updates: any = {};
         
-    updates['hangman/rooms/' + codeRoom + '/selectedLetters'] = Array('-');
     updates['hangman/rooms/' + codeRoom + '/selectedWord'] = selectedWord;
-    updates['hangman/rooms/' + codeRoom + '/wordArray'] = wordArray;
     updates['hangman/rooms/' + codeRoom + '/gameInProgress'] = true;
-    updates['hangman/rooms/' + codeRoom + '/turn'] = nextPlayer;
       
     update(ref(database), updates);
   }
@@ -44,35 +35,30 @@ export default function Lobby({lang, changeComponent, mode, indexTheme, code, cu
 
   useEffect(() => {
     const minPlayers = 2;
-    const maxPlayers = 8;
+    const maxPlayers = 2;
 
     onValue(ref(database, 'hangman/rooms/' + code), (snapshot: any) => {
       const data = snapshot.val();
       const playersArray: any = Object.values(data.players || {});
       const numPlayers = playersArray.length;
+      
       setPlayers(playersArray);
       setPlayerKey(Object.keys(playersArray).find(key => playersArray[key].uid === currentPlayerUID))
       
       if (numPlayers >= minPlayers && numPlayers <= maxPlayers) {
         const allPlayersReady = playersArray.every((player: any) => player.ready && !player.gameover && !player.victory);
         if (allPlayersReady && !data.gameInProgress) {
-          createGame(code, data.indexTheme, data.players);
-          //navigateGame()
+          createGame(code, data.indexTheme);
+          changeComponent('Game')
         }
       }
     });
   }, []);
 
-  const navigateGame = (params: any) => {
-    //navigation.navigate("Game", { code, currentPlayerUID });
-  };
-
   const copyToClipboard = async () => await Clipboard.setStringAsync(code);
-  const showAlert = (message: any) => Alert.alert(message);
 
   const logout = () => {
-    //exitPlayer(code, currentPlayerUID as string);
-    //navigation.navigate('Home');
+    changeComponent('Home');
   };
 
   const renderThemes = (data: any, index: any) => (
@@ -126,9 +112,10 @@ export default function Lobby({lang, changeComponent, mode, indexTheme, code, cu
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: '#262632',
     paddingHorizontal: 16,
     paddingTop: 30,
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',
@@ -147,7 +134,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 10,
     marginRight: 10,
-    maxWidth: 150,
   },
   playerInfo: {
     color: '#eee',
